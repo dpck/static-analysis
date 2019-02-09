@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/artdecocode/static-analysis.git"
+    "url": "git://github.com/dpck/static-analysis.git"
   },
   "keywords": [
     "static-analysis"
@@ -34,9 +34,9 @@
   "author": "Anton <anton@adc.sh>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/artdecocode/static-analysis/issues"
+    "url": "https://github.com/dpck/static-analysis/issues"
   },
-  "homepage": "https://github.com/artdecocode/static-analysis#readme",
+  "homepage": "https://github.com/dpck/static-analysis#readme",
   "devDependencies": {
     "alamode": "1.7.3",
     "documentary": "1.21.1",
