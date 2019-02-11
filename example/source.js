@@ -1,7 +1,8 @@
 import { read } from '@wrote/read'
 import { resolve } from 'path'
 import { render } from 'preact'
-import Component from './Component'
+
+const Component = require('./Component');
 
 (async () => {
   const file = await read(resolve('example'))

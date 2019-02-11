@@ -1,7 +1,7 @@
 {
   "name": "static-analysis",
   "version": "0.0.0",
-  "description": "Performs Static Analysis On JavaScript Programs To Build Dependency Trees.",
+  "description": "Performs Static Analysis On JavaScript Programs To Find Out All Dependencies That Stem From The Given File.",
   "main": "build/index.js",
   "module": "src/index.js",
   "scripts": {

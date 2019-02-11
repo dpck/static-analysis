@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/static-analysis.svg)](https://npmjs.org/package/static-analysis)
 
-`static-analysis` is Performs Static Analysis On JavaScript Programs To Build Dependency Trees.
+`static-analysis` Performs Static Analysis On JavaScript Programs To Find Out All Dependencies That Stem From The Given File.
 
 ```sh
 yarn add -E static-analysis
@@ -37,7 +37,8 @@ _For example, for the given file_:
 import { read } from '@wrote/read'
 import { resolve } from 'path'
 import { render } from 'preact'
-import Component from './Component'
+
+const Component = require('./Component');
 
 (async () => {
   const file = await read(resolve('example'))
