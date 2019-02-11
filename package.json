@@ -29,7 +29,14 @@
     "url": "git://github.com/dpck/static-analysis.git"
   },
   "keywords": [
-    "static-analysis"
+    "static-analysis",
+    "static analysis",
+    "import",
+    "export",
+    "dependency",
+    "dependencies",
+    "list",
+    "tree"
   ],
   "author": "Anton <anton@adc.sh>",
   "license": "MIT",

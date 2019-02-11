@@ -14,6 +14,7 @@ yarn add -E static-analysis
 - [API](#api)
 - [`async staticAnalysis(path: string): Array<Detection>`](#async-staticanalysispath-string-arraydetection)
   * [`Detection`](#type-detection)
+- [`sort(detections: Array<Detection>)`](#sortdetections-arraydetection-void)
 - [Copyright](#copyright)
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
@@ -30,11 +31,11 @@ import staticAnalysis from 'static-analysis'
 
 ## `async staticAnalysis(`<br/>&nbsp;&nbsp;`path: string,`<br/>`): Array<Detection>`
 
-Detects all dependencies in a file and their dependencies recursively. If the package exports `main` over `module`, the `hasMain` property will be added.
+Detects all dependencies in a file and their dependencies recursively. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
 
 _For example, for the given file_:
 ```js
-import { read } from '@wrote/read'
+import read from '@wrote/read'
 import { resolve } from 'path'
 import { render } from 'preact'
 
@@ -125,6 +126,52 @@ __<a name="type-detection">`Detection`</a>__: The module detection result.
 | hasMain     | _boolean_             | Whether the entry from the package was specified via the `main` field and not `module` field.                                           |
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
+
+## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): void`
+
+Sorts the detected dependencies into commonJS modules, packageJsons and internals.
+
+```js
+import staticAnalysis, { sort } from 'static-analysis'
+
+(async () => {
+  const d = await staticAnalysis('example/source.js')
+  const sorted = sort(d)
+  console.log(sorted)
+})()
+```
+```js
+{ commonJsPackageJsons: [],
+  packageJsons: 
+   [ 'node_modules/@wrote/read/package.json',
+     'node_modules/preact/package.json',
+     'node_modules/@wrote/read/node_modules/catchment/package.json',
+     'node_modules/erotic/package.json',
+     'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/package.json',
+     'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json' ],
+  commonJs: [],
+  js: 
+   [ 'node_modules/@wrote/read/src/index.js',
+     'node_modules/preact/dist/preact.mjs',
+     'example/Component.jsx',
+     'node_modules/@wrote/read/node_modules/catchment/src/index.js',
+     'node_modules/erotic/src/index.js',
+     'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js',
+     'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
+     'node_modules/erotic/src/lib.js',
+     'node_modules/erotic/src/callback.js',
+     'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js' ],
+  internals: [ 'path', 'fs', 'stream', 'os' ],
+  deps: 
+   [ '@wrote/read',
+     'preact',
+     'catchment',
+     'erotic',
+     '@artdeco/clean-stack',
+     '@artdeco/clean-stack' ] }
+```
+
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
 
 ## Copyright
 

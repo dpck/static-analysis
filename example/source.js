@@ -1,4 +1,4 @@
-import { read } from '@wrote/read'
+import read from '@wrote/read'
 import { resolve } from 'path'
 import { render } from 'preact'
 
