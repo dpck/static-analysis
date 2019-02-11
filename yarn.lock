@@ -232,6 +232,11 @@ assert-throws@3.1.1:
     erotic "2.0.1"
     erte "1.1.4"
 
+catchment@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/catchment/-/catchment-2.0.1.tgz#df0a05ac2e1194cf280c2444d5bb564a9cc8f488"
+  integrity sha512-aNvgHj+gmfld9rzUwxJJN6aT5MLBT0/R2LtqO8Xtjy/iq6PCAVLyFzYXZAs5Ew6FzwXAW5xV5XLGD5oACPtJdg==
+
 catchment@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/catchment/-/catchment-3.0.1.tgz#11dab5fea86d412343e797e052b21091b7e83a55"
@@ -323,6 +328,13 @@ dreamopt@~0.6.0:
   dependencies:
     wordwrap ">=0.0.2"
 
+erotic@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/erotic/-/erotic-0.2.0.tgz#4162384016281b1dd313bf1ecc87576f92d8e509"
+  integrity sha512-rIPuI6Ylvp0epeBvGVmy+77RDcIkqKhqelzSr9G/OjLPjJAF5ssx9uxcn6t+iMWayV+ICiA30pYtEYrRvs39Gg==
+  dependencies:
+    clean-stack "1.3.0"
+
 erotic@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/erotic/-/erotic-1.0.1.tgz#222fedd8215937b9e5d0ec37abb27889af63776f"
@@ -395,6 +407,13 @@ json-diff@0.5.2:
     difflib "~0.2.1"
     dreamopt "~0.6.0"
 
+makepromise@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/makepromise/-/makepromise-1.1.1.tgz#4e03bf98c25ca96a4223b0f2e280e3b3a6f9dea4"
+  integrity sha512-PEYQW9FBRsXgef571s9BLvL2mhAcST2L3LXM4+ztKdBBhLUX97VVUJCs1o0SzqOXyw11ejnXhmS0qxF9y8Ea+g==
+  dependencies:
+    erotic "0.2.0"
+
 makepromise@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/makepromise/-/makepromise-2.0.0.tgz#3b91b9de3e36cd6979c94c38392f04ba4d8e1f18"
@@ -456,6 +475,25 @@ promto@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/promto/-/promto-1.0.1.tgz#0a169fc7bd8f48cef1ee9faeace61a100305a536"
 
+reloquent@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/reloquent/-/reloquent-1.0.6.tgz#56cb87f43209e421a129df48ba621a658c08b1d4"
+  integrity sha1-VsuH9DIJ5CGhKd9IumIaZYwIsdQ=
+  dependencies:
+    promto "1.0.1"
+
+resolve-dependency@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/resolve-dependency/-/resolve-dependency-1.0.0.tgz#8f6b2dc6dce5e220eb6252581af4d1181d11dcc1"
+  integrity sha512-Q7jtB7N7zp0TA6L7uXbo+Pv03VvDBkZRbNkyHxfn8o0eACIpwNfr0O9UZ2umVFyYKRl9fRkqocdRwXtaOfTYYQ==
+  dependencies:
+    "@wrote/exists" "1.0.1"
+
+restream@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/restream/-/restream-1.2.0.tgz#fd13b031a54e80cc65d1878c43149f1b3a40efbb"
+  integrity sha1-/ROwMaVOgMxl0YeMQxSfGzpA77s=
+
 restream@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/restream/-/restream-3.1.1.tgz#36084997bd3e765c2da484700e16b850c2f9ffb4"
@@ -488,6 +526,17 @@ rexml@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/rexml/-/rexml-1.2.0.tgz#f78ada4db77b77b5ade1c16ba9e7da6975192438"
   integrity sha512-kXVHg5xCKMgtuy9jiCHHzwVQyokla58YQ9Y5JIK6cLcuUWx9dh+D91RRzHybN/4UfEY9QC93C/gP+btRM99EaQ==
+
+snapshot-context@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/snapshot-context/-/snapshot-context-2.0.4.tgz#b8121d9bff2eded0462a74fa503186fdaea17444"
+  integrity sha512-uwbNvHhpQ5LtPTF87+r5PcAXz7k+Rs2fkC41b9niYQYzrc6HZQE01N43uBypr3WBRfimlnrf2e2qVSM0cOEW1Q==
+  dependencies:
+    assert-diff "2.0.3"
+    erotic "1.2.1"
+    erte "1.1.4"
+    reloquent "1.0.6"
+    wrote "1.4.0"
 
 source-map@0.7.3:
   version "0.7.3"
@@ -530,6 +579,15 @@ which-stream@1.0.1:
 wordwrap@>=0.0.2:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
+
+wrote@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/wrote/-/wrote-1.4.0.tgz#68c95aa1d62e425c8cdf03fa26baa3acca2eed8f"
+  integrity sha512-HnlHymRmCxidxnZZmcQIbrSfyIVFxeZiVbqNDV+GpH+zNr/ZSpHgfS1E1XkA8YrC4x3JiF9kMbNU4kNXS0mbPA==
+  dependencies:
+    catchment "2.0.1"
+    makepromise "1.1.1"
+    restream "1.2.0"
 
 yarn-s@1.1.0:
   version "1.1.0"

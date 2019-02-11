@@ -1,22 +1,37 @@
-import { equal, ok } from 'zoroaster/assert'
-import Context from '../context'
-import staticAnalysis from '../../src'
+import SnapshotContext from 'snapshot-context'
+import staticAnalysis, { detect } from '../../src'
 
-/** @type {Object.<string, (c: Context)>} */
-const T = {
-  context: Context,
-  'is a function'() {
-    equal(typeof staticAnalysis, 'function')
+/** @type {Object.<string, (c: SnapshotContext)} */
+const TS = {
+  context: SnapshotContext,
+  async '!detects the matches'({ test, setDir }) {
+    setDir('test/snapshot')
+    const res = await detect('test/fixture/detect.js')
+    await test('detect.json', res)
+    // const packages = res.reduce((acc, current) => {
+    //   const { internal, version, name } = current
+    //   if (internal) return acc
+    //   const key = `${name}-${version}`
+    //   if (!(key in acc)) acc[key] = []
+    //   acc[key].push(current)
+    //   return acc
+    // }, {})
   },
-  async 'calls package without error'() {
-    await staticAnalysis()
+  async 'filters duplicates'({ test, setDir }) {
+    setDir('test/snapshot')
+    const res = await staticAnalysis('test/fixture/detect.js')
+    await test('detect-filtered.json', res)
   },
-  async 'gets a link to the fixture'({ FIXTURE }) {
-    const res = await staticAnalysis({
-      text: FIXTURE,
-    })
-    ok(res, FIXTURE)
+  async 'has main'({ test, setDir }) {
+    setDir('test/snapshot')
+    const res = await staticAnalysis('test/fixture/lib/has-main.js')
+    await test('detect-hasmain.json', res)
+  },
+  async 'read with dot'({ test, setDir }) {
+    setDir('test/snapshot')
+    const res = await staticAnalysis('test/fixture/dot/dot.js')
+    await test('detect-dot.json', res)
   },
 }
 
-export default T
+export default TS

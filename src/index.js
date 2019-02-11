@@ -1,10 +1,12 @@
-import { dirname, join } from 'path'
+import { dirname } from 'path'
 import { builtinModules } from 'module'
-import { read, exists } from '@wrote/wrote'
+import { read } from '@wrote/wrote'
 import mismatch from 'mismatch'
+import resolveDependency from 'resolve-dependency'
 import getMatches from '@depack/detect'
 import findPackageJson from 'fpj'
-import { checkIfLib } from '../lib'
+
+export const checkIfLib = modName => /^[./]/.test(modName)
 
 /**
  * Detects all dependencies in a file and their dependencies recursively.
@@ -79,7 +81,7 @@ export const detect = async (path, cache = {}) => {
 }
 
 /**
- * Expands the dependency match to include information include `package.json` and entry paths.
+ * Expands the dependency match to include `package.json` and entry paths.
  * @param {string} path The path to the file.
  * @param {Array<string>} matches The matches.
  * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
@@ -90,10 +92,13 @@ const calculateDependencies = async (path, matches) => {
     const internal = builtinModules.includes(name)
     if (internal) return { internal: name }
     const isLib = checkIfLib(name)
-    if (isLib) { // e.g., ./lib is a package
-      const entry = await getLibRequire(path, name)
-      const e = await exists(entry)
-      if (e) return { entry }
+    if (isLib) {
+      try {
+        const { path: entry } = await resolveDependency(name, path)
+        return { entry }
+      } catch (err) { /*
+        a local package with package.json
+      */}
     }
     const {
       entry, packageJson, version, packageName, hasMain,
@@ -101,26 +106,6 @@ const calculateDependencies = async (path, matches) => {
     return { entry, packageJson, version, name: packageName, ...(hasMain ? { hasMain } : {}) }
   })
   return await Promise.all(proms)
-}
-
-/**
- * Returns the path of a library file (`./lib`) that can be required by Node.js.
- * @param {string} source The path where the module was required.
- * @param {string} mod The name of the required module.
- */
-export const getLibRequire = async (source, mod) => {
-  let d = join(dirname(source), mod)
-  if (mod.endsWith('/')) {
-    d = join(d, 'index.js')
-  } else {
-    const stat = await exists(d)
-    if (!stat) {
-      d = `${d}.js`
-    } else if (stat.isDirectory()) {
-      d = join(d, 'index.js')
-    }
-  }
-  return d
 }
 
 export const getRequireMatches = (source) => {
