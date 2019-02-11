@@ -38,10 +38,18 @@
   },
   "homepage": "https://github.com/dpck/static-analysis#readme",
   "devDependencies": {
+    "@wrote/wrote": "1.2.1",
     "alamode": "1.7.3",
     "documentary": "1.21.1",
     "eslint-config-artdeco": "1.0.1",
     "yarn-s": "1.1.0",
     "zoroaster": "3.6.6"
+  },
+  "dependencies": {
+    "@depack/detect": "1.0.0",
+    "@wrote/exists": "1.0.1",
+    "@wrote/read": "1.0.2",
+    "fpj": "1.0.0",
+    "mismatch": "1.0.3"
   }
 }

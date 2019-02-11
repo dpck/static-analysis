@@ -1,10 +1,22 @@
 <types>
-  <type name="Config" desc="Options for the program.">
-    <prop boolean name="shouldRun" default="true">
-      A boolean option.
+  <type name="Detection" desc="The module detection result.">
+    <prop string name="entry">
+      The path to the JavaScript file to be required.
     </prop>
-    <prop string name="text">
-      A text to return.
+    <prop string name="from">
+      The file in which the dependency was found.
+    </prop>
+    <prop opt string name="packageJson">
+      The path to the `package.json` file of the dependency if it's a module.
+    </prop>
+    <prop opt string name="name">
+      The name of the package.
+    </prop>
+    <prop opt string name="internal">
+      If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.
+    </prop>
+    <prop opt boolean name="hasMain">
+      Whether the entry from the package was specified via the `main` field and not `module` field.
     </prop>
   </type>
 </types>
