@@ -1,7 +1,7 @@
 <types>
   <type name="Detection" desc="The module detection result.">
-    <prop string name="entry">
-      The path to the JavaScript file to be required.
+    <prop opt string name="entry">
+      The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
     </prop>
     <prop string name="from">
       The file in which the dependency was found.

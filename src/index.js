@@ -145,7 +145,7 @@ export default staticAnalysis
 /* documentary types/index.xml */
 /**
  * @typedef {Object} Detection The module detection result.
- * @prop {string} entry The path to the JavaScript file to be required.
+ * @prop {string} [entry] The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
  * @prop {string} from The file in which the dependency was found.
  * @prop {string} [packageJson] The path to the `package.json` file of the dependency if it's a module.
  * @prop {string} [name] The name of the package.

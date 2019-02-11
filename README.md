@@ -113,14 +113,14 @@ import staticAnalysis from 'static-analysis'
 
 __<a name="type-detection">`Detection`</a>__: The module detection result.
 
-|    Name     |   Type    |                                          Description                                          |
-| ----------- | --------- | --------------------------------------------------------------------------------------------- |
-| __entry*__  | _string_  | The path to the JavaScript file to be required.                                               |
-| __from*__   | _string_  | The file in which the dependency was found.                                                   |
-| packageJson | _string_  | The path to the `package.json` file of the dependency if it's a module.                       |
-| name        | _string_  | The name of the package.                                                                      |
-| internal    | _string_  | If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.             |
-| hasMain     | _boolean_ | Whether the entry from the package was specified via the `main` field and not `module` field. |
+|    Name     |   Type    |                                                               Description                                                               |
+| ----------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| entry       | _string_  | The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field. |
+| __from*__   | _string_  | The file in which the dependency was found.                                                                                             |
+| packageJson | _string_  | The path to the `package.json` file of the dependency if it's a module.                                                                 |
+| name        | _string_  | The name of the package.                                                                                                                |
+| internal    | _string_  | If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.                                                       |
+| hasMain     | _boolean_ | Whether the entry from the package was specified via the `main` field and not `module` field.                                           |
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
 
