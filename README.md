@@ -12,8 +12,8 @@ yarn add -E static-analysis
 
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
-- [`staticAnalysis(arg1: string, arg2?: boolean)`](#mynewpackagearg1-stringarg2-boolean-void)
-  * [`Config`](#type-config)
+- [`async staticAnalysis(path: string): Array<Detection>`](#async-staticanalysispath-string-arraydetection)
+  * [`Detection`](#type-detection)
 - [Copyright](#copyright)
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
@@ -28,38 +28,124 @@ import staticAnalysis from 'static-analysis'
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
 
-## `staticAnalysis(`<br/>&nbsp;&nbsp;`arg1: string,`<br/>&nbsp;&nbsp;`arg2?: boolean,`<br/>`): void`
+## `async staticAnalysis(`<br/>&nbsp;&nbsp;`path: string,`<br/>`): Array<Detection>`
 
-Call this function to get the result you want.
+Detects all dependencies in a file and their dependencies recursively. If the package exports `main` over `module`, the `hasMain` property will be added.
 
-__<a name="type-config">`Config`</a>__: Options for the program.
+_For example, for the given file_:
+```js
+import { read } from '@wrote/read'
+import { resolve } from 'path'
+import { render } from 'preact'
+import Component from './Component'
 
-|   Name    |   Type    |    Description    | Default |
-| --------- | --------- | ----------------- | ------- |
-| shouldRun | _boolean_ | A boolean option. | `true`  |
-| __text*__ | _string_  | A text to return. | -       |
+(async () => {
+  const file = await read(resolve('example'))
+  render(<Component>{file}</Component>, document.body)
+})()
+```
 
+_Static Analysis can detect matches using the following script_:
 ```js
 /* yarn example/ */
 import staticAnalysis from 'static-analysis'
 
 (async () => {
-  const res = await staticAnalysis({
-    text: 'example',
-  })
+  const res = await staticAnalysis('example/source.js')
   console.log(res)
 })()
 ```
+```js
+[ { entry: 'node_modules/@wrote/read/src/index.js',
+    packageJson: 'node_modules/@wrote/read/package.json',
+    version: '1.0.2',
+    name: '@wrote/read',
+    from: [ 'example/source.js' ] },
+  { internal: 'path', from: [ 'example/source.js' ] },
+  { entry: 'node_modules/preact/dist/preact.mjs',
+    packageJson: 'node_modules/preact/package.json',
+    version: '8.4.2',
+    name: 'preact',
+    from: [ 'example/source.js' ] },
+  { entry: 'example/Component.jsx',
+    from: [ 'example/source.js' ] },
+  { internal: 'fs',
+    from: [ 'node_modules/@wrote/read/src/index.js' ] },
+  { entry: 'node_modules/@wrote/read/node_modules/catchment/src/index.js',
+    packageJson: 'node_modules/@wrote/read/node_modules/catchment/package.json',
+    version: '3.2.1',
+    name: 'catchment',
+    from: [ 'node_modules/@wrote/read/src/index.js' ] },
+  { internal: 'stream',
+    from: 
+     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+  { entry: 'node_modules/erotic/src/index.js',
+    packageJson: 'node_modules/erotic/package.json',
+    version: '2.0.2',
+    name: 'erotic',
+    from: 
+     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+  { entry: 'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js',
+    packageJson: 'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/package.json',
+    version: '1.0.1',
+    name: '@artdeco/clean-stack',
+    from: 
+     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+  { entry: 'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
+    from: 
+     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+  { entry: 'node_modules/erotic/src/lib.js',
+    from: 
+     [ 'node_modules/erotic/src/index.js',
+       'node_modules/erotic/src/callback.js' ] },
+  { entry: 'node_modules/erotic/src/callback.js',
+    from: [ 'node_modules/erotic/src/index.js' ] },
+  { entry: 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
+    packageJson: 'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json',
+    version: '1.0.1',
+    name: '@artdeco/clean-stack',
+    from: [ 'node_modules/erotic/src/callback.js' ] },
+  { internal: 'os',
+    from: 
+     [ 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
+       'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js' ] } ]
 ```
-example
-```
+
+__<a name="type-detection">`Detection`</a>__: The module detection result.
+
+|    Name     |   Type    |                                          Description                                          |
+| ----------- | --------- | --------------------------------------------------------------------------------------------- |
+| __entry*__  | _string_  | The path to the JavaScript file to be required.                                               |
+| __from*__   | _string_  | The file in which the dependency was found.                                                   |
+| packageJson | _string_  | The path to the `package.json` file of the dependency if it's a module.                       |
+| name        | _string_  | The name of the package.                                                                      |
+| internal    | _string_  | If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.             |
+| hasMain     | _boolean_ | Whether the entry from the package was specified via the `main` field and not `module` field. |
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
 
 ## Copyright
 
-(c) [Art Deco][1] 2019
-
-[1]: https://artd.eco
+<table>
+  <tr>
+    <th>
+      <a href="https://artd.eco">
+        <img src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png" alt="Art Deco" />
+      </a>
+    </th>
+    <th>
+      © <a href="https://artd.eco">Art Deco</a> for <a href="https://artd.eco/depack">Depack</a>
+      2019
+    </th>
+    <th>
+      <a href="https://www.technation.sucks" title="Tech Nation Visa">
+        <img src="https://raw.githubusercontent.com/artdecoweb/www.technation.sucks/master/anim.gif" alt="Tech Nation Visa" />
+      </a>
+    </th>
+    <th>
+      <a href="https://www.technation.sucks">Tech Nation Visa Sucks</a>
+    </th>
+  </tr>
+</table>
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>

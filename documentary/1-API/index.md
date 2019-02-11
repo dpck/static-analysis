@@ -8,18 +8,21 @@ import staticAnalysis from 'static-analysis'
 
 %~%
 
-```## staticAnalysis
+```## async staticAnalysis => Array<Detection>
 [
-  ["arg1", "string"],
-  ["arg2?", "boolean"]
+  ["path", "string"]
 ]
 ```
 
-Call this function to get the result you want.
+Detects all dependencies in a file and their dependencies recursively. If the package exports `main` over `module`, the `hasMain` property will be added.
+
+_For example, for the given file_:
+%EXAMPLE: example/source.js, ../src => static-analysis%
+
+_Static Analysis can detect matches using the following script_:
+%EXAMPLE: example/example.js, ../src => static-analysis%
+%FORK-js example example/example%
 
 %TYPEDEF types/index.xml%
-
-%EXAMPLE: example/example.js, ../src => static-analysis%
-%FORK example example/example%
 
 %~%
