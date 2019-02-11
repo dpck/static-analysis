@@ -3,7 +3,7 @@
     <prop opt string name="entry">
       The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
     </prop>
-    <prop string name="from">
+    <prop type="Array<string>" name="from">
       The file in which the dependency was found.
     </prop>
     <prop opt string name="packageJson">
@@ -11,6 +11,9 @@
     </prop>
     <prop opt string name="name">
       The name of the package.
+    </prop>
+    <prop opt string name="version">
+      The version of the package.
     </prop>
     <prop opt string name="internal">
       If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.

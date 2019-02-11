@@ -146,9 +146,10 @@ export default staticAnalysis
 /**
  * @typedef {Object} Detection The module detection result.
  * @prop {string} [entry] The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
- * @prop {string} from The file in which the dependency was found.
+ * @prop {Array<string>} from The file in which the dependency was found.
  * @prop {string} [packageJson] The path to the `package.json` file of the dependency if it's a module.
  * @prop {string} [name] The name of the package.
+ * @prop {string} [version] The version of the package.
  * @prop {string} [internal] If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.
  * @prop {boolean} [hasMain] Whether the entry from the package was specified via the `main` field and not `module` field.
  */
