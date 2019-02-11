@@ -2,7 +2,7 @@
   {
     "entry": "node_modules/@wrote/wrote/src/index.js",
     "packageJson": "node_modules/@wrote/wrote/package.json",
-    "version": "1.1.0",
+    "version": "1.2.1",
     "name": "@wrote/wrote",
     "from": "test/fixture/detect.js"
   },
@@ -18,15 +18,15 @@
     "from": "test/fixture/detect.js"
   },
   {
-    "entry": "node_modules/@wrote/wrote/node_modules/@wrote/read/src/index.js",
-    "packageJson": "node_modules/@wrote/wrote/node_modules/@wrote/read/package.json",
+    "entry": "node_modules/@wrote/read/src/index.js",
+    "packageJson": "node_modules/@wrote/read/package.json",
     "version": "1.0.2",
     "name": "@wrote/read",
     "from": "node_modules/@wrote/wrote/src/index.js"
   },
   {
-    "entry": "node_modules/@wrote/wrote/node_modules/@wrote/write/src/index.js",
-    "packageJson": "node_modules/@wrote/wrote/node_modules/@wrote/write/package.json",
+    "entry": "node_modules/@wrote/write/src/index.js",
+    "packageJson": "node_modules/@wrote/write/package.json",
     "version": "1.0.2",
     "name": "@wrote/write",
     "from": "node_modules/@wrote/wrote/src/index.js"
@@ -39,8 +39,8 @@
     "from": "node_modules/@wrote/wrote/src/index.js"
   },
   {
-    "entry": "node_modules/@wrote/wrote/node_modules/@wrote/rm/src/index.js",
-    "packageJson": "node_modules/@wrote/wrote/node_modules/@wrote/rm/package.json",
+    "entry": "node_modules/@wrote/rm/src/index.js",
+    "packageJson": "node_modules/@wrote/rm/package.json",
     "version": "1.1.2",
     "name": "@wrote/rm",
     "from": "node_modules/@wrote/wrote/src/index.js"
@@ -53,37 +53,44 @@
     "from": "node_modules/@wrote/wrote/src/index.js"
   },
   {
-    "internal": "fs",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/read/src/index.js"
+    "entry": "node_modules/@wrote/exists/src/index.js",
+    "packageJson": "node_modules/@wrote/exists/package.json",
+    "version": "1.0.1",
+    "name": "@wrote/exists",
+    "from": "node_modules/@wrote/wrote/src/index.js"
   },
   {
-    "entry": "node_modules/catchment/src/index.js",
-    "packageJson": "node_modules/catchment/package.json",
+    "internal": "fs",
+    "from": "node_modules/@wrote/read/src/index.js"
+  },
+  {
+    "entry": "node_modules/@wrote/read/node_modules/catchment/src/index.js",
+    "packageJson": "node_modules/@wrote/read/node_modules/catchment/package.json",
     "version": "3.2.1",
     "name": "catchment",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/read/src/index.js"
+    "from": "node_modules/@wrote/read/src/index.js"
   },
   {
     "internal": "stream",
-    "from": "node_modules/catchment/src/index.js"
+    "from": "node_modules/@wrote/read/node_modules/catchment/src/index.js"
   },
   {
     "entry": "node_modules/erotic/src/index.js",
     "packageJson": "node_modules/erotic/package.json",
     "version": "2.0.2",
     "name": "erotic",
-    "from": "node_modules/catchment/src/index.js"
+    "from": "node_modules/@wrote/read/node_modules/catchment/src/index.js"
   },
   {
-    "entry": "node_modules/catchment/node_modules/@artdeco/clean-stack/src/index.js",
-    "packageJson": "node_modules/catchment/node_modules/@artdeco/clean-stack/package.json",
+    "entry": "node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js",
+    "packageJson": "node_modules/@wrote/read/node_modules/@artdeco/clean-stack/package.json",
     "version": "1.0.1",
     "name": "@artdeco/clean-stack",
-    "from": "node_modules/catchment/src/index.js"
+    "from": "node_modules/@wrote/read/node_modules/catchment/src/index.js"
   },
   {
-    "entry": "node_modules/catchment/src/lib/index.js",
-    "from": "node_modules/catchment/src/index.js"
+    "entry": "node_modules/@wrote/read/node_modules/catchment/src/lib/index.js",
+    "from": "node_modules/@wrote/read/node_modules/catchment/src/index.js"
   },
   {
     "entry": "node_modules/erotic/src/lib.js",
@@ -110,18 +117,18 @@
   },
   {
     "internal": "os",
-    "from": "node_modules/catchment/node_modules/@artdeco/clean-stack/src/index.js"
+    "from": "node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js"
   },
   {
     "internal": "fs",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/write/src/index.js"
+    "from": "node_modules/@wrote/write/src/index.js"
   },
   {
     "entry": "node_modules/erotic/src/index.js",
     "packageJson": "node_modules/erotic/package.json",
     "version": "2.0.2",
     "name": "erotic",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/write/src/index.js"
+    "from": "node_modules/@wrote/write/src/index.js"
   },
   {
     "internal": "fs",
@@ -147,25 +154,40 @@
   },
   {
     "internal": "fs",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/rm/src/index.js"
+    "from": "node_modules/@wrote/rm/src/index.js"
   },
   {
-    "entry": "node_modules/@wrote/wrote/node_modules/@wrote/read-dir-structure/src/index.js",
-    "packageJson": "node_modules/@wrote/wrote/node_modules/@wrote/read-dir-structure/package.json",
+    "entry": "node_modules/@wrote/rm/node_modules/@wrote/read-dir-structure/src/index.js",
+    "packageJson": "node_modules/@wrote/rm/node_modules/@wrote/read-dir-structure/package.json",
     "version": "1.0.2",
     "name": "@wrote/read-dir-structure",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/rm/src/index.js"
+    "from": "node_modules/@wrote/rm/src/index.js"
   },
   {
     "entry": "node_modules/makepromise/src/index.js",
     "packageJson": "node_modules/makepromise/package.json",
     "version": "3.0.2",
     "name": "makepromise",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/rm/src/index.js"
+    "from": "node_modules/@wrote/rm/src/index.js"
   },
   {
     "internal": "path",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/rm/src/index.js"
+    "from": "node_modules/@wrote/rm/src/index.js"
+  },
+  {
+    "internal": "fs",
+    "from": "node_modules/@wrote/rm/node_modules/@wrote/read-dir-structure/src/index.js"
+  },
+  {
+    "entry": "node_modules/makepromise/src/index.js",
+    "packageJson": "node_modules/makepromise/package.json",
+    "version": "3.0.2",
+    "name": "makepromise",
+    "from": "node_modules/@wrote/rm/node_modules/@wrote/read-dir-structure/src/index.js"
+  },
+  {
+    "internal": "path",
+    "from": "node_modules/@wrote/rm/node_modules/@wrote/read-dir-structure/src/index.js"
   },
   {
     "internal": "fs",
@@ -181,6 +203,17 @@
   {
     "internal": "path",
     "from": "node_modules/@wrote/wrote/node_modules/@wrote/read-dir-structure/src/index.js"
+  },
+  {
+    "entry": "node_modules/makepromise/src/index.js",
+    "packageJson": "node_modules/makepromise/package.json",
+    "version": "3.0.2",
+    "name": "makepromise",
+    "from": "node_modules/@wrote/exists/src/index.js"
+  },
+  {
+    "internal": "fs",
+    "from": "node_modules/@wrote/exists/src/index.js"
   },
   {
     "entry": "test/fixture/lib/node_modules/test2/index.js",
