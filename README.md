@@ -16,7 +16,7 @@ yarn add -E static-analysis
   * [`Config`](#type-config)
   * [`Detection`](#type-detection)
   * [Ignore Node_Modules](#ignore-node_modules)
-- [`sort(detections: Array<Detection>)`](#sortdetections-arraydetection-void)
+- [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
 - [Copyright](#copyright)
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
@@ -150,7 +150,7 @@ import staticAnalysis from 'static-analysis'
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
 
-## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): void`
+## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): {}`
 
 Sorts the detected dependencies into commonJS modules, packageJsons and internals.
 

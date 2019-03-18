@@ -1,4 +1,4 @@
-```## sort
+```## sort => {}
 [
   ["detections", "Array<Detection>"]
 ]
