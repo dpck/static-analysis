@@ -1,2 +1,2 @@
-import detect from './detect'
+import detect from './lib/lib'
 import rm from '@wrote/rm'

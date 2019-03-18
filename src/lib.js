@@ -43,17 +43,18 @@ const calculateDependencies = async (path, matches) => {
  * @param {Object} nodeModules
  * @returns {Array<Detection>}
  */
-export const detect = async (path, cache = {}, nodeModules) => {
+export const detect = async (path, cache = {}, nodeModules = true) => {
   if (path in cache) return []
   cache[path] = 1
   const source = await read(path)
   const matches = getMatches(source)
   const requireMatches = getRequireMatches(source)
   const allMatches = [...matches, ...requireMatches]
+  const m = nodeModules ? allMatches : allMatches.filter(checkIfLib)
 
   let deps
   try {
-    deps = await calculateDependencies(path, allMatches)
+    deps = await calculateDependencies(path, m)
   } catch (err) {
     err.message = `${path}\n [!] ${err.message}`
     throw err

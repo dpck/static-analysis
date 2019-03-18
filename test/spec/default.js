@@ -23,6 +23,11 @@ const TS = {
   async 'read with dot'() {
     return await staticAnalysis('test/fixture/dot/dot.js')
   },
+  async 'ignores node_modules'() {
+    return await staticAnalysis('test/fixture/no-node-modules.js', {
+      nodeModules: false,
+    })
+  },
 }
 
 export default TS
