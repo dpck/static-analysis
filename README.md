@@ -35,6 +35,12 @@ import staticAnalysis from 'static-analysis'
 
 Detects all dependencies in a file and their dependencies recursively. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
 
+__<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
+
+|    Name     |   Type    |                          Description                           | Default |
+| ----------- | --------- | -------------------------------------------------------------- | ------- |
+| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output. | `true`  |
+
 _For example, for the given file_:
 ```js
 import read from '@wrote/read'
@@ -108,12 +114,6 @@ import staticAnalysis from 'static-analysis'
   { internal: 'os',
     from: [ 'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
 ```
-
-__<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
-
-|    Name     |   Type    |                          Description                           | Default |
-| ----------- | --------- | -------------------------------------------------------------- | ------- |
-| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output. | `true`  |
 
 __<a name="type-detection">`Detection`</a>__: The module detection result.
 
