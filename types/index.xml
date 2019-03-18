@@ -1,4 +1,9 @@
 <types>
+  <type name="Config" desc="The configuration for staticAnalysis.">
+    <prop type="boolean" name="nodeModules" default="true">
+      Whether to include packages from `node_modules` in the output.
+    </prop>
+  </type>
   <type name="Detection" desc="The module detection result.">
     <prop opt string name="entry">
       The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.

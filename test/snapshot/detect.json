@@ -82,8 +82,8 @@
     "from": "node_modules/@wrote/read/node_modules/catchment/src/index.js"
   },
   {
-    "entry": "node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js",
-    "packageJson": "node_modules/@wrote/read/node_modules/@artdeco/clean-stack/package.json",
+    "entry": "node_modules/@artdeco/clean-stack/src/index.js",
+    "packageJson": "node_modules/@artdeco/clean-stack/package.json",
     "version": "1.0.1",
     "name": "@artdeco/clean-stack",
     "from": "node_modules/@wrote/read/node_modules/catchment/src/index.js"
@@ -101,8 +101,8 @@
     "from": "node_modules/erotic/src/index.js"
   },
   {
-    "entry": "node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js",
-    "packageJson": "node_modules/erotic/node_modules/@artdeco/clean-stack/package.json",
+    "entry": "node_modules/@artdeco/clean-stack/src/index.js",
+    "packageJson": "node_modules/@artdeco/clean-stack/package.json",
     "version": "1.0.1",
     "name": "@artdeco/clean-stack",
     "from": "node_modules/erotic/src/callback.js"
@@ -113,11 +113,7 @@
   },
   {
     "internal": "os",
-    "from": "node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js"
-  },
-  {
-    "internal": "os",
-    "from": "node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js"
+    "from": "node_modules/@artdeco/clean-stack/src/index.js"
   },
   {
     "internal": "fs",

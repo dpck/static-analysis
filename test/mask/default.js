@@ -1,4 +1,4 @@
-import { makeTestSuite } from 'zoroaster'
+import makeTestSuite from '@zoroaster/mask'
 import Context from '../context'
 import staticAnalysis from '../../src'
 
