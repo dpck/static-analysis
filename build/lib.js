@@ -1,6 +1,6 @@
 const { dirname } = require('path');
 const { builtinModules } = require('module');
-const { read } = require('@wrote/wrote');
+let read = require('@wrote/read'); if (read && read.__esModule) read = read.default;
 let resolveDependency = require('resolve-dependency'); if (resolveDependency && resolveDependency.__esModule) resolveDependency = resolveDependency.default;
 let getMatches = require('@depack/detect'); if (getMatches && getMatches.__esModule) getMatches = getMatches.default;
 let findPackageJson = require('fpj'); if (findPackageJson && findPackageJson.__esModule) findPackageJson = findPackageJson.default;
