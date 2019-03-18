@@ -1,6 +1,7 @@
 ```## async staticAnalysis => Array<Detection>
 [
-  ["path", "string"]
+  ["path", "string"],
+  ["config", "Config"]
 ]
 ```
 
@@ -14,5 +15,14 @@ _Static Analysis can detect matches using the following script_:
 %FORK-js example example/example%
 
 %TYPEDEF types/index.xml%
+
+%~ width="15"%
+
+### Ignore Node_Modules
+
+It is possible to ignore `node_modules` folders. In this case, only dependencies that start with `./` or `/` will be included in the output.
+
+%EXAMPLE: example/example-nm.js, ../src => static-analysis%
+%FORK-js example example/example-nm%
 
 %~%

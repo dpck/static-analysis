@@ -12,8 +12,10 @@ yarn add -E static-analysis
 
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
-- [`async staticAnalysis(path: string): Array<Detection>`](#async-staticanalysispath-string-arraydetection)
+- [`async staticAnalysis(path: string, config: Config): Array<Detection>`](#async-staticanalysispath-stringconfig-config-arraydetection)
+  * [`Config`](#type-config)
   * [`Detection`](#type-detection)
+  * [Ignore Node_Modules](#ignore-node_modules)
 - [`sort(detections: Array<Detection>)`](#sortdetections-arraydetection-void)
 - [Copyright](#copyright)
 
@@ -29,7 +31,7 @@ import staticAnalysis from 'static-analysis'
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
 
-## `async staticAnalysis(`<br/>&nbsp;&nbsp;`path: string,`<br/>`): Array<Detection>`
+## `async staticAnalysis(`<br/>&nbsp;&nbsp;`path: string,`<br/>&nbsp;&nbsp;`config: Config,`<br/>`): Array<Detection>`
 
 Detects all dependencies in a file and their dependencies recursively. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
 
@@ -87,12 +89,13 @@ import staticAnalysis from 'static-analysis'
     name: 'erotic',
     from: 
      [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
-  { entry: 'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js',
-    packageJson: 'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/package.json',
+  { entry: 'node_modules/@artdeco/clean-stack/src/index.js',
+    packageJson: 'node_modules/@artdeco/clean-stack/package.json',
     version: '1.0.1',
     name: '@artdeco/clean-stack',
     from: 
-     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js',
+       'node_modules/erotic/src/callback.js' ] },
   { entry: 'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
     from: 
      [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
@@ -102,16 +105,15 @@ import staticAnalysis from 'static-analysis'
        'node_modules/erotic/src/callback.js' ] },
   { entry: 'node_modules/erotic/src/callback.js',
     from: [ 'node_modules/erotic/src/index.js' ] },
-  { entry: 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
-    packageJson: 'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json',
-    version: '1.0.1',
-    name: '@artdeco/clean-stack',
-    from: [ 'node_modules/erotic/src/callback.js' ] },
   { internal: 'os',
-    from: 
-     [ 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
-       'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js' ] } ]
+    from: [ 'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
 ```
+
+__<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
+
+|    Name     |   Type    |                          Description                           | Default |
+| ----------- | --------- | -------------------------------------------------------------- | ------- |
+| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output. | `true`  |
 
 __<a name="type-detection">`Detection`</a>__: The module detection result.
 
@@ -125,7 +127,28 @@ __<a name="type-detection">`Detection`</a>__: The module detection result.
 | internal    | _string_              | If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.                                                       |
 | hasMain     | _boolean_             | Whether the entry from the package was specified via the `main` field and not `module` field.                                           |
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true" width="15"></a></p>
+
+### Ignore Node_Modules
+
+It is possible to ignore `node_modules` folders. In this case, only dependencies that start with `./` or `/` will be included in the output.
+
+```js
+import staticAnalysis from 'static-analysis'
+
+(async () => {
+  const res = await staticAnalysis('example/source.js', {
+    nodeModules: false,
+  })
+  console.log(res)
+})()
+```
+```js
+[ { entry: 'example/Component.jsx',
+    from: [ 'example/source.js' ] } ]
+```
+
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
 
 ## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): void`
 
@@ -147,8 +170,7 @@ import staticAnalysis, { sort } from 'static-analysis'
      'node_modules/preact/package.json',
      'node_modules/@wrote/read/node_modules/catchment/package.json',
      'node_modules/erotic/package.json',
-     'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/package.json',
-     'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json' ],
+     'node_modules/@artdeco/clean-stack/package.json' ],
   commonJs: [],
   js: 
    [ 'node_modules/@wrote/read/src/index.js',
@@ -156,22 +178,20 @@ import staticAnalysis, { sort } from 'static-analysis'
      'example/Component.jsx',
      'node_modules/@wrote/read/node_modules/catchment/src/index.js',
      'node_modules/erotic/src/index.js',
-     'node_modules/@wrote/read/node_modules/@artdeco/clean-stack/src/index.js',
+     'node_modules/@artdeco/clean-stack/src/index.js',
      'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
      'node_modules/erotic/src/lib.js',
-     'node_modules/erotic/src/callback.js',
-     'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js' ],
+     'node_modules/erotic/src/callback.js' ],
   internals: [ 'path', 'fs', 'stream', 'os' ],
   deps: 
    [ '@wrote/read',
      'preact',
      'catchment',
      'erotic',
-     '@artdeco/clean-stack',
      '@artdeco/clean-stack' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true"></a></p>
 
 ## Copyright
 
