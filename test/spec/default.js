@@ -1,13 +1,10 @@
-import SnapshotContext from 'snapshot-context'
 import staticAnalysis from '../../src'
 import { detect } from '../../src/lib'
 
-/** @type {Object.<string, (c: SnapshotContext)} */
+/** @type {Object.<string, ()} */
 const TS = {
-  context: SnapshotContext,
-  async '!detects the matches'({ test }) {
-    const res = await detect('test/fixture/detect.js')
-    await test('detect.json', res)
+  async 'detects the matches'() {
+    return await detect('test/fixture/detect.js')
     // const packages = res.reduce((acc, current) => {
     //   const { internal, version, name } = current
     //   if (internal) return acc
@@ -17,17 +14,14 @@ const TS = {
     //   return acc
     // }, {})
   },
-  async 'filters duplicates'({ test }) {
-    const res = await staticAnalysis('test/fixture/detect.js')
-    await test('detect-filtered.json', res)
+  async 'filters duplicates'() {
+    return await staticAnalysis('test/fixture/detect.js')
   },
-  async 'has main'({ test }) {
-    const res = await staticAnalysis('test/fixture/lib/has-main.js')
-    await test('detect-hasmain.json', res)
+  async 'has main'() {
+    return await staticAnalysis('test/fixture/lib/has-main.js')
   },
-  async 'read with dot'({ test }) {
-    const res = await staticAnalysis('test/fixture/dot/dot.js')
-    await test('detect-dot.json', res)
+  async 'read with dot'() {
+    return await staticAnalysis('test/fixture/dot/dot.js')
   },
 }
 
