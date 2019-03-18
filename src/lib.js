@@ -1,6 +1,6 @@
 import { dirname } from 'path'
 import { builtinModules } from 'module'
-import { read } from '@wrote/wrote'
+import read from '@wrote/read'
 import resolveDependency from 'resolve-dependency'
 import getMatches from '@depack/detect'
 import findPackageJson from 'fpj'
