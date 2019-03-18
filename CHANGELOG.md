@@ -3,6 +3,7 @@
 ### 1.1.0
 
 - [feature] Allow to ignore `node_modules` packages.
+- [fix] Fix incorrect dependencies.
 
 ## 11 February 2019
 
