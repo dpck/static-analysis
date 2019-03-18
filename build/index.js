@@ -1,19 +1,14 @@
-const { dirname } = require('path');
-const { builtinModules } = require('module');
-const { read } = require('@wrote/wrote');
-let mismatch = require('mismatch'); if (mismatch && mismatch.__esModule) mismatch = mismatch.default;
-let resolveDependency = require('resolve-dependency'); if (resolveDependency && resolveDependency.__esModule) resolveDependency = resolveDependency.default;
-let getMatches = require('@depack/detect'); if (getMatches && getMatches.__esModule) getMatches = getMatches.default;
-let findPackageJson = require('fpj'); if (findPackageJson && findPackageJson.__esModule) findPackageJson = findPackageJson.default;
-
-       const checkIfLib = modName => /^[./]/.test(modName)
+const { detect } = require('./lib');
 
 /**
  * Detects all dependencies in a file and their dependencies recursively.
  * @param {string} path The path to the file in which to detect dependencies.
+ * @param {Config} config The configuration for staticAnalysis.
+ * @param {boolean} [config.nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
  */
-const staticAnalysis = async (path) => {
-  const detected = await detect(path)
+const staticAnalysis = async (path, config = {}) => {
+  const { nodeModules = true } = config
+  const detected = await detect(path, {}, nodeModules)
   const filtered = detected.filter(({ internal, entry }, i) => {
     if (internal) {
       const fi = detected.findIndex(({ internal: ii }) => {
@@ -39,79 +34,6 @@ const staticAnalysis = async (path) => {
     return newF
   })
   return f
-}
-
-/**
- * Detects the imports.
- * @param {string} path
- * @param {Object} cache
- * @returns {Array<Detection>}
- */
-       const detect = async (path, cache = {}) => {
-  if (path in cache) return []
-  cache[path] = 1
-  const source = await read(path)
-  const matches = getMatches(source)
-  const requireMatches = getRequireMatches(source)
-  const allMatches = [...matches, ...requireMatches]
-
-  let deps
-  try {
-    deps = await calculateDependencies(path, allMatches)
-  } catch (err) {
-    err.message = `${path}\n [!] ${err.message}`
-    throw err
-  }
-  const d = deps.map(o => ({ ...o, from: path }))
-  const entries = deps
-    .filter(({ entry }) => entry && !(entry in cache))
-  const discovered = await entries
-    .reduce(async (acc, { entry, hasMain }) => {
-      const accRes = await acc
-      const res = await detect(entry, cache)
-      const r = res
-        .map(o => ({
-          ...o,
-          from: o.from ? o.from : entry,
-          ...(!o.packageJson && hasMain ? { hasMain } : {}),
-        }))
-      return [...accRes, ...r]
-    }, d)
-  return discovered
-}
-
-/**
- * Expands the dependency match to include `package.json` and entry paths.
- * @param {string} path The path to the file.
- * @param {Array<string>} matches The matches.
- * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
- */
-const calculateDependencies = async (path, matches) => {
-  const dir = dirname(path)
-  const proms = matches.map(async (name) => {
-    const internal = builtinModules.includes(name)
-    if (internal) return { internal: name }
-    const isLib = checkIfLib(name)
-    if (isLib) {
-      try {
-        const { path: entry } = await resolveDependency(name, path)
-        return { entry }
-      } catch (err) { /*
-        a local package with package.json
-      */}
-    }
-    const {
-      entry, packageJson, version, packageName, hasMain,
-    } = await findPackageJson(dir, name)
-    return { entry, packageJson, version, name: packageName, ...(hasMain ? { hasMain } : {}) }
-  })
-  return await Promise.all(proms)
-}
-
-       const getRequireMatches = (source) => {
-  const m = mismatch(/(?:^|\s+)require\((['"])(.+?)\1\)/gm, source, ['q', 'from'])
-  const res = m.map(a => a['from'])
-  return res
 }
 
 /**
@@ -144,6 +66,9 @@ module.exports=staticAnalysis
 
 /* documentary types/index.xml */
 /**
+ * @typedef {Object} Config The configuration for staticAnalysis.
+ * @prop {boolean} [nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
+ *
  * @typedef {Object} Detection The module detection result.
  * @prop {string} [entry] The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
  * @prop {Array<string>} from The file in which the dependency was found.
@@ -155,7 +80,4 @@ module.exports=staticAnalysis
  */
 
 
-module.exports.checkIfLib = checkIfLib
-module.exports.detect = detect
-module.exports.getRequireMatches = getRequireMatches
 module.exports.sort = sort
