@@ -3,7 +3,7 @@
     <prop type="boolean" name="nodeModules" default="true">
       Whether to include packages from `node_modules` in the output.
     </prop>
-    <prop type="boolean" name="shallowNodeModules" default="false">
+    <prop type="boolean" name="shallow" default="false">
       Only report on the entries of `node_module` dependencies, without analysic their own dependencies.
     </prop>
   </type>

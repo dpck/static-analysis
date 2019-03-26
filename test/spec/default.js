@@ -30,7 +30,12 @@ const TS = {
   },
   async 'shallow node_modules'() {
     return await staticAnalysis('test/fixture/shallow.js', {
-      shallowNodeModules: true,
+      shallow: true,
+    })
+  },
+  async 'allows to pass resolvable path'() {
+    return await staticAnalysis('test/fixture', {
+      shallow: true,
     })
   },
 }

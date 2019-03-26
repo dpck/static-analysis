@@ -1,3 +1,4 @@
+import resolveDependency from 'resolve-dependency'
 import { detect } from './lib'
 
 /**
@@ -5,12 +6,13 @@ import { detect } from './lib'
  * @param {string} path The path to the file in which to detect dependencies.
  * @param {Config} config The configuration for staticAnalysis.
  * @param {boolean} [config.nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
- * @param {boolean} [config.shallowNodeModules=false] Only report on the entries of `node_module` dependencies, without analysic their own dependencies. Default `false`.
+ * @param {boolean} [config.shallow=false] Only report on the entries of `node_module` dependencies, without analysic their own dependencies. Default `false`.
  */
 const staticAnalysis = async (path, config = {}) => {
-  const { nodeModules = true, shallowNodeModules = false } = config
-  const detected = await detect(path, {}, {
-    nodeModules, shallowNodeModules })
+  const { path: p } = await resolveDependency(path)
+  const { nodeModules = true, shallow = false } = config
+  const detected = await detect(p, {}, {
+    nodeModules, shallow })
   const filtered = detected.filter(({ internal, entry }, i) => {
     if (internal) {
       const fi = detected.findIndex(({ internal: ii }) => {
@@ -70,7 +72,7 @@ export default staticAnalysis
 /**
  * @typedef {Object} Config The configuration for staticAnalysis.
  * @prop {boolean} [nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
- * @prop {boolean} [shallowNodeModules=false] Only report on the entries of `node_module` dependencies, without analysic their own dependencies. Default `false`.
+ * @prop {boolean} [shallow=false] Only report on the entries of `node_module` dependencies, without analysic their own dependencies. Default `false`.
  *
  * @typedef {Object} Detection The module detection result.
  * @prop {string} [entry] The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
