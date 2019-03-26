@@ -16,6 +16,7 @@ yarn add -E static-analysis
   * [`Config`](#type-config)
   * [`Detection`](#type-detection)
   * [Ignore Node_Modules](#ignore-node_modules)
+  * [Shallow Node_Modules](#shallow-node_modules)
 - [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
 - [Copyright](#copyright)
 
@@ -37,9 +38,10 @@ Detects all dependencies in a file and their dependencies recursively. If the pa
 
 __<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
 
-|    Name     |   Type    |                          Description                           | Default |
-| ----------- | --------- | -------------------------------------------------------------- | ------- |
-| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output. | `true`  |
+|        Name        |   Type    |                                            Description                                             | Default |
+| ------------------ | --------- | -------------------------------------------------------------------------------------------------- | ------- |
+| nodeModules        | _boolean_ | Whether to include packages from `node_modules` in the output.                                     | `true`  |
+| shallowNodeModules | _boolean_ | Only report on the entries of `node_module` dependencies, without analysic their own dependencies. | `false` |
 
 _For example, for the given file_:
 ```js
@@ -148,7 +150,39 @@ import staticAnalysis from 'static-analysis'
     from: [ 'example/source.js' ] } ]
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true" width="15"></a></p>
+
+### Shallow Node_Modules
+
+To only report the entry to the dependency from `node_modules` without analysing its dependency, the `shallow` options can be set.
+
+```js
+import staticAnalysis from 'static-analysis'
+
+(async () => {
+  const res = await staticAnalysis('example/source.js', {
+    shallowNodeModules: true,
+  })
+  console.log(res)
+})()
+```
+```js
+[ { entry: 'node_modules/@wrote/read/src/index.js',
+    packageJson: 'node_modules/@wrote/read/package.json',
+    version: '1.0.2',
+    name: '@wrote/read',
+    from: [ 'example/source.js' ] },
+  { internal: 'path', from: [ 'example/source.js' ] },
+  { entry: 'node_modules/preact/dist/preact.mjs',
+    packageJson: 'node_modules/preact/package.json',
+    version: '8.4.2',
+    name: 'preact',
+    from: [ 'example/source.js' ] },
+  { entry: 'example/Component.jsx',
+    from: [ 'example/source.js' ] } ]
+```
+
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true"></a></p>
 
 ## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): {}`
 
@@ -191,30 +225,10 @@ import staticAnalysis, { sort } from 'static-analysis'
      '@artdeco/clean-stack' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
 
 ## Copyright
 
-<table>
-  <tr>
-    <th>
-      <a href="https://artd.eco">
-        <img src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png" alt="Art Deco" />
-      </a>
-    </th>
-    <th>
-      © <a href="https://artd.eco">Art Deco</a> for <a href="https://artd.eco/depack">Depack</a>
-      2019
-    </th>
-    <th>
-      <a href="https://www.technation.sucks" title="Tech Nation Visa">
-        <img src="https://raw.githubusercontent.com/artdecoweb/www.technation.sucks/master/anim.gif" alt="Tech Nation Visa" />
-      </a>
-    </th>
-    <th>
-      <a href="https://www.technation.sucks">Tech Nation Visa Sucks</a>
-    </th>
-  </tr>
-</table>
+<table><tr><th><a href="https://artd.eco"><img src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png" alt="Art Deco" /></a></th><th>© <a href="https://artd.eco">Art Deco</a> for <a href="https://artd.eco/depack">Depack</a> 2019</th><th><a href="https://www.technation.sucks" title="Tech Nation Visa"><img src="https://raw.githubusercontent.com/artdecoweb/www.technation.sucks/master/anim.gif" alt="Tech Nation Visa" /></a></th><th><a href="https://www.technation.sucks">Tech Nation Visa Sucks</a></th></tr></table>
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>

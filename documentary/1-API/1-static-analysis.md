@@ -27,4 +27,13 @@ It is possible to ignore `node_modules` folders. In this case, only dependencies
 %EXAMPLE: example/example-nm.js, ../src => static-analysis%
 %FORK-js example example/example-nm%
 
+%~ width="15"%
+
+### Shallow Node_Modules
+
+To only report the entry to the dependency from `node_modules` without analysing its dependency, the `shallow` options can be set.
+
+%EXAMPLE: example/shallow.js, ../src => static-analysis%
+%FORK-js example example/shallow%
+
 %~%
