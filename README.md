@@ -34,14 +34,14 @@ import staticAnalysis from 'static-analysis'
 
 ## `async staticAnalysis(`<br/>&nbsp;&nbsp;`path: string,`<br/>&nbsp;&nbsp;`config: Config,`<br/>`): Array<Detection>`
 
-Detects all dependencies in a file and their dependencies recursively. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
+Detects all dependencies in a file and their dependencies recursively. It is possible to pass path to the directory which has `index.js` or `index.jsx` files. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
 
 __<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
 
-|        Name        |   Type    |                                            Description                                             | Default |
-| ------------------ | --------- | -------------------------------------------------------------------------------------------------- | ------- |
-| nodeModules        | _boolean_ | Whether to include packages from `node_modules` in the output.                                     | `true`  |
-| shallowNodeModules | _boolean_ | Only report on the entries of `node_module` dependencies, without analysic their own dependencies. | `false` |
+|    Name     |   Type    |                                            Description                                             | Default |
+| ----------- | --------- | -------------------------------------------------------------------------------------------------- | ------- |
+| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output.                                     | `true`  |
+| shallow     | _boolean_ | Only report on the entries of `node_module` dependencies, without analysic their own dependencies. | `false` |
 
 _For example, for the given file_:
 ```js
@@ -161,7 +161,7 @@ import staticAnalysis from 'static-analysis'
 
 (async () => {
   const res = await staticAnalysis('example/source.js', {
-    shallowNodeModules: true,
+    shallow: true,
   })
   console.log(res)
 })()
