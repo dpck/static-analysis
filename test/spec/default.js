@@ -28,6 +28,11 @@ const TS = {
       nodeModules: false,
     })
   },
+  async 'shallow node_modules'() {
+    return await staticAnalysis('test/fixture/shallow.js', {
+      shallowNodeModules: true,
+    })
+  },
 }
 
 export default TS

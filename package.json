@@ -49,11 +49,11 @@
   "homepage": "https://github.com/dpck/static-analysis#readme",
   "devDependencies": {
     "@wrote/wrote": "1.2.1",
-    "alamode": "1.8.5",
+    "alamode": "1.8.6",
     "documentary": "1.22.0",
     "eslint-config-artdeco": "1.0.1",
     "yarn-s": "1.1.0",
-    "zoroaster": "3.9.0"
+    "zoroaster": "3.10.0"
   },
   "dependencies": {
     "@depack/detect": "1.0.0",
