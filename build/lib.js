@@ -40,10 +40,10 @@ const calculateDependencies = async (path, matches) => {
  * Detects the imports.
  * @param {string} path
  * @param {Object} cache
- * @param {Object} nodeModules
  * @returns {Array<Detection>}
  */
-       const detect = async (path, cache = {}, nodeModules = true) => {
+       const detect = async (path, cache = {}, {
+  nodeModules = true, shallow = false } = {}) => {
   if (path in cache) return []
   cache[path] = 1
   const source = await read(path)
@@ -63,7 +63,8 @@ const calculateDependencies = async (path, matches) => {
   const entries = deps
     .filter(({ entry }) => entry && !(entry in cache))
   const discovered = await entries
-    .reduce(async (acc, { entry, hasMain }) => {
+    .reduce(async (acc, { entry, hasMain, packageJson }) => {
+      if (packageJson && shallow) return acc
       const accRes = await acc
       const res = await detect(entry, cache, nodeModules)
       const r = res
