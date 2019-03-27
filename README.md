@@ -37,6 +37,9 @@ import staticAnalysis from 'static-analysis'
 
 Detects all dependencies in a file and their dependencies recursively. It is possible to pass path to the directory which has `index.js` or `index.jsx` files. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
 
+- The package does not build an AST, it just looks for `import` and `require` statements using regular expressions. Therefore, there's also no tree-shaking or complete analysis of the real dependencies.
+- If a source is imported like `import fn from '@idio/preact/build/fn`, then the analysis will not contain `@idio/preact` as a `node_module` dependency with the `packageJson`, `name` and `version` fields, it will only appear as an entry file.
+
 __<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
 
 |    Name     |   Type    |                                             Description                                             | Default |
@@ -50,12 +53,16 @@ _For example, for the given file_:
 import read from '@wrote/read'
 import { resolve } from 'path'
 import { render } from 'preact'
+import Fixture from '@idio/preact-fixture/src/Test'
 
 const Component = require('./Component');
 
 (async () => {
   const file = await read(resolve('example'))
-  render(<Component>{file}</Component>, document.body)
+  render(<Component>
+    {file}
+    <Fixture />
+  </Component>, document.body)
 })()
 ```
 
@@ -80,6 +87,8 @@ import staticAnalysis from 'static-analysis'
     packageJson: 'node_modules/preact/package.json',
     version: '8.4.2',
     name: 'preact',
+    from: [ 'example/source.js' ] },
+  { entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
     from: [ 'example/source.js' ] },
   { entry: 'example/Component.jsx',
     from: [ 'example/source.js' ] },
@@ -180,6 +189,8 @@ import staticAnalysis from 'static-analysis'
     version: '8.4.2',
     name: 'preact',
     from: [ 'example/source.js' ] },
+  { entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
+    from: [ 'example/source.js' ] },
   { entry: 'example/Component.jsx',
     from: [ 'example/source.js' ] } ]
 ```
@@ -262,6 +273,7 @@ import staticAnalysis, { sort } from 'static-analysis'
   js: 
    [ 'node_modules/@wrote/read/src/index.js',
      'node_modules/preact/dist/preact.mjs',
+     'node_modules/@idio/preact-fixture/src/Test.jsx',
      'example/Component.jsx',
      'node_modules/@wrote/read/node_modules/catchment/src/index.js',
      'node_modules/erotic/src/index.js',
