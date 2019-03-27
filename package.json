@@ -53,7 +53,7 @@
     "documentary": "1.22.0",
     "eslint-config-artdeco": "1.0.1",
     "yarn-s": "1.1.0",
-    "zoroaster": "3.10.0"
+    "zoroaster": "3.11.0"
   },
   "dependencies": {
     "@depack/detect": "1.0.0",

@@ -17,6 +17,7 @@ yarn add -E static-analysis
   * [`Detection`](#type-detection)
   * [Ignore Node_Modules](#ignore-node_modules)
   * [Shallow Node_Modules](#shallow-node_modules)
+  * [Soft Mode](#soft-mode)
 - [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
 - [Copyright](#copyright)
 
@@ -38,10 +39,11 @@ Detects all dependencies in a file and their dependencies recursively. It is pos
 
 __<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
 
-|    Name     |   Type    |                                            Description                                             | Default |
-| ----------- | --------- | -------------------------------------------------------------------------------------------------- | ------- |
-| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output.                                     | `true`  |
-| shallow     | _boolean_ | Only report on the entries of `node_module` dependencies, without analysic their own dependencies. | `false` |
+|    Name     |   Type    |                                             Description                                             | Default |
+| ----------- | --------- | --------------------------------------------------------------------------------------------------- | ------- |
+| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output.                                      | `true`  |
+| shallow     | _boolean_ | Only report on the entries of `node_module` dependencies, without analysing their own dependencies. | `false` |
+| soft        | _boolean_ | Do not throw an error when the dependency cannot be found in `node_modules`.                        | `false` |
 
 _For example, for the given file_:
 ```js
@@ -182,7 +184,49 @@ import staticAnalysis from 'static-analysis'
     from: [ 'example/source.js' ] } ]
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="15"></a></p>
+
+### Soft Mode
+
+_Static Analysis_ will try to figure out entry points of package dependencies by looking up their `package.json` in the `node_modules` folder. If it cannot find this file, an error will be throw. To prevent the error, and exclude the module from appearing the results, the `soft` mode can be activated.
+
+_With the following file being analysed:_
+
+```jsx
+import missing from 'missing'
+import { render } from 'preact'
+
+render(<div>Hello World</div>)
+```
+
+```js
+import staticAnalysis from 'static-analysis'
+
+(async () => {
+  try {
+    const res = await staticAnalysis('example/missing-dep')
+    console.log(res)
+  } catch (err) {
+    console.log(err)
+  }
+})()
+
+;(async () => {
+  const res = await staticAnalysis('example/missing-dep', {
+    soft: true,
+  })
+  console.log('Soft mode on: %s', res)
+})()
+```
+```js
+Error: example/missing-dep.jsx
+ [!] Package.json for module missing not found.
+    at findPackageJson (/Users/zavr/depack/static-analysis/node_modules/fpj/build/index.js:27:11)
+    at <anonymous>
+Soft mode on: [object Object]
+```
+
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
 
 ## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): {}`
 
@@ -225,7 +269,7 @@ import staticAnalysis, { sort } from 'static-analysis'
      '@artdeco/clean-stack' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true"></a></p>
 
 ## Copyright
 

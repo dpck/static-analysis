@@ -36,4 +36,17 @@ To only report the entry to the dependency from `node_modules` without analysing
 %EXAMPLE: example/shallow.js, ../src => static-analysis%
 %FORK-js example example/shallow%
 
+%~ width="15"%
+
+### Soft Mode
+
+_Static Analysis_ will try to figure out entry points of package dependencies by looking up their `package.json` in the `node_modules` folder. If it cannot find this file, an error will be throw. To prevent the error, and exclude the module from appearing the results, the `soft` mode can be activated.
+
+_With the following file being analysed:_
+
+%EXAMPLE: example/missing-dep.jsx, ../src => static-analysis%
+
+%EXAMPLE: example/soft.js, ../src => static-analysis%
+%FORK-js example example/soft%
+
 %~%

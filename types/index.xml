@@ -4,7 +4,7 @@
       Whether to include packages from `node_modules` in the output.
     </prop>
     <prop type="boolean" name="shallow" default="false">
-      Only report on the entries of `node_module` dependencies, without analysic their own dependencies.
+      Only report on the entries of `node_module` dependencies, without analysing their own dependencies.
     </prop>
     <prop type="boolean" name="soft" default="false">
       Do not throw an error when the dependency cannot be found in `node_modules`.
