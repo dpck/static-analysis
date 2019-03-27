@@ -48,7 +48,7 @@ const calculateDependencies = async (path, matches, soft) => {
  * Detects the imports.
  * @param {string} path
  * @param {Object} cache
- * @returns {Array<Detection>}
+ * @returns {Promise<Array<Detection>>}
  */
        const detect = async (path, cache = {}, {
   nodeModules = true, shallow = false, soft = false } = {}) => {
