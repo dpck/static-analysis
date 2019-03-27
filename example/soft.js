@@ -13,5 +13,6 @@ import staticAnalysis from '../src'
   const res = await staticAnalysis('example/missing-dep', {
     soft: true,
   })
-  console.log('Soft mode on: %s', res)
+  console.log('Soft mode on.')
+  console.log(res)
 })()

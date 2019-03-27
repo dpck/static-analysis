@@ -46,6 +46,8 @@ _With the following file being analysed:_
 
 %EXAMPLE: example/missing-dep.jsx, ../src => static-analysis%
 
+_The program will throw initially, but will skip the missing dependency in **soft mode**:_
+
 %EXAMPLE: example/soft.js, ../src => static-analysis%
 %FORK-js example example/soft%
 

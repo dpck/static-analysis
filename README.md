@@ -199,6 +199,8 @@ import { render } from 'preact'
 render(<div>Hello World</div>)
 ```
 
+_The program will throw initially, but will skip the missing dependency in **soft mode**:_
+
 ```js
 import staticAnalysis from 'static-analysis'
 
@@ -215,7 +217,8 @@ import staticAnalysis from 'static-analysis'
   const res = await staticAnalysis('example/missing-dep', {
     soft: true,
   })
-  console.log('Soft mode on: %s', res)
+  console.log('Soft mode on.')
+  console.log(res)
 })()
 ```
 ```js
@@ -223,7 +226,12 @@ Error: example/missing-dep.jsx
  [!] Package.json for module missing not found.
     at findPackageJson (/Users/zavr/depack/static-analysis/node_modules/fpj/build/index.js:27:11)
     at <anonymous>
-Soft mode on: [object Object]
+Soft mode on.
+[ { entry: 'node_modules/preact/dist/preact.mjs',
+    packageJson: 'node_modules/preact/package.json',
+    version: '8.4.2',
+    name: 'preact',
+    from: [ 'example/missing-dep.jsx' ] } ]
 ```
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
