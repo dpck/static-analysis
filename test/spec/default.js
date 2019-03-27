@@ -33,6 +33,11 @@ const TS = {
       shallow: true,
     })
   },
+  async 'soft mode'() {
+    return await staticAnalysis('test/fixture/soft.js', {
+      soft: true,
+    })
+  },
   async 'allows to pass resolvable path'() {
     return await staticAnalysis('test/fixture', {
       shallow: true,

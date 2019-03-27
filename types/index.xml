@@ -6,6 +6,9 @@
     <prop type="boolean" name="shallow" default="false">
       Only report on the entries of `node_module` dependencies, without analysic their own dependencies.
     </prop>
+    <prop type="boolean" name="soft" default="false">
+      Do not throw an error when the dependency cannot be found in `node_modules`.
+    </prop>
   </type>
   <type name="Detection" desc="The module detection result.">
     <prop opt string name="entry">

@@ -7,12 +7,13 @@ import { detect } from './lib'
  * @param {Config} config The configuration for staticAnalysis.
  * @param {boolean} [config.nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
  * @param {boolean} [config.shallow=false] Only report on the entries of `node_module` dependencies, without analysic their own dependencies. Default `false`.
+ * @param {boolean} [config.soft=false] Do not throw an error when the dependency cannot be found in `node_modules`. Default `false`.
  */
 const staticAnalysis = async (path, config = {}) => {
   const { path: p } = await resolveDependency(path)
-  const { nodeModules = true, shallow = false } = config
+  const { nodeModules = true, shallow = false, soft = false } = config
   const detected = await detect(p, {}, {
-    nodeModules, shallow })
+    nodeModules, shallow, soft })
   const filtered = detected.filter(({ internal, entry }, i) => {
     if (internal) {
       const fi = detected.findIndex(({ internal: ii }) => {
@@ -73,6 +74,7 @@ export default staticAnalysis
  * @typedef {Object} Config The configuration for staticAnalysis.
  * @prop {boolean} [nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
  * @prop {boolean} [shallow=false] Only report on the entries of `node_module` dependencies, without analysic their own dependencies. Default `false`.
+ * @prop {boolean} [soft=false] Do not throw an error when the dependency cannot be found in `node_modules`. Default `false`.
  *
  * @typedef {Object} Detection The module detection result.
  * @prop {string} [entry] The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
