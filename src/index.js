@@ -36,9 +36,9 @@ const staticAnalysis = async (path, config = {}) => {
   const f = filtered.map((ff) => {
     const { entry, internal } = ff
     const froms = detected
-      .filter(({ internal: i, entry: e }) => {
+      .filter(({ internal: i, entry: ee }) => {
         if (internal) return internal == i
-        if (entry) return entry == e
+        if (entry) return entry == ee
       })
       .map(({ from }) => from)
       .filter((el, i, a) => a.indexOf(el) == i)

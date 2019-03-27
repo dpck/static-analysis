@@ -1,4 +1,5 @@
 let resolveDependency = require('resolve-dependency'); if (resolveDependency && resolveDependency.__esModule) resolveDependency = resolveDependency.default;
+let erotic = require('erotic'); if (erotic && erotic.__esModule) erotic = erotic.default;
 const { detect } = require('./lib');
 
 /**
@@ -10,10 +11,16 @@ const { detect } = require('./lib');
  * @param {boolean} [config.soft=false] Do not throw an error when the dependency cannot be found in `node_modules`. Default `false`.
  */
 const staticAnalysis = async (path, config = {}) => {
+  const e = erotic()
   const { path: p } = await resolveDependency(path)
   const { nodeModules = true, shallow = false, soft = false } = config
-  const detected = await detect(p, {}, {
-    nodeModules, shallow, soft })
+  let detected
+  try {
+    detected = await detect(p, {}, {
+      nodeModules, shallow, soft })
+  } catch (err) {
+    throw e(err)
+  }
   const filtered = detected.filter(({ internal, entry }, i) => {
     if (internal) {
       const fi = detected.findIndex(({ internal: ii }) => {
@@ -29,9 +36,9 @@ const staticAnalysis = async (path, config = {}) => {
   const f = filtered.map((ff) => {
     const { entry, internal } = ff
     const froms = detected
-      .filter(({ internal: i, entry: e }) => {
+      .filter(({ internal: i, entry: ee }) => {
         if (internal) return internal == i
-        if (entry) return entry == e
+        if (entry) return entry == ee
       })
       .map(({ from }) => from)
       .filter((el, i, a) => a.indexOf(el) == i)

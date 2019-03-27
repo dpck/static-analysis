@@ -1,3 +1,4 @@
+import { throws } from 'zoroaster/assert'
 import staticAnalysis from '../../src'
 import { detect } from '../../src/lib'
 
@@ -36,6 +37,13 @@ const TS = {
   async 'soft mode'() {
     return await staticAnalysis('test/fixture/soft.js', {
       soft: true,
+    })
+  },
+  async 'has erotic error stack'() {
+    await throws({
+      fn: staticAnalysis,
+      args: 'test/fixture/soft.js',
+      stack: /has erotic error stack/,
     })
   },
   async 'allows to pass resolvable path'() {

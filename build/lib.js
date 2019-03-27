@@ -5,6 +5,7 @@ let resolveDependency = require('resolve-dependency'); if (resolveDependency && 
 let getMatches = require('@depack/detect'); if (getMatches && getMatches.__esModule) getMatches = getMatches.default;
 let findPackageJson = require('fpj'); if (findPackageJson && findPackageJson.__esModule) findPackageJson = findPackageJson.default;
 let mismatch = require('mismatch'); if (mismatch && mismatch.__esModule) mismatch = mismatch.default;
+let erotic = require('erotic'); if (erotic && erotic.__esModule) erotic = erotic.default;
 
        const checkIfLib = modName => /^[./]/.test(modName)
 
@@ -16,6 +17,7 @@ let mismatch = require('mismatch'); if (mismatch && mismatch.__esModule) mismatc
  * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
  */
 const calculateDependencies = async (path, matches, soft) => {
+  const e = erotic()
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
     const internal = builtinModules.includes(name)
@@ -36,7 +38,7 @@ const calculateDependencies = async (path, matches, soft) => {
       return { entry, packageJson, version, name: packageName, ...(hasMain ? { hasMain } : {}) }
     } catch (err) {
       if (soft) return null
-      throw err
+      throw e(err)
     }
   })
   return (await Promise.all(proms)).filter(Boolean)
