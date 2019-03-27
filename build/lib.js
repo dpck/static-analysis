@@ -1,4 +1,4 @@
-const { dirname } = require('path');
+const { dirname, join } = require('path');
 const { builtinModules } = require('module');
 let read = require('@wrote/read'); if (read && read.__esModule) read = read.default;
 let resolveDependency = require('resolve-dependency'); if (resolveDependency && resolveDependency.__esModule) resolveDependency = resolveDependency.default;
@@ -8,6 +8,20 @@ let mismatch = require('mismatch'); if (mismatch && mismatch.__esModule) mismatc
 let erotic = require('erotic'); if (erotic && erotic.__esModule) erotic = erotic.default;
 
        const checkIfLib = modName => /^[./]/.test(modName)
+
+// https://github.com/idiocc/frontend/blob/master/src/lib/index.js#L7
+       const splitFrom = (from) => {
+  let [scope, name, ...paths] = from.split('/')
+  if (!scope.startsWith('@') && name) {
+    paths = [name, ...paths]
+    name = scope
+  } else if (!scope.startsWith('@')) {
+    name = scope
+  } else {
+    name = `${scope}/${name}`
+  }
+  return { name, paths: paths.join('/') }
+}
 
 /**
  * Expands the dependency match to include `package.json` and entry paths.
@@ -28,8 +42,16 @@ const calculateDependencies = async (path, matches, soft) => {
         const { path: entry } = await resolveDependency(name, path)
         return { entry }
       } catch (err) { /*
-        a local package with package.json
+        maybe a local package with package.json
       */}
+    } else {
+      const { name: n, paths } = splitFrom(name)
+      if (paths) {
+        const { packageJson } = await findPackageJson(dir, n)
+        const d = dirname(packageJson)
+        const { path: entry } = await resolveDependency(join(d, paths))
+        return { entry }
+      }
     }
     try {
       const {
@@ -94,5 +116,6 @@ const calculateDependencies = async (path, matches, soft) => {
 
 
 module.exports.checkIfLib = checkIfLib
+module.exports.splitFrom = splitFrom
 module.exports.detect = detect
 module.exports.getRequireMatches = getRequireMatches
