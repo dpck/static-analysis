@@ -1,0 +1,8 @@
+[
+  {
+    "entry": "test/fixture/same-name/run.js",
+    "from": [
+      "test/fixture/same-name/run/doc.js"
+    ]
+  }
+]

@@ -477,10 +477,10 @@ reloquent@1.2.4:
   dependencies:
     promto "1.0.1"
 
-resolve-dependency@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/resolve-dependency/-/resolve-dependency-1.0.0.tgz#8f6b2dc6dce5e220eb6252581af4d1181d11dcc1"
-  integrity sha512-Q7jtB7N7zp0TA6L7uXbo+Pv03VvDBkZRbNkyHxfn8o0eACIpwNfr0O9UZ2umVFyYKRl9fRkqocdRwXtaOfTYYQ==
+resolve-dependency@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/resolve-dependency/-/resolve-dependency-1.0.1.tgz#97c8e7dbea0a305a11fb740467fdc1613d76a3e5"
+  integrity sha512-O3Fn//q6bKqXoE4erVzHGvjAPJCa4so3H1L7E47ww4LsAjVP5xWfujPZYDUU1MXVVLXhKs2j++5RhsslfHoF4g==
   dependencies:
     "@wrote/exists" "1.0.1"
 
@@ -509,10 +509,10 @@ rexml@1.3.0:
   resolved "https://registry.yarnpkg.com/rexml/-/rexml-1.3.0.tgz#70d773c2e69da392112784e5ef7a65e77bef9612"
   integrity sha512-FCoo+tfyqX7cw0ruRaCIz2rLoDL1IRNmCUF6e1P8v2G/RPB6t0EiJPZ2A8DxNJfGG5Hc9PPF7JRnm18Q0pKbIg==
 
-snapshot-context@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/snapshot-context/-/snapshot-context-2.2.0.tgz#5c2b69c4eab2f287e21784694d3975ccf4be35be"
-  integrity sha512-W7ipXBctQKDG5PwyWOIaw6U2nw1QdAARxXRml53vQhnJE6zSEZ0z/IlWroDM7Rh3jymhQdw8K7Qkw+BSsFCcLw==
+snapshot-context@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/snapshot-context/-/snapshot-context-2.2.1.tgz#beec7c044f142973fdbbb84136151e9ff5f1ec60"
+  integrity sha512-COKO04xXoq2Ru3AWL78ddgO+hpAy0vNaHinVwKazI6xbIZ/7KVfgvdqhgOJrajHxi/a451AXHowiEtvjn/Aq3A==
   dependencies:
     assert-diff "2.0.3"
     erotic "2.0.2"
@@ -576,10 +576,10 @@ yarn-s@1.1.0:
   dependencies:
     spawncommand "1.1.0"
 
-zoroaster@3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/zoroaster/-/zoroaster-3.11.0.tgz#253c8b51c3ef164b8dafb83824b2988a43fbcbab"
-  integrity sha512-HsdsGJNURgAGYw5A04+ApVvBIZ4qF7u8kRpWH+GK7UbyvgRZOwgqazYXG7MwknE9p5lkXHtCIhJED2FFikqSrA==
+zoroaster@3.11.1:
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/zoroaster/-/zoroaster-3.11.1.tgz#e99600c5ef1f88e8a0fff1c8c551476863ffcdc9"
+  integrity sha512-MQ0GTdl5G7eMbWdMtQTlSETdp7q5AosQEGLV6g8MmS387wWUlKGzSYGlfmuc44pcEJCd4cCWS+1osdDcpDW6+A==
   dependencies:
     "@artdeco/clean-stack" "1.0.1"
     "@wrote/exists" "1.0.1"
@@ -595,6 +595,6 @@ zoroaster@3.11.0:
     makepromise "3.0.2"
     mismatch "1.0.3"
     reloquent "1.2.4"
-    snapshot-context "2.2.0"
+    snapshot-context "2.2.1"
     spawncommand "2.1.1"
     usually "1.1.0"

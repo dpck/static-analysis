@@ -51,6 +51,9 @@ const TS = {
       shallow: true,
     })
   },
+  async 'same name'() {
+    return await staticAnalysis('test/fixture/same-name/run/doc')
+  },
 }
 
 export default TS
