@@ -12,9 +12,10 @@ let mismatch = require('mismatch'); if (mismatch && mismatch.__esModule) mismatc
  * Expands the dependency match to include `package.json` and entry paths.
  * @param {string} path The path to the file.
  * @param {Array<string>} matches The matches.
+ * @param {boolean} [soft] Whether to throw when a dependency's package.json is not found.
  * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
  */
-const calculateDependencies = async (path, matches) => {
+const calculateDependencies = async (path, matches, soft) => {
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
     const internal = builtinModules.includes(name)
@@ -28,12 +29,17 @@ const calculateDependencies = async (path, matches) => {
         a local package with package.json
       */}
     }
-    const {
-      entry, packageJson, version, packageName, hasMain,
-    } = await findPackageJson(dir, name)
-    return { entry, packageJson, version, name: packageName, ...(hasMain ? { hasMain } : {}) }
+    try {
+      const {
+        entry, packageJson, version, packageName, hasMain,
+      } = await findPackageJson(dir, name)
+      return { entry, packageJson, version, name: packageName, ...(hasMain ? { hasMain } : {}) }
+    } catch (err) {
+      if (soft) return null
+      throw err
+    }
   })
-  return await Promise.all(proms)
+  return (await Promise.all(proms)).filter(Boolean)
 }
 
 /**
@@ -43,7 +49,7 @@ const calculateDependencies = async (path, matches) => {
  * @returns {Array<Detection>}
  */
        const detect = async (path, cache = {}, {
-  nodeModules = true, shallow = false } = {}) => {
+  nodeModules = true, shallow = false, soft = false } = {}) => {
   if (path in cache) return []
   cache[path] = 1
   const source = await read(path)
@@ -54,7 +60,7 @@ const calculateDependencies = async (path, matches) => {
 
   let deps
   try {
-    deps = await calculateDependencies(path, m)
+    deps = await calculateDependencies(path, m, soft)
   } catch (err) {
     err.message = `${path}\n [!] ${err.message}`
     throw err
