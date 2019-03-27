@@ -1,15 +1,17 @@
 import makeTestSuite from '@zoroaster/mask'
-import Context from '../context'
+import TempContext from 'temp-context'
 import staticAnalysis from '../../src'
 
-const ts = makeTestSuite('test/result', {
-  async getResults(input) {
-    const res = await staticAnalysis({
-      text: input,
-    })
+export default makeTestSuite('test/result', {
+  context: TempContext,
+  /**
+   * @param {string} input
+   * @param {TempContext} t
+   */
+  async getResults(input, { write }) {
+    const f = await write('test.js', input)
+    const res = await staticAnalysis(f)
     return res
   },
-  context: Context,
+  jsonProps: ['expected'],
 })
-
-// export default ts

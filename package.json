@@ -48,10 +48,13 @@
   },
   "homepage": "https://github.com/dpck/static-analysis#readme",
   "devDependencies": {
+    "@idio/preact-fixture": "1.0.0",
+    "@wrote/write": "1.0.2",
     "@wrote/wrote": "1.2.1",
     "alamode": "1.8.6",
     "documentary": "1.22.0",
     "eslint-config-artdeco": "1.0.1",
+    "temp-context": "2.1.1",
     "yarn-s": "1.1.0",
     "zoroaster": "3.11.1"
   },

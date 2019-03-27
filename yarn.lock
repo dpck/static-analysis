@@ -64,6 +64,11 @@
   resolved "https://registry.yarnpkg.com/@depack/render/-/render-1.1.4.tgz#8586d55f60502c8bfae7bbb0bd0a0513670fbcbd"
   integrity sha512-/dotKRTngUMOZpVwZvdMYZz6NID6fJENTaG1sa14UbAS3bleGa7OeXie5468Huw/NRZcGPf/390ndegXbdNSpA==
 
+"@idio/preact-fixture@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@idio/preact-fixture/-/preact-fixture-1.0.0.tgz#3070f49f32641ccd08db8d5241374d2111f206f4"
+  integrity sha512-/QNdKiwBW3R9lkYjwSKrbsm1SHL99StYtuo0aR0ZDRrhzNDPvab3wB1u5Lye/Bix4EezRQ8ckgv1n/kukgX8FA==
+
 "@wrote/clone@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@wrote/clone/-/clone-1.1.0.tgz#6f5d05b320c3294d6879f65a3950475249cdfcab"
@@ -537,6 +542,20 @@ spawncommand@2.1.1:
   integrity sha512-4uvLpHyUsts2OBPG5/juVhuwVPj8GBD3FfjcR0fMheV5TW7TYCUnbGbjAqnv19D31SbjG14bOoAVBMY4nB2XEg==
   dependencies:
     catchment "3.2.2"
+
+temp-context@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/temp-context/-/temp-context-2.1.1.tgz#52638a5e3218273f4b99fd87c7cd84ef02cb63cc"
+  integrity sha512-Z9Axk6A7uGF65L9+5YSujE7ALMgkUgq/nO3MtZ0NfviK+YN3V2DTFrzh7K04sWS7BcA+b9JLhl5XHbHatXPjhA==
+  dependencies:
+    "@wrote/clone" "1.1.0"
+    "@wrote/ensure-path" "1.0.5"
+    "@wrote/read" "1.0.2"
+    "@wrote/rm" "1.1.2"
+    "@wrote/write" "1.0.2"
+    catchment "3.2.2"
+    makepromise "3.0.2"
+    pedantry "2.2.0"
 
 typal@1.2.0:
   version "1.2.0"

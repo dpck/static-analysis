@@ -32,8 +32,8 @@
     "from": "node_modules/@wrote/wrote/src/index.js"
   },
   {
-    "entry": "node_modules/@wrote/wrote/node_modules/@wrote/ensure-path/src/index.js",
-    "packageJson": "node_modules/@wrote/wrote/node_modules/@wrote/ensure-path/package.json",
+    "entry": "node_modules/@wrote/ensure-path/src/index.js",
+    "packageJson": "node_modules/@wrote/ensure-path/package.json",
     "version": "1.0.5",
     "name": "@wrote/ensure-path",
     "from": "node_modules/@wrote/wrote/src/index.js"
@@ -128,18 +128,18 @@
   },
   {
     "internal": "fs",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/ensure-path/src/index.js"
+    "from": "node_modules/@wrote/ensure-path/src/index.js"
   },
   {
     "entry": "node_modules/makepromise/src/index.js",
     "packageJson": "node_modules/makepromise/package.json",
     "version": "3.0.2",
     "name": "makepromise",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/ensure-path/src/index.js"
+    "from": "node_modules/@wrote/ensure-path/src/index.js"
   },
   {
     "internal": "path",
-    "from": "node_modules/@wrote/wrote/node_modules/@wrote/ensure-path/src/index.js"
+    "from": "node_modules/@wrote/ensure-path/src/index.js"
   },
   {
     "entry": "node_modules/erotic/src/index.js",
