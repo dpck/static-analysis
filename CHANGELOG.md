@@ -3,7 +3,7 @@
 ### [1.3.0](https://github.com/dpck/static-analysis/compare/v1.2.0...v1.3.0)
 
 - [feature] Implement soft mode to prevent throwing when a dependency's `package.json` is not found.
-- [fix] Show correct error stack.
+- [fix] Show correct error stack with `erotic`.
 
 ## 26 March 2019
 
