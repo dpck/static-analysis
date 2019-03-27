@@ -5,6 +5,7 @@ import resolveDependency from 'resolve-dependency'
 import getMatches from '@depack/detect'
 import findPackageJson from 'fpj'
 import mismatch from 'mismatch'
+import erotic from 'erotic'
 
 export const checkIfLib = modName => /^[./]/.test(modName)
 
@@ -16,6 +17,7 @@ export const checkIfLib = modName => /^[./]/.test(modName)
  * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
  */
 const calculateDependencies = async (path, matches, soft) => {
+  const e = erotic()
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
     const internal = builtinModules.includes(name)
@@ -36,7 +38,7 @@ const calculateDependencies = async (path, matches, soft) => {
       return { entry, packageJson, version, name: packageName, ...(hasMain ? { hasMain } : {}) }
     } catch (err) {
       if (soft) return null
-      throw err
+      throw e(err)
     }
   })
   return (await Promise.all(proms)).filter(Boolean)

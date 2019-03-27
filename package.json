@@ -58,6 +58,7 @@
   "dependencies": {
     "@depack/detect": "1.0.0",
     "@wrote/read": "1.0.2",
+    "erotic": "2.0.2",
     "fpj": "1.0.0",
     "mismatch": "1.0.3",
     "resolve-dependency": "1.0.0"

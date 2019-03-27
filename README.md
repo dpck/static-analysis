@@ -224,8 +224,9 @@ import staticAnalysis from 'static-analysis'
 ```js
 Error: example/missing-dep.jsx
  [!] Package.json for module missing not found.
-    at findPackageJson (/Users/zavr/depack/static-analysis/node_modules/fpj/build/index.js:27:11)
-    at <anonymous>
+    at staticAnalysis (/Users/zavr/depack/static-analysis/src/index.js:14:13)
+    at /Users/zavr/depack/static-analysis/example/soft.js:5:23
+    at Object.<anonymous> (/Users/zavr/depack/static-analysis/example/soft.js:10:3)
 Soft mode on.
 [ { entry: 'node_modules/preact/dist/preact.mjs',
     packageJson: 'node_modules/preact/package.json',
