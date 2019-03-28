@@ -1,1 +1,1 @@
-import 'soft' from './soft'
+import soft from './soft'
