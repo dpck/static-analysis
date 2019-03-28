@@ -1,5 +1,9 @@
 ## 28 March 2019
 
+### [1.3.2](https://github.com/dpck/static-analysis/compare/v1.3.1...v1.3.2)
+
+- [fix] Pass down the options to child entries.
+
 ### [1.3.1](https://github.com/dpck/static-analysis/compare/v1.3.0...v1.3.1)
 
 - [fix] Analyse manual imports like `@idio/preact-fixture/src`.

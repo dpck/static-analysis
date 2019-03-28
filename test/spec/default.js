@@ -35,7 +35,12 @@ const TS = {
     })
   },
   async 'soft mode'() {
-    return await staticAnalysis('test/fixture/soft.js', {
+    return await staticAnalysis('test/fixture/soft', {
+      soft: true,
+    })
+  },
+  async 'soft mode recursive'() {
+    return await staticAnalysis('test/fixture/soft-recursive', {
       soft: true,
     })
   },

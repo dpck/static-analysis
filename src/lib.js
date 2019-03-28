@@ -96,7 +96,7 @@ export const detect = async (path, cache = {}, {
     .reduce(async (acc, { entry, hasMain, packageJson }) => {
       if (packageJson && shallow) return acc
       const accRes = await acc
-      const res = await detect(entry, cache, nodeModules)
+      const res = await detect(entry, cache, { nodeModules, shallow, soft })
       const r = res
         .map(o => ({
           ...o,

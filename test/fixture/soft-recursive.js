@@ -1,0 +1,1 @@
+import 'soft' from './soft'
