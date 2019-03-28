@@ -4,9 +4,9 @@ _Static Analysis_ will try to figure out entry points of package dependencies by
 
 _With the following file being analysed:_
 
-%EXAMPLE: example/missing-dep.jsx, ../src => static-analysis%
+%EXAMPLE: example/missing-dep, ../src => static-analysis%
 
 _The program will throw initially, but will skip the missing dependency in **soft mode**:_
 
-%EXAMPLE: example/soft.js, ../src => static-analysis%
-%FORK-js example example/soft%
+%EXAMPLE: example/soft, ../src => static-analysis%
+%FORK-js example/soft%

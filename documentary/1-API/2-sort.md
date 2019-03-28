@@ -6,7 +6,7 @@
 
 Sorts the detected dependencies into commonJS modules, packageJsons and internals.
 
-%EXAMPLE: example/sort.js, ../src => static-analysis%
-%FORK-js example example/sort%
+%EXAMPLE: example/sort, ../src => static-analysis%
+%FORK-js example/sort%
 
 %~%

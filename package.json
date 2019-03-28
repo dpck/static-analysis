@@ -52,11 +52,11 @@
     "@wrote/write": "1.0.2",
     "@wrote/wrote": "1.2.1",
     "alamode": "1.8.6",
-    "documentary": "1.22.0",
+    "documentary": "1.23.0",
     "eslint-config-artdeco": "1.0.1",
     "temp-context": "2.1.1",
     "yarn-s": "1.1.0",
-    "zoroaster": "3.11.1"
+    "zoroaster": "3.11.2"
   },
   "dependencies": {
     "@depack/detect": "1.0.0",
