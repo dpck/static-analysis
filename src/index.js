@@ -9,6 +9,7 @@ import { detect } from './lib'
  * @param {boolean} [config.nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
  * @param {boolean} [config.shallow=false] Only report on the entries of `node_module` dependencies, without analysing their own dependencies. Default `false`.
  * @param {boolean} [config.soft=false] Do not throw an error when the dependency cannot be found in `node_modules`. Default `false`.
+ * @return {Promise<Array<Detection>>} The array with detections.
  */
 const staticAnalysis = async (path, config = {}) => {
   const e = erotic()
