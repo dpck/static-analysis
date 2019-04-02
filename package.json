@@ -59,7 +59,7 @@
     "zoroaster": "3.11.2"
   },
   "dependencies": {
-    "@depack/detect": "1.0.0",
+    "@depack/detect": "1.0.1",
     "@wrote/read": "1.0.2",
     "erotic": "2.0.3",
     "fpj": "1.0.0",
