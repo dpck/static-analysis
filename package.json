@@ -51,19 +51,19 @@
     "@idio/preact-fixture": "1.0.0",
     "@wrote/write": "1.0.2",
     "@wrote/wrote": "1.2.1",
-    "alamode": "1.8.6",
-    "documentary": "1.23.0",
+    "alamode": "1.9.0",
+    "documentary": "1.23.2",
     "eslint-config-artdeco": "1.0.1",
-    "temp-context": "2.1.1",
+    "temp-context": "2.1.2",
     "yarn-s": "1.1.0",
     "zoroaster": "3.11.2"
   },
   "dependencies": {
     "@depack/detect": "1.0.0",
     "@wrote/read": "1.0.2",
-    "erotic": "2.0.2",
+    "erotic": "2.0.3",
     "fpj": "1.0.0",
-    "mismatch": "1.0.3",
+    "mismatch": "1.1.0",
     "resolve-dependency": "1.0.1"
   }
 }
