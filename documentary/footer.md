@@ -4,7 +4,6 @@
 
 ## Copyright
 
-<Footer client="Depack"
-  clientLink="https://artd.eco/depack" />
+<DepackFooter />
 
 %~ -1%

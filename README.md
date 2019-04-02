@@ -79,7 +79,7 @@ import staticAnalysis from 'static-analysis'
 ```js
 [ { entry: 'node_modules/@wrote/read/src/index.js',
     packageJson: 'node_modules/@wrote/read/package.json',
-    version: '1.0.2',
+    version: '1.0.3',
     name: '@wrote/read',
     from: [ 'example/source.js' ] },
   { internal: 'path', from: [ 'example/source.js' ] },
@@ -96,7 +96,7 @@ import staticAnalysis from 'static-analysis'
     from: [ 'node_modules/@wrote/read/src/index.js' ] },
   { entry: 'node_modules/@wrote/read/node_modules/catchment/src/index.js',
     packageJson: 'node_modules/@wrote/read/node_modules/catchment/package.json',
-    version: '3.2.1',
+    version: '3.2.3',
     name: 'catchment',
     from: [ 'node_modules/@wrote/read/src/index.js' ] },
   { internal: 'stream',
@@ -104,7 +104,7 @@ import staticAnalysis from 'static-analysis'
      [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
   { entry: 'node_modules/erotic/src/index.js',
     packageJson: 'node_modules/erotic/package.json',
-    version: '2.0.2',
+    version: '2.0.3',
     name: 'erotic',
     from: 
      [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
@@ -113,8 +113,7 @@ import staticAnalysis from 'static-analysis'
     version: '1.0.1',
     name: '@artdeco/clean-stack',
     from: 
-     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js',
-       'node_modules/erotic/src/callback.js' ] },
+     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
   { entry: 'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
     from: 
      [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
@@ -124,8 +123,15 @@ import staticAnalysis from 'static-analysis'
        'node_modules/erotic/src/callback.js' ] },
   { entry: 'node_modules/erotic/src/callback.js',
     from: [ 'node_modules/erotic/src/index.js' ] },
+  { entry: 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
+    packageJson: 'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json',
+    version: '1.0.1',
+    name: '@artdeco/clean-stack',
+    from: [ 'node_modules/erotic/src/callback.js' ] },
   { internal: 'os',
-    from: [ 'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
+    from: 
+     [ 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
+       'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
 ```
 
 __<a name="type-detection">`Detection`</a>__: The module detection result.
@@ -180,7 +186,7 @@ import staticAnalysis from 'static-analysis'
 ```js
 [ { entry: 'node_modules/@wrote/read/src/index.js',
     packageJson: 'node_modules/@wrote/read/package.json',
-    version: '1.0.2',
+    version: '1.0.3',
     name: '@wrote/read',
     from: [ 'example/source.js' ] },
   { internal: 'path', from: [ 'example/source.js' ] },
@@ -235,7 +241,7 @@ import staticAnalysis from 'static-analysis'
 ```js
 Error: example/missing-dep.jsx
  [!] Package.json for module missing not found.
-    at staticAnalysis (/Users/zavr/depack/static-analysis/src/index.js:14:13)
+    at staticAnalysis (/Users/zavr/depack/static-analysis/src/index.js:15:13)
     at /Users/zavr/depack/static-analysis/example/soft.js:5:23
     at Object.<anonymous> (/Users/zavr/depack/static-analysis/example/soft.js:10:3)
 Soft mode on.
@@ -268,7 +274,8 @@ import staticAnalysis, { sort } from 'static-analysis'
      'node_modules/preact/package.json',
      'node_modules/@wrote/read/node_modules/catchment/package.json',
      'node_modules/erotic/package.json',
-     'node_modules/@artdeco/clean-stack/package.json' ],
+     'node_modules/@artdeco/clean-stack/package.json',
+     'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json' ],
   commonJs: [],
   js: 
    [ 'node_modules/@wrote/read/src/index.js',
@@ -280,13 +287,15 @@ import staticAnalysis, { sort } from 'static-analysis'
      'node_modules/@artdeco/clean-stack/src/index.js',
      'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
      'node_modules/erotic/src/lib.js',
-     'node_modules/erotic/src/callback.js' ],
+     'node_modules/erotic/src/callback.js',
+     'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js' ],
   internals: [ 'path', 'fs', 'stream', 'os' ],
   deps: 
    [ '@wrote/read',
      'preact',
      'catchment',
      'erotic',
+     '@artdeco/clean-stack',
      '@artdeco/clean-stack' ] }
 ```
 

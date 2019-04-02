@@ -49,8 +49,8 @@
   "homepage": "https://github.com/dpck/static-analysis#readme",
   "devDependencies": {
     "@idio/preact-fixture": "1.0.0",
-    "@wrote/write": "1.0.2",
-    "@wrote/wrote": "1.2.1",
+    "@wrote/write": "1.0.3",
+    "@wrote/wrote": "1.2.2",
     "alamode": "1.9.0",
     "documentary": "1.23.2",
     "eslint-config-artdeco": "1.0.1",
@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "@depack/detect": "1.0.1",
-    "@wrote/read": "1.0.2",
+    "@wrote/read": "1.0.3",
     "erotic": "2.0.3",
     "fpj": "1.0.0",
     "mismatch": "1.1.0",
