@@ -1,3 +1,9 @@
+## 2 April 2019
+
+### [1.3.3](https://github.com/dpck/static-analysis/compare/v1.3.2...v1.3.3)
+
+- [doc] Fix JSDoc for return type.
+
 ## 28 March 2019
 
 ### [1.3.2](https://github.com/dpck/static-analysis/compare/v1.3.1...v1.3.2)
