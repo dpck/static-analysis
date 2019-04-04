@@ -16,7 +16,7 @@ const TS = {
     // }, {})
   },
   async 'filters duplicates'() {
-    return await staticAnalysis('test/fixture/detect.js')
+    return await staticAnalysis('test/fixture/detect')
   },
   async 'has main'() {
     return await staticAnalysis('test/fixture/lib/has-main.js')
