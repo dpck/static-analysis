@@ -1,3 +1,9 @@
+## 4 April 2019
+
+### [1.3.4](https://github.com/dpck/static-analysis/compare/v1.3.3...v1.3.4)
+
+- [deps] Unfix dependencies.
+
 ## 2 April 2019
 
 ### [1.3.3](https://github.com/dpck/static-analysis/compare/v1.3.2...v1.3.3)
