@@ -1,3 +1,9 @@
+## 5 April 2019
+
+### [1.4.0](https://github.com/dpck/static-analysis/compare/v1.3.4...v1.4.0)
+
+- [feature] Allow to return fields from _package.json_ files via `FPJ`.
+
 ## 4 April 2019
 
 ### [1.3.4](https://github.com/dpck/static-analysis/compare/v1.3.3...v1.3.4)
