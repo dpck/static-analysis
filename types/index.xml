@@ -1,5 +1,5 @@
 <types>
-  <type name="Config" desc="The configuration for staticAnalysis.">
+  <type name="StaticAnalysisConfig" desc="The configuration for staticAnalysis.">
     <prop type="boolean" name="nodeModules" default="true">
       Whether to include packages from `node_modules` in the output.
     </prop>
@@ -8,6 +8,9 @@
     </prop>
     <prop type="boolean" name="soft" default="false">
       Do not throw an error when the dependency cannot be found in `node_modules`.
+    </prop>
+    <prop opt type="Array<string>" name="fields">
+      Any additional fields from `package.json` files to return.
     </prop>
   </type>
   <type name="Detection" desc="The module detection result.">

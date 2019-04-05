@@ -26,3 +26,42 @@ import Fixture from '@idio/preact-fixture/src'
   }
 ]
 /**/
+
+## returns fields
+import Zoroaster from 'zoroaster'
+import Fixture from '@idio/preact-fixture'
+
+/* options */
+{
+  "fields": ["license", "author"],
+  "shallow": true
+}
+/**/
+
+/* expected */
+[
+  {
+    "entry": "node_modules/zoroaster/build/index.js",
+    "packageJson": "node_modules/zoroaster/package.json",
+    "version": "3.11.4",
+    "name": "zoroaster",
+    "hasMain": true,
+    "license": "MIT",
+    "author": "Anton <anton@adc.sh>",
+    "from": [
+      "test/temp/test.js"
+    ]
+  },
+  {
+    "entry": "node_modules/@idio/preact-fixture/src/index.js",
+    "packageJson": "node_modules/@idio/preact-fixture/package.json",
+    "version": "1.0.0",
+    "name": "@idio/preact-fixture",
+    "license": "MIT",
+    "author": "Anton <anton@adc.sh>",
+    "from": [
+      "test/temp/test.js"
+    ]
+  }
+]
+/**/

@@ -28,9 +28,10 @@ export const splitFrom = (from) => {
  * @param {string} path The path to the file.
  * @param {Array<string>} matches The matches.
  * @param {boolean} [soft] Whether to throw when a dependency's package.json is not found.
+ * @param {!Array<string>} [fields] What additional fields to fetch from package.json.
  * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
  */
-const calculateDependencies = async (path, matches, soft) => {
+const calculateDependencies = async (path, matches, soft, fields) => {
   const e = erotic()
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
@@ -55,9 +56,12 @@ const calculateDependencies = async (path, matches, soft) => {
     }
     try {
       const {
-        entry, packageJson, version, packageName, hasMain,
-      } = await findPackageJson(dir, name)
-      return { entry, packageJson, version, name: packageName, ...(hasMain ? { hasMain } : {}) }
+        entry, packageJson, version, packageName, hasMain, ...rest
+      } = await findPackageJson(dir, name, { fields })
+      return {
+        entry, packageJson, version, name: packageName,
+        ...(hasMain ? { hasMain } : {}),
+        ...rest }
     } catch (err) {
       if (soft) return null
       throw e(err)
@@ -73,7 +77,7 @@ const calculateDependencies = async (path, matches, soft) => {
  * @returns {Promise<Array<Detection>>}
  */
 export const detect = async (path, cache = {}, {
-  nodeModules = true, shallow = false, soft = false } = {}) => {
+  nodeModules = true, shallow = false, soft = false, fields = [] } = {}) => {
   if (path in cache) return []
   cache[path] = 1
   const source = await read(path)
@@ -84,7 +88,7 @@ export const detect = async (path, cache = {}, {
 
   let deps
   try {
-    deps = await calculateDependencies(path, m, soft)
+    deps = await calculateDependencies(path, m, soft, fields)
   } catch (err) {
     err.message = `${path}\n [!] ${err.message}`
     throw err
@@ -96,7 +100,7 @@ export const detect = async (path, cache = {}, {
     .reduce(async (acc, { entry, hasMain, packageJson }) => {
       if (packageJson && shallow) return acc
       const accRes = await acc
-      const res = await detect(entry, cache, { nodeModules, shallow, soft })
+      const res = await detect(entry, cache, { nodeModules, shallow, soft, fields })
       const r = res
         .map(o => ({
           ...o,

@@ -10,8 +10,8 @@ export default makeTestSuite('test/result', {
    */
   async getResults(input, { write }) {
     const f = await write('test.js', input)
-    const res = await staticAnalysis(f)
+    const res = await staticAnalysis(f, this.options)
     return res
   },
-  jsonProps: ['expected'],
+  jsonProps: ['expected', 'options'],
 })
