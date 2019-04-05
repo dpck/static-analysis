@@ -13,11 +13,12 @@ yarn add -E static-analysis
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
 - [`async staticAnalysis(path: string, config: Config): Array<Detection>`](#async-staticanalysispath-stringconfig-config-arraydetection)
-  * [`Config`](#type-config)
+  * [`StaticAnalysisConfig`](#type-staticanalysisconfig)
   * [`Detection`](#type-detection)
   * [Ignore Node_Modules](#ignore-node_modules)
   * [Shallow Node_Modules](#shallow-node_modules)
   * [Soft Mode](#soft-mode)
+  * [Fields](#fields)
 - [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
 - [Copyright](#copyright)
 
@@ -40,13 +41,14 @@ Detects all dependencies in a file and their dependencies recursively. It is pos
 - The package does not build an AST, it just looks for `import` and `require` statements using regular expressions. Therefore, there's also no tree-shaking or complete analysis of the real dependencies.
 - If a source is imported like `import fn from '@idio/preact/build/fn`, then the analysis will not contain `@idio/preact` as a `node_module` dependency with the `packageJson`, `name` and `version` fields, it will only appear as an entry file.
 
-__<a name="type-config">`Config`</a>__: The configuration for staticAnalysis.
+__<a name="type-staticanalysisconfig">`StaticAnalysisConfig`</a>__: The configuration for staticAnalysis.
 
-|    Name     |   Type    |                                             Description                                             | Default |
-| ----------- | --------- | --------------------------------------------------------------------------------------------------- | ------- |
-| nodeModules | _boolean_ | Whether to include packages from `node_modules` in the output.                                      | `true`  |
-| shallow     | _boolean_ | Only report on the entries of `node_module` dependencies, without analysing their own dependencies. | `false` |
-| soft        | _boolean_ | Do not throw an error when the dependency cannot be found in `node_modules`.                        | `false` |
+|    Name     |         Type          |                                             Description                                             | Default |
+| ----------- | --------------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| nodeModules | _boolean_             | Whether to include packages from `node_modules` in the output.                                      | `true`  |
+| shallow     | _boolean_             | Only report on the entries of `node_module` dependencies, without analysing their own dependencies. | `false` |
+| soft        | _boolean_             | Do not throw an error when the dependency cannot be found in `node_modules`.                        | `false` |
+| fields      | _Array&lt;string&gt;_ | Any additional fields from `package.json` files to return.                                          | -       |
 
 _For example, for the given file_:
 ```js
@@ -94,44 +96,35 @@ import staticAnalysis from 'static-analysis'
     from: [ 'example/source.js' ] },
   { internal: 'fs',
     from: [ 'node_modules/@wrote/read/src/index.js' ] },
-  { entry: 'node_modules/@wrote/read/node_modules/catchment/src/index.js',
-    packageJson: 'node_modules/@wrote/read/node_modules/catchment/package.json',
+  { entry: 'node_modules/catchment/src/index.js',
+    packageJson: 'node_modules/catchment/package.json',
     version: '3.2.3',
     name: 'catchment',
     from: [ 'node_modules/@wrote/read/src/index.js' ] },
   { internal: 'stream',
-    from: 
-     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+    from: [ 'node_modules/catchment/src/index.js' ] },
   { entry: 'node_modules/erotic/src/index.js',
     packageJson: 'node_modules/erotic/package.json',
     version: '2.0.3',
     name: 'erotic',
-    from: 
-     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+    from: [ 'node_modules/catchment/src/index.js' ] },
   { entry: 'node_modules/@artdeco/clean-stack/src/index.js',
     packageJson: 'node_modules/@artdeco/clean-stack/package.json',
     version: '1.0.1',
     name: '@artdeco/clean-stack',
     from: 
-     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
-  { entry: 'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
-    from: 
-     [ 'node_modules/@wrote/read/node_modules/catchment/src/index.js' ] },
+     [ 'node_modules/catchment/src/index.js',
+       'node_modules/erotic/src/callback.js' ] },
+  { entry: 'node_modules/catchment/src/lib/index.js',
+    from: [ 'node_modules/catchment/src/index.js' ] },
   { entry: 'node_modules/erotic/src/lib.js',
     from: 
      [ 'node_modules/erotic/src/index.js',
        'node_modules/erotic/src/callback.js' ] },
   { entry: 'node_modules/erotic/src/callback.js',
     from: [ 'node_modules/erotic/src/index.js' ] },
-  { entry: 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
-    packageJson: 'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json',
-    version: '1.0.1',
-    name: '@artdeco/clean-stack',
-    from: [ 'node_modules/erotic/src/callback.js' ] },
   { internal: 'os',
-    from: 
-     [ 'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js',
-       'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
+    from: [ 'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
 ```
 
 __<a name="type-detection">`Detection`</a>__: The module detection result.
@@ -241,7 +234,7 @@ import staticAnalysis from 'static-analysis'
 ```js
 Error: example/missing-dep.jsx
  [!] Package.json for module missing not found.
-    at staticAnalysis (/Users/zavr/depack/static-analysis/src/index.js:15:13)
+    at staticAnalysis (/Users/zavr/depack/static-analysis/src/index.js:16:13)
     at /Users/zavr/depack/static-analysis/example/soft.js:5:23
     at Object.<anonymous> (/Users/zavr/depack/static-analysis/example/soft.js:10:3)
 Soft mode on.
@@ -252,7 +245,46 @@ Soft mode on.
     from: [ 'example/missing-dep.jsx' ] } ]
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true" width="25"></a></p>
+
+### Fields
+
+To make _Static Analysis_ return any additional fields from _package.json_ files on detected dependencies, they should be specified in the `fields` config property.
+
+```js
+import staticAnalysis from 'static-analysis'
+
+(async () => {
+  const res = await staticAnalysis('example/source', {
+    fields: ['license', 'homepage'],
+    shallow: true,
+  })
+  console.log(res)
+})()
+```
+```js
+[ { entry: 'node_modules/@wrote/read/src/index.js',
+    packageJson: 'node_modules/@wrote/read/package.json',
+    version: '1.0.3',
+    name: '@wrote/read',
+    license: 'MIT',
+    homepage: 'https://github.com/wrote/read#readme',
+    from: [ 'example/source.js' ] },
+  { internal: 'path', from: [ 'example/source.js' ] },
+  { entry: 'node_modules/preact/dist/preact.mjs',
+    packageJson: 'node_modules/preact/package.json',
+    version: '8.4.2',
+    name: 'preact',
+    license: 'MIT',
+    homepage: 'https://github.com/developit/preact',
+    from: [ 'example/source.js' ] },
+  { entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
+    from: [ 'example/source.js' ] },
+  { entry: 'example/Component.jsx',
+    from: [ 'example/source.js' ] } ]
+```
+
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true"></a></p>
 
 ## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): {}`
 
@@ -272,34 +304,31 @@ import staticAnalysis, { sort } from 'static-analysis'
   packageJsons: 
    [ 'node_modules/@wrote/read/package.json',
      'node_modules/preact/package.json',
-     'node_modules/@wrote/read/node_modules/catchment/package.json',
+     'node_modules/catchment/package.json',
      'node_modules/erotic/package.json',
-     'node_modules/@artdeco/clean-stack/package.json',
-     'node_modules/erotic/node_modules/@artdeco/clean-stack/package.json' ],
+     'node_modules/@artdeco/clean-stack/package.json' ],
   commonJs: [],
   js: 
    [ 'node_modules/@wrote/read/src/index.js',
      'node_modules/preact/dist/preact.mjs',
      'node_modules/@idio/preact-fixture/src/Test.jsx',
      'example/Component.jsx',
-     'node_modules/@wrote/read/node_modules/catchment/src/index.js',
+     'node_modules/catchment/src/index.js',
      'node_modules/erotic/src/index.js',
      'node_modules/@artdeco/clean-stack/src/index.js',
-     'node_modules/@wrote/read/node_modules/catchment/src/lib/index.js',
+     'node_modules/catchment/src/lib/index.js',
      'node_modules/erotic/src/lib.js',
-     'node_modules/erotic/src/callback.js',
-     'node_modules/erotic/node_modules/@artdeco/clean-stack/src/index.js' ],
+     'node_modules/erotic/src/callback.js' ],
   internals: [ 'path', 'fs', 'stream', 'os' ],
   deps: 
    [ '@wrote/read',
      'preact',
      'catchment',
      'erotic',
-     '@artdeco/clean-stack',
      '@artdeco/clean-stack' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/7.svg?sanitize=true"></a></p>
 
 ## Copyright
 

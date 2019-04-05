@@ -10,3 +10,5 @@ _The program will throw initially, but will skip the missing dependency in **sof
 
 %EXAMPLE: example/soft, ../src => static-analysis%
 %FORK-js example/soft%
+
+%~ width="25"%
