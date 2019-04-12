@@ -6,4 +6,6 @@ The package is available by importing its default function:
 import staticAnalysis from 'static-analysis'
 ```
 
+<Externs namespace="_staticAnalysis" />
+
 %~%

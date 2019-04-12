@@ -13,8 +13,8 @@ yarn add -E static-analysis
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
 - [`async staticAnalysis(path: string, config: Config): Array<Detection>`](#async-staticanalysispath-stringconfig-config-arraydetection)
-  * [`StaticAnalysisConfig`](#type-staticanalysisconfig)
-  * [`Detection`](#type-detection)
+  * [`_staticAnalysis.Config`](#type-_staticanalysisconfig)
+  * [`_staticAnalysis.Detection`](#type-_staticanalysisdetection)
   * [Ignore Node_Modules](#ignore-node_modules)
   * [Shallow Node_Modules](#shallow-node_modules)
   * [Soft Mode](#soft-mode)
@@ -32,6 +32,8 @@ The package is available by importing its default function:
 import staticAnalysis from 'static-analysis'
 ```
 
+The types and [externs](externs.js) for _Google Closure Compiler_ via [**_Depack_**](https://github.com/dpck/depack) are defined in the `_staticAnalysis` namespace.
+
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
 
 ## `async staticAnalysis(`<br/>&nbsp;&nbsp;`path: string,`<br/>&nbsp;&nbsp;`config: Config,`<br/>`): Array<Detection>`
@@ -41,7 +43,7 @@ Detects all dependencies in a file and their dependencies recursively. It is pos
 - The package does not build an AST, it just looks for `import` and `require` statements using regular expressions. Therefore, there's also no tree-shaking or complete analysis of the real dependencies.
 - If a source is imported like `import fn from '@idio/preact/build/fn`, then the analysis will not contain `@idio/preact` as a `node_module` dependency with the `packageJson`, `name` and `version` fields, it will only appear as an entry file.
 
-__<a name="type-staticanalysisconfig">`StaticAnalysisConfig`</a>__: The configuration for staticAnalysis.
+__<a name="type-_staticanalysisconfig">`_staticAnalysis.Config`</a>__: The configuration options for `staticAnalysis`.
 
 |    Name     |         Type          |                                             Description                                             | Default |
 | ----------- | --------------------- | --------------------------------------------------------------------------------------------------- | ------- |
@@ -90,7 +92,8 @@ import staticAnalysis from 'static-analysis'
     version: '8.4.2',
     name: 'preact',
     from: [ 'example/source.js' ] },
-  { entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
+  { package: '@idio/preact-fixture',
+    entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
     from: [ 'example/source.js' ] },
   { entry: 'example/Component.jsx',
     from: [ 'example/source.js' ] },
@@ -115,19 +118,22 @@ import staticAnalysis from 'static-analysis'
     from: 
      [ 'node_modules/catchment/src/index.js',
        'node_modules/erotic/src/callback.js' ] },
-  { entry: 'node_modules/catchment/src/lib/index.js',
+  { package: 'catchment',
+    entry: 'node_modules/catchment/src/lib/index.js',
     from: [ 'node_modules/catchment/src/index.js' ] },
-  { entry: 'node_modules/erotic/src/lib.js',
+  { package: 'erotic',
+    entry: 'node_modules/erotic/src/lib.js',
     from: 
      [ 'node_modules/erotic/src/index.js',
        'node_modules/erotic/src/callback.js' ] },
-  { entry: 'node_modules/erotic/src/callback.js',
+  { package: 'erotic',
+    entry: 'node_modules/erotic/src/callback.js',
     from: [ 'node_modules/erotic/src/index.js' ] },
   { internal: 'os',
     from: [ 'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
 ```
 
-__<a name="type-detection">`Detection`</a>__: The module detection result.
+__<a name="type-_staticanalysisdetection">`_staticAnalysis.Detection`</a>__: The module detection result.
 
 |    Name     |         Type          |                                                               Description                                                               |
 | ----------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -138,6 +144,7 @@ __<a name="type-detection">`Detection`</a>__: The module detection result.
 | version     | _string_              | The version of the package.                                                                                                             |
 | internal    | _string_              | If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.                                                       |
 | hasMain     | _boolean_             | Whether the entry from the package was specified via the `main` field and not `module` field.                                           |
+| package     | _string_              | If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries. |
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true" width="15"></a></p>
 
@@ -188,7 +195,8 @@ import staticAnalysis from 'static-analysis'
     version: '8.4.2',
     name: 'preact',
     from: [ 'example/source.js' ] },
-  { entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
+  { package: '@idio/preact-fixture',
+    entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
     from: [ 'example/source.js' ] },
   { entry: 'example/Component.jsx',
     from: [ 'example/source.js' ] } ]
@@ -278,7 +286,8 @@ import staticAnalysis from 'static-analysis'
     license: 'MIT',
     homepage: 'https://github.com/developit/preact',
     from: [ 'example/source.js' ] },
-  { entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
+  { package: '@idio/preact-fixture',
+    entry: 'node_modules/@idio/preact-fixture/src/Test.jsx',
     from: [ 'example/source.js' ] },
   { entry: 'example/Component.jsx',
     from: [ 'example/source.js' ] } ]

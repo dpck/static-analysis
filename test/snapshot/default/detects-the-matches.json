@@ -113,7 +113,7 @@
   },
   {
     "entry": "node_modules/erotic/src/lib.js",
-    "package": null,
+    "package": "erotic",
     "from": "node_modules/erotic/src/callback.js"
   },
   {

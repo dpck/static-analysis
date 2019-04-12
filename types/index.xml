@@ -1,5 +1,5 @@
-<types>
-  <type name="StaticAnalysisConfig" desc="The configuration for staticAnalysis.">
+<types namespace="_staticAnalysis">
+  <type name="Config" desc="The configuration options for `staticAnalysis`.">
     <prop type="boolean" name="nodeModules" default="true">
       Whether to include packages from `node_modules` in the output.
     </prop>
@@ -34,6 +34,9 @@
     </prop>
     <prop opt boolean name="hasMain">
       Whether the entry from the package was specified via the `main` field and not `module` field.
+    </prop>
+    <prop opt string name="package">
+      If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries.
     </prop>
   </type>
 </types>

@@ -10,7 +10,7 @@ Detects all dependencies in a file and their dependencies recursively. It is pos
 - The package does not build an AST, it just looks for `import` and `require` statements using regular expressions. Therefore, there's also no tree-shaking or complete analysis of the real dependencies.
 - If a source is imported like `import fn from '@idio/preact/build/fn`, then the analysis will not contain `@idio/preact` as a `node_module` dependency with the `packageJson`, `name` and `version` fields, it will only appear as an entry file.
 
-%TYPEDEF types/index.xml StaticAnalysisConfig%
+%TYPEDEF types/index.xml Config%
 
 _For example, for the given file_:
 %EXAMPLE: example/source, ../src => static-analysis%
