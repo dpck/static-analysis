@@ -5,6 +5,7 @@ import Fixture from '@idio/preact-fixture/src'
 [
   {
     "entry": "node_modules/@idio/preact-fixture/src/index.js",
+    "package": "@idio/preact-fixture",
     "from": [
       "test/temp/test.js"
     ]
@@ -20,6 +21,7 @@ import Fixture from '@idio/preact-fixture/src'
   },
   {
     "entry": "node_modules/@idio/preact-fixture/src/Test.jsx",
+    "package": "@idio/preact-fixture",
     "from": [
       "node_modules/@idio/preact-fixture/src/index.js"
     ]
@@ -64,4 +66,25 @@ import Fixture from '@idio/preact-fixture'
     ]
   }
 ]
+/**/
+
+## skips recursion
+import r from '../fixture/recursion'
+
+/* expected */
+[{
+  "entry": "test/fixture/recursion/index.js",
+  "from": [
+    "test/temp/test.js"
+  ]
+},
+{
+  "entry": "test/fixture/recursion/node_modules/recursion/index.js",
+  "packageJson": "test/fixture/recursion/node_modules/recursion/package.json",
+  "name": "recursion",
+  "from": [
+    "test/fixture/recursion/index.js"
+  ],
+  "version": "1.0.0"
+}]
 /**/

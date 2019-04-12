@@ -15,6 +15,7 @@
   },
   {
     "entry": "test/fixture/lib/index.js",
+    "package": null,
     "from": "test/fixture/detect.js"
   },
   {
@@ -90,14 +91,17 @@
   },
   {
     "entry": "node_modules/catchment/src/lib/index.js",
+    "package": "catchment",
     "from": "node_modules/catchment/src/index.js"
   },
   {
     "entry": "node_modules/erotic/src/lib.js",
+    "package": "erotic",
     "from": "node_modules/erotic/src/index.js"
   },
   {
     "entry": "node_modules/erotic/src/callback.js",
+    "package": "erotic",
     "from": "node_modules/erotic/src/index.js"
   },
   {
@@ -109,6 +113,7 @@
   },
   {
     "entry": "node_modules/erotic/src/lib.js",
+    "package": null,
     "from": "node_modules/erotic/src/callback.js"
   },
   {
@@ -213,10 +218,12 @@
   },
   {
     "entry": "test/fixture/lib/lib.js",
+    "package": null,
     "from": "test/fixture/lib/index.js"
   },
   {
     "entry": "test/fixture/lib/node_modules/test2/r.js",
+    "package": "test2",
     "from": "test/fixture/lib/node_modules/test2/index.js",
     "hasMain": true
   },

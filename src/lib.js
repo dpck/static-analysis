@@ -31,7 +31,7 @@ export const splitFrom = (from) => {
  * @param {!Array<string>} [fields] What additional fields to fetch from package.json.
  * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
  */
-const calculateDependencies = async (path, matches, soft, fields) => {
+const calculateDependencies = async (path, matches, soft, fields, pckg = null) => {
   const e = erotic()
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
@@ -41,23 +41,27 @@ const calculateDependencies = async (path, matches, soft, fields) => {
     if (isLib) {
       try {
         const { path: entry } = await resolveDependency(name, path)
-        return { entry }
+        return { entry, package: pckg }
       } catch (err) { /*
         maybe a local package with package.json
       */}
     } else {
       const { name: n, paths } = splitFrom(name)
       if (paths) {
-        const { packageJson } = await findPackageJson(dir, n)
+        const { packageJson, packageName } = await findPackageJson(dir, n)
         const d = dirname(packageJson)
         const { path: entry } = await resolveDependency(join(d, paths))
-        return { entry }
+        return { entry, package: packageName }
       }
     }
     try {
       const {
         entry, packageJson, version, packageName, hasMain, ...rest
       } = await findPackageJson(dir, name, { fields })
+      if (packageName == pckg) {
+        console.warn('[static-analysis] Skipping package %s that imports itself in %s', packageName, path)
+        return null
+      }
       return {
         entry, packageJson, version, name: packageName,
         ...(hasMain ? { hasMain } : {}),
@@ -77,7 +81,8 @@ const calculateDependencies = async (path, matches, soft, fields) => {
  * @returns {Promise<Array<Detection>>}
  */
 export const detect = async (path, cache = {}, {
-  nodeModules = true, shallow = false, soft = false, fields = [] } = {}) => {
+  nodeModules = true, shallow = false, soft = false, fields = [],
+  package: pckg } = {}) => {
   if (path in cache) return []
   cache[path] = 1
   const source = await read(path)
@@ -88,7 +93,7 @@ export const detect = async (path, cache = {}, {
 
   let deps
   try {
-    deps = await calculateDependencies(path, m, soft, fields)
+    deps = await calculateDependencies(path, m, soft, fields, pckg)
   } catch (err) {
     err.message = `${path}\n [!] ${err.message}`
     throw err
@@ -97,10 +102,11 @@ export const detect = async (path, cache = {}, {
   const entries = deps
     .filter(({ entry }) => entry && !(entry in cache))
   const discovered = await entries
-    .reduce(async (acc, { entry, hasMain, packageJson }) => {
+    .reduce(async (acc, {
+      entry, hasMain, packageJson, name, package: p }) => {
       if (packageJson && shallow) return acc
       const accRes = await acc
-      const res = await detect(entry, cache, { nodeModules, shallow, soft, fields })
+      const res = await detect(entry, cache, { nodeModules, shallow, soft, fields, package: name || p })
       const r = res
         .map(o => ({
           ...o,
