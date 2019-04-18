@@ -1,5 +1,9 @@
 ## 18 April 2019
 
+### [1.5.1](https://github.com/dpck/static-analysis/compare/v1.5.0...v1.5.1)
+
+- [feature] Update `resolve-dependency` to be able to find `index.js` when present in the root of the package without the _main_ field.
+
 ### [1.5.0](https://github.com/dpck/static-analysis/compare/v1.4.0...v1.5.0)
 
 - [feature] Report `package` of dependencies.
