@@ -3,25 +3,12 @@ const { builtinModules } = require('module');
 let read = require('@wrote/read'); if (read && read.__esModule) read = read.default;
 let resolveDependency = require('resolve-dependency'); if (resolveDependency && resolveDependency.__esModule) resolveDependency = resolveDependency.default;
 let getMatches = require('@depack/detect'); if (getMatches && getMatches.__esModule) getMatches = getMatches.default;
+let split = require('@depack/split'); if (split && split.__esModule) split = split.default;
 let findPackageJson = require('fpj'); if (findPackageJson && findPackageJson.__esModule) findPackageJson = findPackageJson.default;
 let mismatch = require('mismatch'); if (mismatch && mismatch.__esModule) mismatch = mismatch.default;
 let erotic = require('erotic'); if (erotic && erotic.__esModule) erotic = erotic.default;
 
        const checkIfLib = modName => /^[./]/.test(modName)
-
-// https://github.com/idiocc/frontend/blob/master/src/lib/index.js#L7
-       const splitFrom = (from) => {
-  let [scope, name, ...paths] = from.split('/')
-  if (!scope.startsWith('@') && name) {
-    paths = [name, ...paths]
-    name = scope
-  } else if (!scope.startsWith('@')) {
-    name = scope
-  } else {
-    name = `${scope}/${name}`
-  }
-  return { name, paths: paths.join('/') }
-}
 
 /**
  * Expands the dependency match to include `package.json` and entry paths.
@@ -31,7 +18,7 @@ let erotic = require('erotic'); if (erotic && erotic.__esModule) erotic = erotic
  * @param {!Array<string>} [fields] What additional fields to fetch from package.json.
  * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
  */
-const calculateDependencies = async (path, matches, soft, fields) => {
+const calculateDependencies = async (path, matches, soft, fields, pckg = null) => {
   const e = erotic()
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
@@ -41,23 +28,27 @@ const calculateDependencies = async (path, matches, soft, fields) => {
     if (isLib) {
       try {
         const { path: entry } = await resolveDependency(name, path)
-        return { entry }
+        return { entry, package: pckg }
       } catch (err) { /*
         maybe a local package with package.json
       */}
     } else {
-      const { name: n, paths } = splitFrom(name)
+      const { name: n, paths } = split(name)
       if (paths) {
-        const { packageJson } = await findPackageJson(dir, n)
+        const { packageJson, packageName } = await findPackageJson(dir, n)
         const d = dirname(packageJson)
         const { path: entry } = await resolveDependency(join(d, paths))
-        return { entry }
+        return { entry, package: packageName }
       }
     }
     try {
       const {
         entry, packageJson, version, packageName, hasMain, ...rest
       } = await findPackageJson(dir, name, { fields })
+      if (packageName == pckg) {
+        console.warn('[static-analysis] Skipping package %s that imports itself in %s', packageName, path)
+        return null
+      }
       return {
         entry, packageJson, version, name: packageName,
         ...(hasMain ? { hasMain } : {}),
@@ -77,7 +68,8 @@ const calculateDependencies = async (path, matches, soft, fields) => {
  * @returns {Promise<Array<Detection>>}
  */
        const detect = async (path, cache = {}, {
-  nodeModules = true, shallow = false, soft = false, fields = [] } = {}) => {
+  nodeModules = true, shallow = false, soft = false, fields = [],
+  package: pckg } = {}) => {
   if (path in cache) return []
   cache[path] = 1
   const source = await read(path)
@@ -88,7 +80,7 @@ const calculateDependencies = async (path, matches, soft, fields) => {
 
   let deps
   try {
-    deps = await calculateDependencies(path, m, soft, fields)
+    deps = await calculateDependencies(path, m, soft, fields, pckg)
   } catch (err) {
     err.message = `${path}\n [!] ${err.message}`
     throw err
@@ -97,10 +89,11 @@ const calculateDependencies = async (path, matches, soft, fields) => {
   const entries = deps
     .filter(({ entry }) => entry && !(entry in cache))
   const discovered = await entries
-    .reduce(async (acc, { entry, hasMain, packageJson }) => {
+    .reduce(async (acc, {
+      entry, hasMain, packageJson, name, package: p }) => {
       if (packageJson && shallow) return acc
       const accRes = await acc
-      const res = await detect(entry, cache, { nodeModules, shallow, soft, fields })
+      const res = await detect(entry, cache, { nodeModules, shallow, soft, fields, package: name || p })
       const r = res
         .map(o => ({
           ...o,
@@ -120,6 +113,5 @@ const calculateDependencies = async (path, matches, soft, fields) => {
 
 
 module.exports.checkIfLib = checkIfLib
-module.exports.splitFrom = splitFrom
 module.exports.detect = detect
 module.exports.getRequireMatches = getRequireMatches

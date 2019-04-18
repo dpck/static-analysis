@@ -52,6 +52,10 @@ const staticAnalysis = async (path, config = {}) => {
     const newF =  { ...ff, from: froms }
     return newF
   })
+    .map(({ package: pckg, ...props }) => {
+      if (pckg) return { package: pckg, ...props }
+      return props
+    })
   return f
 }
 

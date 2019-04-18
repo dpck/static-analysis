@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "@depack/detect": "^1.0.1",
+    "@depack/split": "^1.0.0",
     "@wrote/read": "^1.0.3",
     "erotic": "^2.0.3",
     "fpj": "^1.1.0",

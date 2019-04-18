@@ -3,25 +3,12 @@ import { builtinModules } from 'module'
 import read from '@wrote/read'
 import resolveDependency from 'resolve-dependency'
 import getMatches from '@depack/detect'
+import split from '@depack/split'
 import findPackageJson from 'fpj'
 import mismatch from 'mismatch'
 import erotic from 'erotic'
 
 export const checkIfLib = modName => /^[./]/.test(modName)
-
-// https://github.com/idiocc/frontend/blob/master/src/lib/index.js#L7
-export const splitFrom = (from) => {
-  let [scope, name, ...paths] = from.split('/')
-  if (!scope.startsWith('@') && name) {
-    paths = [name, ...paths]
-    name = scope
-  } else if (!scope.startsWith('@')) {
-    name = scope
-  } else {
-    name = `${scope}/${name}`
-  }
-  return { name, paths: paths.join('/') }
-}
 
 /**
  * Expands the dependency match to include `package.json` and entry paths.
@@ -46,7 +33,7 @@ const calculateDependencies = async (path, matches, soft, fields, pckg = null) =
         maybe a local package with package.json
       */}
     } else {
-      const { name: n, paths } = splitFrom(name)
+      const { name: n, paths } = split(name)
       if (paths) {
         const { packageJson, packageName } = await findPackageJson(dir, n)
         const d = dirname(packageJson)
