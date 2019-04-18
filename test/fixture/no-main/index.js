@@ -1,0 +1,1 @@
+import noMain from 'no-main'
