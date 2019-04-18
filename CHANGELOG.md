@@ -1,3 +1,11 @@
+## 18 April 2019
+
+### [1.5.0](https://github.com/dpck/static-analysis/compare/v1.4.0...v1.5.0)
+
+- [feature] Report `package` of dependencies.
+- [fix] Prevent recursion.
+- [deps] Move `splitFrom` to `@depack/split`.
+
 ## 5 April 2019
 
 ### [1.4.0](https://github.com/dpck/static-analysis/compare/v1.3.4...v1.4.0)
