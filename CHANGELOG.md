@@ -1,3 +1,9 @@
+## 19 April 2019
+
+### [1.6.0](https://github.com/dpck/static-analysis/compare/v1.5.1...v1.6.0)
+
+- [types] Publish externs compiled with _Typal_.
+
 ## 18 April 2019
 
 ### [1.5.1](https://github.com/dpck/static-analysis/compare/v1.5.0...v1.5.1)
