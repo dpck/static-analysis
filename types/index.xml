@@ -9,7 +9,7 @@
     <prop type="boolean" name="soft" default="false">
       Do not throw an error when the dependency cannot be found in `node_modules`.
     </prop>
-    <prop opt type="Array<string>" name="fields">
+    <prop opt type="!Array<string>" name="fields">
       Any additional fields from `package.json` files to return.
     </prop>
   </type>
@@ -17,7 +17,7 @@
     <prop opt string name="entry">
       The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field.
     </prop>
-    <prop type="Array<string>" name="from">
+    <prop type="!Array<string>" name="from">
       The file in which the dependency was found.
     </prop>
     <prop opt string name="packageJson">

@@ -1452,7 +1452,7 @@ tsscmp@1.0.6:
   resolved "https://registry.yarnpkg.com/tsscmp/-/tsscmp-1.0.6.tgz#85b99583ac3589ec4bfef825b5000aa911d605eb"
   integrity sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==
 
-typal@^1.2.3:
+typal@^1.2.3, typal@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/typal/-/typal-1.3.1.tgz#f61350517014258fd1deb1a917c070514efff16d"
   integrity sha512-e2MG3uCOrFzjQhTLPG2RYeEdpZDOF1kDZ9I82u1aJkjZW/AFskE+CoHUaAkq5qklvPAVF76pm0v0m+l7ER41uA==

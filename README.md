@@ -45,12 +45,12 @@ Detects all dependencies in a file and their dependencies recursively. It is pos
 
 __<a name="type-_staticanalysisconfig">`_staticAnalysis.Config`</a>__: The configuration options for `staticAnalysis`.
 
-|    Name     |         Type          |                                             Description                                             | Default |
-| ----------- | --------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| nodeModules | _boolean_             | Whether to include packages from `node_modules` in the output.                                      | `true`  |
-| shallow     | _boolean_             | Only report on the entries of `node_module` dependencies, without analysing their own dependencies. | `false` |
-| soft        | _boolean_             | Do not throw an error when the dependency cannot be found in `node_modules`.                        | `false` |
-| fields      | _Array&lt;string&gt;_ | Any additional fields from `package.json` files to return.                                          | -       |
+|    Name     |          Type          |                                             Description                                             | Default |
+| ----------- | ---------------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| nodeModules | _boolean_              | Whether to include packages from `node_modules` in the output.                                      | `true`  |
+| shallow     | _boolean_              | Only report on the entries of `node_module` dependencies, without analysing their own dependencies. | `false` |
+| soft        | _boolean_              | Do not throw an error when the dependency cannot be found in `node_modules`.                        | `false` |
+| fields      | _!Array&lt;string&gt;_ | Any additional fields from `package.json` files to return.                                          | -       |
 
 _For example, for the given file_:
 ```js
@@ -83,7 +83,7 @@ import staticAnalysis from 'static-analysis'
 ```js
 [ { entry: 'node_modules/@wrote/read/src/index.js',
     packageJson: 'node_modules/@wrote/read/package.json',
-    version: '1.0.3',
+    version: '1.0.4',
     name: '@wrote/read',
     from: [ 'example/source.js' ] },
   { internal: 'path', from: [ 'example/source.js' ] },
@@ -101,19 +101,19 @@ import staticAnalysis from 'static-analysis'
     from: [ 'node_modules/@wrote/read/src/index.js' ] },
   { entry: 'node_modules/catchment/src/index.js',
     packageJson: 'node_modules/catchment/package.json',
-    version: '3.2.3',
+    version: '3.3.0',
     name: 'catchment',
     from: [ 'node_modules/@wrote/read/src/index.js' ] },
   { internal: 'stream',
     from: [ 'node_modules/catchment/src/index.js' ] },
   { entry: 'node_modules/erotic/src/index.js',
     packageJson: 'node_modules/erotic/package.json',
-    version: '2.0.3',
+    version: '2.1.1',
     name: 'erotic',
     from: [ 'node_modules/catchment/src/index.js' ] },
   { entry: 'node_modules/@artdeco/clean-stack/src/index.js',
     packageJson: 'node_modules/@artdeco/clean-stack/package.json',
-    version: '1.0.1',
+    version: '1.1.1',
     name: '@artdeco/clean-stack',
     from: 
      [ 'node_modules/catchment/src/index.js',
@@ -135,16 +135,16 @@ import staticAnalysis from 'static-analysis'
 
 __<a name="type-_staticanalysisdetection">`_staticAnalysis.Detection`</a>__: The module detection result.
 
-|    Name     |         Type          |                                                               Description                                                               |
-| ----------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| entry       | _string_              | The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field. |
-| __from*__   | _Array&lt;string&gt;_ | The file in which the dependency was found.                                                                                             |
-| packageJson | _string_              | The path to the `package.json` file of the dependency if it's a module.                                                                 |
-| name        | _string_              | The name of the package.                                                                                                                |
-| version     | _string_              | The version of the package.                                                                                                             |
-| internal    | _string_              | If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.                                                       |
-| hasMain     | _boolean_             | Whether the entry from the package was specified via the `main` field and not `module` field.                                           |
-| package     | _string_              | If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries. |
+|    Name     |          Type          |                                                               Description                                                               |
+| ----------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| entry       | _string_               | The path to the JavaScript file to be required. If an internal Node.js package is required, it's name is found in the `internal` field. |
+| __from*__   | _!Array&lt;string&gt;_ | The file in which the dependency was found.                                                                                             |
+| packageJson | _string_               | The path to the `package.json` file of the dependency if it's a module.                                                                 |
+| name        | _string_               | The name of the package.                                                                                                                |
+| version     | _string_               | The version of the package.                                                                                                             |
+| internal    | _string_               | If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.                                                       |
+| hasMain     | _boolean_              | Whether the entry from the package was specified via the `main` field and not `module` field.                                           |
+| package     | _string_               | If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries. |
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true" width="15"></a></p>
 
@@ -186,7 +186,7 @@ import staticAnalysis from 'static-analysis'
 ```js
 [ { entry: 'node_modules/@wrote/read/src/index.js',
     packageJson: 'node_modules/@wrote/read/package.json',
-    version: '1.0.3',
+    version: '1.0.4',
     name: '@wrote/read',
     from: [ 'example/source.js' ] },
   { internal: 'path', from: [ 'example/source.js' ] },
@@ -273,7 +273,7 @@ import staticAnalysis from 'static-analysis'
 ```js
 [ { entry: 'node_modules/@wrote/read/src/index.js',
     packageJson: 'node_modules/@wrote/read/package.json',
-    version: '1.0.3',
+    version: '1.0.4',
     name: '@wrote/read',
     license: 'MIT',
     homepage: 'https://github.com/wrote/read#readme',
