@@ -1,3 +1,9 @@
+## 24 April 2019
+
+### [1.7.0](https://github.com/dpck/static-analysis/compare/v1.6.0...v1.7.0)
+
+- [feature] Report whether the entry was `required`.
+
 ## 19 April 2019
 
 ### [1.6.0](https://github.com/dpck/static-analysis/compare/v1.5.1...v1.6.0)
