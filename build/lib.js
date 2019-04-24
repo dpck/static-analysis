@@ -16,9 +16,9 @@ let erotic = require('erotic'); if (erotic && erotic.__esModule) erotic = erotic
  * @param {Array<string>} matches The matches.
  * @param {boolean} [soft] Whether to throw when a dependency's package.json is not found.
  * @param {!Array<string>} [fields] What additional fields to fetch from package.json.
- * @returns {Array<Promise<{internal?: string, packageJson?: string, entry?: string}>}
+ * @returns {Promise<!Array<{internal?: string, packageJson?: string, entry?: string, package?: string}>>}
  */
-const calculateDependencies = async (path, matches, soft, fields, pckg = null) => {
+const getDependencyMeta = async (path, matches, soft, fields, pckg = null) => {
   const e = erotic()
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
@@ -75,12 +75,17 @@ const calculateDependencies = async (path, matches, soft, fields, pckg = null) =
   const source = await read(path)
   const matches = getMatches(source)
   const requireMatches = getRequireMatches(source)
-  const allMatches = [...matches, ...requireMatches]
-  const m = nodeModules ? allMatches : allMatches.filter(checkIfLib)
+  const fm = nodeModules ? matches : matches.filter(checkIfLib)
+  const fr = nodeModules ? requireMatches : requireMatches.filter(checkIfLib)
 
   let deps
   try {
-    deps = await calculateDependencies(path, m, soft, fields, pckg)
+    const dm = await getDependencyMeta(path, fm, soft, fields, pckg)
+    const rm = await getDependencyMeta(path, fr, soft, fields, pckg)
+    rm.forEach((val) => {
+      val.required = true
+    })
+    deps = [...dm, ...rm]
   } catch (err) {
     err.message = `${path}\n [!] ${err.message}`
     throw err
@@ -106,7 +111,7 @@ const calculateDependencies = async (path, matches, soft, fields, pckg = null) =
 }
 
        const getRequireMatches = (source) => {
-  const m = mismatch(/(?:^|\s+)require\((['"])(.+?)\1\)/gm, source, ['q', 'from'])
+  const m = mismatch(/(?:^|[^\w\d_])require\(\s*(['"])(.+?)\1\s*\)/gm, source, ['q', 'from'])
   const res = m.map(a => a['from'])
   return res
 }
