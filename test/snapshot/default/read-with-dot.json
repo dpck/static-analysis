@@ -1,6 +1,7 @@
 [
   {
     "entry": "test/fixture/dot/index.js",
+    "required": true,
     "from": [
       "test/fixture/dot/dot.js"
     ]

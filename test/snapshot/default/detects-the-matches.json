@@ -42,7 +42,7 @@
   {
     "entry": "node_modules/@wrote/rm/src/index.js",
     "packageJson": "node_modules/@wrote/rm/package.json",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "name": "@wrote/rm",
     "from": "node_modules/@wrote/wrote/src/index.js"
   },
@@ -56,7 +56,7 @@
   {
     "entry": "node_modules/@wrote/exists/src/index.js",
     "packageJson": "node_modules/@wrote/exists/package.json",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "name": "@wrote/exists",
     "from": "node_modules/@wrote/wrote/src/index.js"
   },
@@ -224,6 +224,7 @@
   {
     "entry": "test/fixture/lib/node_modules/test2/r.js",
     "package": "test2",
+    "required": true,
     "from": "test/fixture/lib/node_modules/test2/index.js",
     "hasMain": true
   },
@@ -232,6 +233,7 @@
     "packageJson": "test/fixture/lib/node_modules/test/package.json",
     "version": "1.0.0",
     "name": "test",
+    "required": true,
     "from": "test/fixture/lib/node_modules/test2/index.js"
   }
 ]

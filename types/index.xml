@@ -38,5 +38,8 @@
     <prop opt string name="package">
       If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries.
     </prop>
+    <prop opt boolean name="required">
+      Whether the package was required using the `require` statement.
+    </prop>
   </type>
 </types>

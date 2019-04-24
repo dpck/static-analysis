@@ -45,7 +45,7 @@ import Fixture from '@idio/preact-fixture'
   {
     "entry": "node_modules/zoroaster/build/index.js",
     "packageJson": "node_modules/zoroaster/package.json",
-    "version": "3.11.6",
+    "version": "3.13.0",
     "name": "zoroaster",
     "hasMain": true,
     "license": "MIT",
@@ -109,4 +109,22 @@ import r from '../fixture/no-main'
   ],
   "version": "1.0.0"
 }]
+/**/
+
+## reports on require
+const r = require('../fixture/lib/node_modules/test')
+
+/* expected */
+[
+  {
+    "entry": "test/fixture/lib/node_modules/test/module.mjs",
+    "packageJson": "test/fixture/lib/node_modules/test/package.json",
+    "version": "1.0.0",
+    "name": "test",
+    "from": [
+      "test/temp/test.js"
+    ],
+    "required": true
+  }
+]
 /**/

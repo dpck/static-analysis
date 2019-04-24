@@ -22,6 +22,7 @@
   {
     "package": "test2",
     "entry": "test/fixture/lib/node_modules/test2/r.js",
+    "required": true,
     "from": [
       "test/fixture/lib/node_modules/test2/index.js"
     ],

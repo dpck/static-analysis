@@ -115,4 +115,5 @@ export default staticAnalysis
  * @prop {string} [internal] If it's an internal NodeJS dependency, such as `fs` or `path`, contains its name.
  * @prop {boolean} [hasMain] Whether the entry from the package was specified via the `main` field and not `module` field.
  * @prop {string} [package] If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries.
+ * @prop {boolean} [required] Whether the package was required using the `require` statement.
  */
