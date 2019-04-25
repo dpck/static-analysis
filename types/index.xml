@@ -42,4 +42,24 @@
       Whether the package was required using the `require` statement.
     </prop>
   </type>
+  <type name="DependencyMeta">
+    <prop opt string name="internal">
+      The name of the internal Node.JS package.
+    </prop>
+    <prop opt string name="packageJson">
+      The location of the _package.json_ file.
+    </prop>
+    <prop opt string name="entry">
+      The entry to the package (module or main fields).
+    </prop>
+    <prop opt string name="package">
+      The package the entry belongs to.
+    </prop>
+    <prop opt boolean name="hasMain">
+      Whether the dependency has main field.
+    </prop>
+    <prop opt boolean name="required">
+      Whether the dependency was required.
+    </prop>
+  </type>
 </types>

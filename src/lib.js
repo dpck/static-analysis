@@ -13,12 +13,12 @@ export const checkIfLib = modName => /^[./]/.test(modName)
 /**
  * Expands the dependency match to include `package.json` and entry paths.
  * @param {string} path The path to the file.
- * @param {Array<string>} matches The matches.
+ * @param {!Array<string>} matches The matches.
  * @param {boolean} [soft] Whether to throw when a dependency's package.json is not found.
  * @param {!Array<string>} [fields] What additional fields to fetch from package.json.
- * @returns {Promise<!Array<{internal?: string, packageJson?: string, entry?: string, package?: string}>>}
+ * @returns {!Promise<!Array<!_staticAnalysis.DependencyMeta>>}
  */
-const getDependencyMeta = async (path, matches, soft, fields, pckg = null) => {
+const getDependenciesMeta = async (path, matches, soft, fields, pckg = null) => {
   const e = erotic()
   const dir = dirname(path)
   const proms = matches.map(async (name) => {
@@ -65,7 +65,7 @@ const getDependencyMeta = async (path, matches, soft, fields, pckg = null) => {
  * Detects the imports.
  * @param {string} path
  * @param {Object} cache
- * @returns {Promise<Array<Detection>>}
+ * @returns {!Promise<!Array<!_staticAnalysis.Detection>>}
  */
 export const detect = async (path, cache = {}, {
   nodeModules = true, shallow = false, soft = false, fields = [],
@@ -80,8 +80,8 @@ export const detect = async (path, cache = {}, {
 
   let deps
   try {
-    const dm = await getDependencyMeta(path, fm, soft, fields, pckg)
-    const rm = await getDependencyMeta(path, fr, soft, fields, pckg)
+    const dm = await getDependenciesMeta(path, fm, soft, fields, pckg)
+    const rm = await getDependenciesMeta(path, fr, soft, fields, pckg)
     rm.forEach((val) => {
       val.required = true
     })
@@ -115,3 +115,12 @@ export const getRequireMatches = (source) => {
   const res = m.map(a => a['from'])
   return res
 }
+
+/**
+ * @suppress {nonStandardJsDocs}
+ * @typedef {import('.').Detection} _staticAnalysis.Detection
+ */
+/**
+ * @suppress {nonStandardJsDocs}
+ * @typedef {import('.').DependencyMeta} _staticAnalysis.DependencyMeta
+ */

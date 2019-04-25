@@ -117,6 +117,19 @@ module.exports=staticAnalysis
  * @prop {string} [package] If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries.
  * @prop {boolean} [required] Whether the package was required using the `require` statement.
  */
+/**
+ * @suppress {nonStandardJsDocs}
+ * @typedef {_staticAnalysis.DependencyMeta} DependencyMeta
+ */
+/**
+ * @suppress {nonStandardJsDocs}
+ * @typedef {Object} _staticAnalysis.DependencyMeta
+ * @prop {string} [internal] The name of the internal Node.JS package.
+ * @prop {string} [packageJson] The location of the _package.json_ file.
+ * @prop {string} [entry] The entry to the package (module or main fields).
+ * @prop {string} [package] The package the entry belongs to.
+ * @prop {boolean} [hasMain] Whether the dependency has main field.
+ */
 
 
 module.exports.sort = sort

@@ -10,7 +10,7 @@ import { detect } from './lib'
  * @param {boolean} [config.shallow=false] Only report on the entries of `node_module` dependencies, without analysing their own dependencies. Default `false`.
  * @param {boolean} [config.soft=false] Do not throw an error when the dependency cannot be found in `node_modules`. Default `false`.
  * @param {!Array<string>} [config.fields] Any additional fields from `package.json` files to return.
- * @return {Promise<!Array<!_staticAnalysis.Detection>>} The array with detections.
+ * @return {!Promise<!Array<!_staticAnalysis.Detection>>} The array with detections.
  */
 const staticAnalysis = async (path, config = {}) => {
   const e = erotic()
@@ -116,4 +116,18 @@ export default staticAnalysis
  * @prop {boolean} [hasMain] Whether the entry from the package was specified via the `main` field and not `module` field.
  * @prop {string} [package] If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries.
  * @prop {boolean} [required] Whether the package was required using the `require` statement.
+ */
+/**
+ * @suppress {nonStandardJsDocs}
+ * @typedef {_staticAnalysis.DependencyMeta} DependencyMeta
+ */
+/**
+ * @suppress {nonStandardJsDocs}
+ * @typedef {Object} _staticAnalysis.DependencyMeta
+ * @prop {string} [internal] The name of the internal Node.JS package.
+ * @prop {string} [packageJson] The location of the _package.json_ file.
+ * @prop {string} [entry] The entry to the package (module or main fields).
+ * @prop {string} [package] The package the entry belongs to.
+ * @prop {boolean} [hasMain] Whether the dependency has main field.
+ * @prop {boolean} [required] Whether the dependency was required.
  */
