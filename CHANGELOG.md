@@ -1,3 +1,9 @@
+## 25 April 2019
+
+### [1.7.1](https://github.com/dpck/static-analysis/compare/v1.7.0...v1.7.1)
+
+- [types] Add `dependencyMeta` type for _GCC_.
+
 ## 24 April 2019
 
 ### [1.7.0](https://github.com/dpck/static-analysis/compare/v1.6.0...v1.7.0)
