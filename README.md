@@ -12,9 +12,9 @@ yarn add -E static-analysis
 
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
-- [`async staticAnalysis(path: string, config: Config): Array<Detection>`](#async-staticanalysispath-stringconfig-config-arraydetection)
-  * [`_staticAnalysis.Config`](#type-_staticanalysisconfig)
-  * [`_staticAnalysis.Detection`](#type-_staticanalysisdetection)
+- [`async staticAnalysis(path, config): !Array<!Detection>`](#async-staticanalysispath-stringarraystringconfig-config-arraydetection)
+  * [`Config`](#type-config)
+  * [`Detection`](#type-detection)
   * [Ignore Node_Modules](#ignore-node_modules)
   * [Shallow Node_Modules](#shallow-node_modules)
   * [Soft Mode](#soft-mode)
@@ -22,7 +22,9 @@ yarn add -E static-analysis
 - [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
 - [Copyright](#copyright)
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/0.svg?sanitize=true">
+</a></p>
 
 ## API
 
@@ -34,16 +36,22 @@ import staticAnalysis from 'static-analysis'
 
 The types and [externs](externs.js) for _Google Closure Compiler_ via [**_Depack_**](https://github.com/dpck/depack) are defined in the `_staticAnalysis` namespace.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/1.svg?sanitize=true">
+</a></p>
 
-## `async staticAnalysis(`<br/>&nbsp;&nbsp;`path: string,`<br/>&nbsp;&nbsp;`config: Config,`<br/>`): Array<Detection>`
+## <code>async <ins>staticAnalysis</ins>(</code><sub><br/>&nbsp;&nbsp;`path: string|!Array<string>,`<br/>&nbsp;&nbsp;`config: !Config,`<br/></sub><code>): <i>!Array<!Detection></i></code>
+Detects all dependencies in a file and their dependencies recursively. Returns the array with detections.
 
-Detects all dependencies in a file and their dependencies recursively. It is possible to pass path to the directory which has `index.js` or `index.jsx` files. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
+ - <kbd><strong>path*</strong></kbd> <em><code>(string \| !Array&lt;string&gt;)</code></em>: The path to the file in which to detect dependencies.
+ - <kbd><strong>config*</strong></kbd> <em><code><a href="#type-config" title="The configuration options for `staticAnalysis`.">!Config</a></code></em>: The configuration options for `staticAnalysis`.
+
+It is possible to pass multiple paths or a path to the directory which has `index.js` or `index.jsx` files. If the package exports `main` over `module`, the `hasMain` property will be added. This function can be useful to find out all files to pass to the Google Closure Compiler, for example, which is what [_Depack_](https://github.com/dpck/depack) does to bundle frontend code and compile Node.js packages.
 
 - The package does not build an AST, it just looks for `import` and `require` statements using regular expressions. Therefore, there's also no tree-shaking or complete analysis of the real dependencies.
 - If a source is imported like `import fn from '@idio/preact/build/fn`, then the analysis will not contain `@idio/preact` as a `node_module` dependency with the `packageJson`, `name` and `version` fields, it will only appear as an entry file.
 
-__<a name="type-_staticanalysisconfig">`_staticAnalysis.Config`</a>__: The configuration options for `staticAnalysis`.
+__<a name="type-config">`Config`</a>__: The configuration options for `staticAnalysis`.
 
 |    Name     |             Type              |                                             Description                                             | Default |
 | ----------- | ----------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
@@ -89,7 +97,7 @@ import staticAnalysis from 'static-analysis'
   { internal: 'path', from: [ 'example/source.js' ] },
   { entry: 'node_modules/preact/dist/preact.mjs',
     packageJson: 'node_modules/preact/package.json',
-    version: '8.4.2',
+    version: '8.5.2',
     name: 'preact',
     from: [ 'example/source.js' ] },
   { package: '@idio/preact-fixture',
@@ -134,7 +142,7 @@ import staticAnalysis from 'static-analysis'
     from: [ 'node_modules/@artdeco/clean-stack/src/index.js' ] } ]
 ```
 
-__<a name="type-_staticanalysisdetection">`_staticAnalysis.Detection`</a>__: The module detection result.
+__<a name="type-detection">`Detection`</a>__: The module detection result.
 
 |    Name     |             Type              |                                                               Description                                                               |
 | ----------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -148,7 +156,9 @@ __<a name="type-_staticanalysisdetection">`_staticAnalysis.Detection`</a>__: The
 | package     | <em>string</em>               | If the entry is a library file withing a package, this field contains its name. Same as the `name` field for the _main/module_ entries. |
 | required    | <em>boolean</em>              | Whether the package was required using the `require` statement.                                                                         |
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true" width="15"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/2.svg?sanitize=true" width="15">
+</a></p>
 
 ### Ignore Node_Modules
 
@@ -170,7 +180,9 @@ import staticAnalysis from 'static-analysis'
     from: [ 'example/source.js' ] } ]
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true" width="15"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/3.svg?sanitize=true" width="15">
+</a></p>
 
 ### Shallow Node_Modules
 
@@ -195,7 +207,7 @@ import staticAnalysis from 'static-analysis'
   { internal: 'path', from: [ 'example/source.js' ] },
   { entry: 'node_modules/preact/dist/preact.mjs',
     packageJson: 'node_modules/preact/package.json',
-    version: '8.4.2',
+    version: '8.5.2',
     name: 'preact',
     from: [ 'example/source.js' ] },
   { package: '@idio/preact-fixture',
@@ -206,7 +218,9 @@ import staticAnalysis from 'static-analysis'
     from: [ 'example/source.js' ] } ]
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="15"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/4.svg?sanitize=true" width="15">
+</a></p>
 
 ### Soft Mode
 
@@ -246,20 +260,22 @@ import staticAnalysis from 'static-analysis'
 ```js
 Error: example/missing-dep.jsx
  [!] Package.json for module missing not found.
-    at staticAnalysis (/Users/zavr/depack/static-analysis/src/index.js:16:13)
-    at /Users/zavr/depack/static-analysis/example/soft.js:5:23
-    at Object.<anonymous> (/Users/zavr/depack/static-analysis/example/soft.js:10:3)
-    at Module.r._compile (/Users/zavr/depack/static-analysis/node_modules/alamode/depack/depack-lib.js:836:20)
-    at Object.l.(anonymous function).E._extensions.(anonymous function) [as .js] (/Users/zavr/depack/static-analysis/node_modules/alamode/depack/depack-lib.js:839:7)
+    at staticAnalysis (src/index.js:12:13)
+    at example/soft.js:5:23
+    at Object.<anonymous> (example/soft.js:10:3)
+    at Module.p._compile (node_modules/alamode/compile/depack.js:49:18)
+    at Object.k.(anonymous function).y._extensions.(anonymous function) [as .js] (node_modules/alamode/compile/depack.js:51:7)
 Soft mode on.
 [ { entry: 'node_modules/preact/dist/preact.mjs',
     packageJson: 'node_modules/preact/package.json',
-    version: '8.4.2',
+    version: '8.5.2',
     name: 'preact',
     from: [ 'example/missing-dep.jsx' ] } ]
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/5.svg?sanitize=true" width="25">
+</a></p>
 
 ### Fields
 
@@ -287,7 +303,7 @@ import staticAnalysis from 'static-analysis'
   { internal: 'path', from: [ 'example/source.js' ] },
   { entry: 'node_modules/preact/dist/preact.mjs',
     packageJson: 'node_modules/preact/package.json',
-    version: '8.4.2',
+    version: '8.5.2',
     name: 'preact',
     license: 'MIT',
     homepage: 'https://github.com/developit/preact',
@@ -300,9 +316,11 @@ import staticAnalysis from 'static-analysis'
     from: [ 'example/source.js' ] } ]
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/6.svg?sanitize=true">
+</a></p>
 
-## `sort(`<br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/>`): {}`
+## <code><ins>sort</ins>(</code><sub><br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/></sub><code>): <i>{}</i></code>
 
 Sorts the detected dependencies into commonJS modules, packageJsons and internals.
 
@@ -344,7 +362,9 @@ import staticAnalysis, { sort } from 'static-analysis'
      '@artdeco/clean-stack' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/7.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/7.svg?sanitize=true">
+</a></p>
 
 ## Copyright
 
@@ -352,18 +372,21 @@ import staticAnalysis, { sort } from 'static-analysis'
   <tr>
     <th>
       <a href="https://artd.eco">
-        <img src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png" alt="Art Deco" />
+        <img width="100" src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png"
+          alt="Art Deco">
       </a>
     </th>
     <th>© <a href="https://artd.eco">Art Deco</a> for <a href="https://artd.eco/depack">Depack</a> 2019</th>
     <th>
       <a href="https://www.technation.sucks" title="Tech Nation Visa">
-        <img src="https://raw.githubusercontent.com/artdecoweb/www.technation.sucks/master/anim.gif"
-          alt="Tech Nation Visa" />
+        <img width="100" src="https://raw.githubusercontent.com/idiocc/cookies/master/wiki/arch4.jpg"
+          alt="Tech Nation Visa">
       </a>
     </th>
     <th><a href="https://www.technation.sucks">Tech Nation Visa Sucks</a></th>
   </tr>
 </table>
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/-1.svg?sanitize=true">
+</a></p>

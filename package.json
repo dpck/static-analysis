@@ -12,7 +12,7 @@
     "test-compile": "ALAMODE_ENV=test-compile yarn test",
     "compile": "depack-dev src/depack -o compile -a -c -O 2018 -s --source_map_include_content",
     "lint": "eslint .",
-    "doc": "NODE_DEBUG=doc doc -o README.md",
+    "doc": "NODE_DEBUG=doc doc -o README.md -n _staticAnalysis",
     "start": "alanode src/server",
     "b": "alamode src -o build -s",
     "d": "yarn-s template d1 externs",

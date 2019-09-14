@@ -9,6 +9,6 @@ _With the following file being analysed:_
 _The program will throw initially, but will skip the missing dependency in **soft mode**:_
 
 %EXAMPLE: example/soft, ../src => static-analysis%
-%FORK-js example/soft%
+%/FORK-js example/soft%
 
 %~ width="25"%
