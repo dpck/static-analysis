@@ -353,16 +353,60 @@ Sorts the detected dependencies into commonJS modules, packageJsons and internal
  - <kbd><strong>detected*</strong></kbd> <em><code>!Array&lt;<a href="#type-detection" title="The module detection result.">!Detection</a>&gt;</code></em>: The detected matches.
 
 __<a name="type-sortreturn">`SortReturn`</a>__: The return of the sort function.
-
-
-|           Name            |             Type              | Description |
-| ------------------------- | ----------------------------- | ----------- |
-| __packageJsons*__         | <em>!Array&lt;string&gt;</em> |             |
-| __commonJsPackageJsons*__ | <em>!Array&lt;string&gt;</em> |             |
-| __commonJs*__             | <em>!Array&lt;string&gt;</em> |             |
-| __js*__                   | <em>!Array&lt;string&gt;</em> |             |
-| __internals*__            | <em>!Array&lt;string&gt;</em> |             |
-| __deps*__                 | <em>!Array&lt;string&gt;</em> |             |
+<table>
+ <thead><tr>
+  <th>Name</th>
+  <th>Type &amp; Description</th>
+ </tr></thead>
+ <tr>
+  <td rowSpan="3" align="center"><strong>packageJsons*</strong></td>
+  <td><em>!Array&lt;string&gt;</em></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td></td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center"><strong>commonJsPackageJsons*</strong></td>
+  <td><em>!Array&lt;string&gt;</em></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td></td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center"><strong>commonJs*</strong></td>
+  <td><em>!Array&lt;string&gt;</em></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td></td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center"><strong>js*</strong></td>
+  <td><em>!Array&lt;string&gt;</em></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td></td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center"><strong>internals*</strong></td>
+  <td><em>!Array&lt;string&gt;</em></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td></td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center"><strong>deps*</strong></td>
+  <td><em>!Array&lt;string&gt;</em></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td></td>
+ </tr>
+</table>
 
 ```js
 import staticAnalysis, { sort } from 'static-analysis'
