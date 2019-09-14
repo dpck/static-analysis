@@ -118,9 +118,9 @@ export const getRequireMatches = (source) => {
 
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {import('.').Detection} _staticAnalysis.Detection
+ * @typedef {import('..').Detection} _staticAnalysis.Detection
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {import('.').DependencyMeta} _staticAnalysis.DependencyMeta
+ * @typedef {import('..').DependencyMeta} _staticAnalysis.DependencyMeta
  */

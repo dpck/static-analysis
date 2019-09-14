@@ -2,7 +2,7 @@ const { _staticAnalysis } = require('./depack')
 
 /**
  * Detects all dependencies in a file and their dependencies recursively. Returns the array with detections.
- * @param {string} path The path to the file in which to detect dependencies.
+ * @param {string|!Array<string>} path The path to the file in which to detect dependencies.
  * @param {!_staticAnalysis.Config} config The configuration options for `staticAnalysis`.
  * @param {boolean} [config.nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
  * @param {boolean} [config.shallow=false] Only report on the entries of `node_module` dependencies, without analysing their own dependencies. Default `false`.

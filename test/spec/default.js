@@ -18,6 +18,12 @@ const TS = {
   async 'filters duplicates'() {
     return await staticAnalysis('test/fixture/detect')
   },
+  async 'multiple files'() {
+    return await staticAnalysis([
+      'test/fixture/multiple/a.js',
+      'test/fixture/multiple/b.js',
+    ])
+  },
   async 'has main'() {
     return await staticAnalysis('test/fixture/lib/has-main.js')
   },

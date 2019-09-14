@@ -1,0 +1,18 @@
+[
+  {
+    "entry": "test/fixture/multiple/index.js",
+    "from": [
+      "test/fixture/multiple/a.js",
+      "test/fixture/multiple/b.js"
+    ]
+  },
+  {
+    "entry": "node_modules/preact/dist/preact.mjs",
+    "packageJson": "node_modules/preact/package.json",
+    "version": "8.5.2",
+    "name": "preact",
+    "from": [
+      "test/fixture/multiple/a.js"
+    ]
+  }
+]

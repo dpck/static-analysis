@@ -1,7 +1,7 @@
 <types namespace="_staticAnalysis">
   <method name="staticAnalysis" async
     return="!Array<!_staticAnalysis.Detection>">
-    <arg string name="path">
+    <arg type="string|!Array<string>" name="path">
       The path to the file in which to detect dependencies.
     </arg>
     <arg type="!_staticAnalysis.Config" name="config">
