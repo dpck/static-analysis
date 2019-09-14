@@ -1,6 +1,6 @@
 {
   "name": "static-analysis",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "Performs Static Analysis On JavaScript Programs To Find Out All Dependencies That Stem From The Given File.",
   "main": "compile/index.js",
   "module": "src/index.js",
