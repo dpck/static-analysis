@@ -1,5 +1,9 @@
 ## 14 September 2019
 
+### [2.0.0](https://github.com/dpck/static-analysis/compare/v1.8.0...v2.0.0)
+
+- [license] Update to _Tech Nation Sucks_ license.
+
 ### [1.8.0](https://github.com/dpck/static-analysis/compare/v1.7.1...v1.8.0)
 
 - [feature] Allow to pass an array of entries.

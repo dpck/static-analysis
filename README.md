@@ -21,7 +21,7 @@ yarn add static-analysis
   * [Fields](#fields)
   * [Multiple Entries](#multiple-entries)
 - [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
-- [Copyright](#copyright)
+- [License & Copyright](#license--copyright)
 
 <p align="center"><a href="#table-of-contents">
   <img src="/.documentary/section-breaks/0.svg?sanitize=true">
@@ -392,7 +392,24 @@ import staticAnalysis, { sort } from 'static-analysis'
   <img src="/.documentary/section-breaks/8.svg?sanitize=true">
 </a></p>
 
-## Copyright
+## License & Copyright
+
+```
+Dual licensed under Affero GPL and a commercial license.
+
+- Within the UK: no commercial use is allowed until the
+  organisation signs up at
+  https://www.technation.sucks/license/.
+- Across the globe: Affero GPL. No companies affiliated
+  with Tech Nation in any way (e.g., participation in
+  their programs, being part of their network, hiring
+  their directors), are allowed to use the software
+  unless they sign up.
+
+(c) 2019 Art Deco Code Limited
+
+The COPYING file contains the full text of the public license.
+```
 
 <table>
   <tr>
