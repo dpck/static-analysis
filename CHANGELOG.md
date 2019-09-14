@@ -1,5 +1,9 @@
 ## 14 September 2019
 
+### [2.0.2](https://github.com/dpck/static-analysis/compare/v2.0.1...v2.0.2)
+
+- [fix] Compile `sort` method.
+
 ### [2.0.1](https://github.com/dpck/static-analysis/compare/v2.0.0...v2.0.1)
 
 - [license] Update `package.json` for LICENSE.
