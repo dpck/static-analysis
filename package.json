@@ -29,7 +29,7 @@
     "types/externs.js",
     "COPYING"
   ],
-  "externs": "externs.js",
+  "externs": "types/externs.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/dpck/static-analysis.git"

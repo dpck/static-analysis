@@ -1,5 +1,9 @@
 ## 14 September 2019
 
+### [2.0.3](https://github.com/dpck/static-analysis/compare/v2.0.2...v2.0.3)
+
+- [fix] Update the location of externs file.
+
 ### [2.0.2](https://github.com/dpck/static-analysis/compare/v2.0.1...v2.0.2)
 
 - [fix] Compile `sort` method.
