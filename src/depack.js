@@ -19,8 +19,9 @@
  */
 
 import '../types/externs'
-import staticAnalysis from './'
+import staticAnalysis, { sort } from './'
 
 module.exports = {
   '_staticAnalysis': staticAnalysis,
+  '_sort': sort,
 }

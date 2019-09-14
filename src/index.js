@@ -70,6 +70,7 @@ const staticAnalysis = async (path, config = {}) => {
 /**
  * Sorts the detected dependencies into commonJS modules, packageJsons and internals.
  * @param {!Array<!_staticAnalysis.Detection>} detected The detected matches
+ * @return {_staticAnalysis.SortReturn}
  */
 export const sort = (detected) => {
   const packageJsons = []
@@ -98,6 +99,10 @@ export default staticAnalysis
 /**
  * @suppress {nonStandardJsDocs}
  * @typedef {import('../').Config} _staticAnalysis.Config
+ */
+/**
+ * @suppress {nonStandardJsDocs}
+ * @typedef {import('../').SortReturn} _staticAnalysis.SortReturn
  */
 /**
  * @suppress {nonStandardJsDocs}

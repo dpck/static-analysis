@@ -188,8 +188,8 @@ const W = async(a, b, f = {}) => {
     if (!a.entryExists && !k) {
       throw Error(`The exported module ${a.main} in package ${b} does not exist.`);
     }
-    const {entry:c, version:e, packageName:d, main:h, entryExists:p, ...n} = a;
-    return {entry:L("", c), packageJson:L("", g), ...e ? {version:e} : {}, packageName:d, ...h ? {hasMain:!0} : {}, ...p ? {} : {entryExists:!1}, ...n};
+    const {entry:c, version:e, packageName:d, main:h, entryExists:n, ...p} = a;
+    return {entry:L("", c), packageJson:L("", g), ...e ? {version:e} : {}, packageName:d, ...h ? {hasMain:!0} : {}, ...n ? {} : {entryExists:!1}, ...p};
   }
   if ("/" == a && !m) {
     throw Error(`Package.json for module ${b} not found.`);
@@ -236,21 +236,21 @@ const X = a => /^[./]/.test(a), Y = async(a, b, f, l, k = null) => {
       }
     } else {
       {
-        let [p, n, ...q] = c.split("/");
-        !p.startsWith("@") && n ? (q = [n, ...q], n = p) : n = p.startsWith("@") ? `${p}/${n}` : p;
-        e = {name:n, paths:q.join("/")};
+        let [n, p, ...q] = c.split("/");
+        !n.startsWith("@") && p ? (q = [p, ...q], p = n) : p = n.startsWith("@") ? `${n}/${p}` : n;
+        e = {name:p, paths:q.join("/")};
       }
       const {name:d, paths:h} = e;
       if (h) {
-        const {packageJson:p, packageName:n} = await W(m, d);
-        c = J(p);
+        const {packageJson:n, packageName:p} = await W(m, d);
+        c = J(n);
         ({path:c} = await O(K(c, h)));
-        return {entry:c, package:n};
+        return {entry:c, package:p};
       }
     }
     try {
-      const {entry:d, packageJson:h, version:p, packageName:n, hasMain:q, ...t} = await W(m, c, {fields:l});
-      return n == k ? (console.warn("[static-analysis] Skipping package %s that imports itself in %s", n, a), null) : {entry:d, packageJson:h, version:p, name:n, ...q ? {hasMain:q} : {}, ...t};
+      const {entry:d, packageJson:h, version:n, packageName:p, hasMain:q, ...t} = await W(m, c, {fields:l});
+      return p == k ? (console.warn("[static-analysis] Skipping package %s that imports itself in %s", p, a), null) : {entry:d, packageJson:h, version:n, name:p, ...q ? {hasMain:q} : {}, ...t};
     } catch (d) {
       if (f) {
         return null;
@@ -270,21 +270,21 @@ const X = a => /^[./]/.test(a), Y = async(a, b, f, l, k = null) => {
   c = f ? c : c.filter(X);
   let d;
   try {
-    const h = await Y(a, e, k, g, m), p = await Y(a, c, k, g, m);
-    p.forEach(n => {
-      n.required = !0;
+    const h = await Y(a, e, k, g, m), n = await Y(a, c, k, g, m);
+    n.forEach(p => {
+      p.required = !0;
     });
-    d = [...h, ...p];
+    d = [...h, ...n];
   } catch (h) {
     throw h.message = `${a}\n [!] ${h.message}`, h;
   }
   m = d.map(h => ({...h, from:a}));
-  return await d.filter(({entry:h}) => h && !(h in b)).reduce(async(h, {entry:p, hasMain:n, packageJson:q, name:t, package:ia}) => {
+  return await d.filter(({entry:h}) => h && !(h in b)).reduce(async(h, {entry:n, hasMain:p, packageJson:q, name:t, package:ia}) => {
     if (q && l) {
       return h;
     }
     h = await h;
-    t = (await Z(p, b, {nodeModules:f, shallow:l, soft:k, fields:g, package:t || ia})).map(z => ({...z, from:z.from ? z.from : p, ...!z.packageJson && n ? {hasMain:n} : {}}));
+    t = (await Z(n, b, {nodeModules:f, shallow:l, soft:k, fields:g, package:t || ia})).map(z => ({...z, from:z.from ? z.from : n, ...!z.packageJson && p ? {hasMain:p} : {}}));
     return [...h, ...t];
   }, m);
 }, ha = a => V(/(?:^|[^\w\d_])require\(\s*(['"])(.+?)\1\s*\)/gm, a).map(b => b.from);
@@ -327,17 +327,28 @@ module.exports = {_staticAnalysis:async(a, b = {}) => {
   } catch (e) {
     throw f(e);
   }
-  return c.filter(({internal:e, entry:d}, h) => e ? c.findIndex(({internal:p}) => p == e) == h : c.findIndex(({entry:p}) => d == p) == h).map(e => {
-    const {entry:d, internal:h} = e, p = c.filter(({internal:n, entry:q}) => {
+  return c.filter(({internal:e, entry:d}, h) => e ? c.findIndex(({internal:n}) => n == e) == h : c.findIndex(({entry:n}) => d == n) == h).map(e => {
+    const {entry:d, internal:h} = e, n = c.filter(({internal:p, entry:q}) => {
       if (h) {
-        return h == n;
+        return h == p;
       }
       if (d) {
         return d == q;
       }
-    }).map(({from:n}) => n).filter((n, q, t) => t.indexOf(n) == q);
-    return {...e, from:p};
+    }).map(({from:p}) => p).filter((p, q, t) => t.indexOf(p) == q);
+    return {...e, from:n};
   }).map(({package:e, ...d}) => e ? {package:e, ...d} : d);
+}, _sort:a => {
+  const b = [], f = [], l = [], k = [], g = [], m = [];
+  a.forEach(({packageJson:c, hasMain:e, name:d, entry:h, internal:n}) => {
+    if (n) {
+      return g.push(n);
+    }
+    c && e ? f.push(c) : c && b.push(c);
+    h && e ? l.push(h) : h && k.push(h);
+    d && m.push(d);
+  });
+  return {commonJsPackageJsons:f, packageJsons:b, commonJs:l, js:k, internals:g, deps:m};
 }};
 
 

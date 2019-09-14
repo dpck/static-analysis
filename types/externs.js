@@ -19,3 +19,32 @@ _staticAnalysis.Detection
  * @typedef {{ internal: (string|undefined), packageJson: (string|undefined), entry: (string|undefined), package: (string|undefined), hasMain: (boolean|undefined), required: (boolean|undefined) }}
  */
 _staticAnalysis.DependencyMeta
+/**
+ * The return of the sort function.
+ * @record
+ */
+_staticAnalysis.SortReturn
+/**
+ * @type {!Array<string>}
+ */
+_staticAnalysis.SortReturn.prototype.packageJsons
+/**
+ * @type {!Array<string>}
+ */
+_staticAnalysis.SortReturn.prototype.commonJsPackageJsons
+/**
+ * @type {!Array<string>}
+ */
+_staticAnalysis.SortReturn.prototype.commonJs
+/**
+ * @type {!Array<string>}
+ */
+_staticAnalysis.SortReturn.prototype.js
+/**
+ * @type {!Array<string>}
+ */
+_staticAnalysis.SortReturn.prototype.internals
+/**
+ * @type {!Array<string>}
+ */
+_staticAnalysis.SortReturn.prototype.deps

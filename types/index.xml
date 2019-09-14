@@ -62,4 +62,12 @@
       Whether the dependency was required.
     </prop>
   </type>
+  <type record name="SortReturn" desc="The return of the sort function.">
+    <prop type="!Array<string>" name="packageJsons"/>
+    <prop type="!Array<string>" name="commonJsPackageJsons"/>
+    <prop type="!Array<string>" name="commonJs"/>
+    <prop type="!Array<string>" name="js"/>
+    <prop type="!Array<string>" name="internals"/>
+    <prop type="!Array<string>" name="deps"/>
+  </type>
 </types>

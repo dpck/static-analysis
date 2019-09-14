@@ -9,4 +9,10 @@
     </arg>
     Detects all dependencies in a file and their dependencies recursively. Returns the array with detections.
   </method>
+  <method name="sort" return="_staticAnalysis.SortReturn">
+    <arg type="!Array<!_staticAnalysis.Detection>" name="detected">
+      The detected matches.
+    </arg>
+    Sorts the detected dependencies into commonJS modules, packageJsons and internals.
+  </method>
 </types>

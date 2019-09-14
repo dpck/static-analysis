@@ -1,10 +1,6 @@
-```## sort => {}
-[
-  ["detections", "Array<Detection>"]
-]
-```
+<typedef name="sort" noArgTypesInToc>types/api.xml</typedef>
 
-Sorts the detected dependencies into commonJS modules, packageJsons and internals.
+<typedef name="SortReturn">types/index.xml</typedef>
 
 %EXAMPLE: example/sort, ../src => static-analysis%
 %FORK-js example/sort%

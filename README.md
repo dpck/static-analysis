@@ -20,7 +20,8 @@ yarn add static-analysis
   * [Soft Mode](#soft-mode)
   * [Fields](#fields)
   * [Multiple Entries](#multiple-entries)
-- [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
+- [`sort(detected): SortReturn`](#sortdetected-arraydetection-sortreturn)
+  * [`SortReturn`](#type-sortreturn)
 - [License & Copyright](#license--copyright)
 
 <p align="center"><a href="#table-of-contents">
@@ -346,9 +347,22 @@ console.log(res)
   <img src="/.documentary/section-breaks/7.svg?sanitize=true">
 </a></p>
 
-## <code><ins>sort</ins>(</code><sub><br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/></sub><code>): <i>{}</i></code>
-
+## <code><ins>sort</ins>(</code><sub><br/>&nbsp;&nbsp;`detected: !Array<!Detection>,`<br/></sub><code>): <i>SortReturn</i></code>
 Sorts the detected dependencies into commonJS modules, packageJsons and internals.
+
+ - <kbd><strong>detected*</strong></kbd> <em><code>!Array&lt;<a href="#type-detection" title="The module detection result.">!Detection</a>&gt;</code></em>: The detected matches.
+
+__<a name="type-sortreturn">`SortReturn`</a>__: The return of the sort function.
+
+
+|           Name            |             Type              | Description |
+| ------------------------- | ----------------------------- | ----------- |
+| __packageJsons*__         | <em>!Array&lt;string&gt;</em> |             |
+| __commonJsPackageJsons*__ | <em>!Array&lt;string&gt;</em> |             |
+| __commonJs*__             | <em>!Array&lt;string&gt;</em> |             |
+| __js*__                   | <em>!Array&lt;string&gt;</em> |             |
+| __internals*__            | <em>!Array&lt;string&gt;</em> |             |
+| __deps*__                 | <em>!Array&lt;string&gt;</em> |             |
 
 ```js
 import staticAnalysis, { sort } from 'static-analysis'

@@ -1,4 +1,4 @@
-const { _staticAnalysis } = require('./depack')
+const { _staticAnalysis, _sort } = require('./depack')
 
 /**
  * Detects all dependencies in a file and their dependencies recursively. Returns the array with detections.
@@ -14,7 +14,17 @@ function staticAnalysis(path, config) {
   return _staticAnalysis(path, config)
 }
 
+/**
+ * Sorts the detected dependencies into commonJS modules, packageJsons and internals.
+ * @param {!Array<!_staticAnalysis.Detection>} detected The detected matches.
+ * @return {_staticAnalysis.SortReturn}
+ */
+function sort(detected) {
+  return _sort(detected)
+}
+
 module.exports = staticAnalysis
+module.exports.sort = sort
 
 /* typal types/index.xml namespace */
 /**
@@ -43,4 +53,12 @@ module.exports = staticAnalysis
  * @prop {string} [package] The package the entry belongs to.
  * @prop {boolean} [hasMain] Whether the dependency has main field.
  * @prop {boolean} [required] Whether the dependency was required.
+ * @typedef {_staticAnalysis.SortReturn} SortReturn `＠record` The return of the sort function.
+ * @typedef {Object} _staticAnalysis.SortReturn `＠record` The return of the sort function.
+ * @prop {!Array<string>} packageJsons
+ * @prop {!Array<string>} commonJsPackageJsons
+ * @prop {!Array<string>} commonJs
+ * @prop {!Array<string>} js
+ * @prop {!Array<string>} internals
+ * @prop {!Array<string>} deps
  */
