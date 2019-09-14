@@ -5,7 +5,7 @@
 `static-analysis` Performs Static Analysis On JavaScript Programs To Find Out All Dependencies That Stem From The Given File.
 
 ```sh
-yarn add -E static-analysis
+yarn add static-analysis
 ```
 
 ## Table Of Contents
@@ -19,6 +19,7 @@ yarn add -E static-analysis
   * [Shallow Node_Modules](#shallow-node_modules)
   * [Soft Mode](#soft-mode)
   * [Fields](#fields)
+  * [Multiple Entries](#multiple-entries)
 - [`sort(detections: Array<Detection>): {}`](#sortdetections-arraydetection-)
 - [Copyright](#copyright)
 
@@ -320,6 +321,31 @@ import staticAnalysis from 'static-analysis'
   <img src="/.documentary/section-breaks/6.svg?sanitize=true">
 </a></p>
 
+### Multiple Entries
+
+It's possible to scan multiple files at ones, taking advantage of intermediate caching of results (i.e., after a file has been read ones, it won't be read again, but its `from` field will contain all files that required it).
+
+```js
+const res = await staticAnalysis([
+  'test/fixture/multiple/a.js',
+  'test/fixture/multiple/b.js',
+])
+console.log(res)
+```
+```js
+[ { entry: 'test/fixture/multiple/index.js',
+    from: [ 'test/fixture/multiple/a.js', 'test/fixture/multiple/b.js' ] },
+  { entry: 'node_modules/preact/dist/preact.mjs',
+    packageJson: 'node_modules/preact/package.json',
+    version: '8.5.2',
+    name: 'preact',
+    from: [ 'test/fixture/multiple/a.js' ] } ]
+```
+
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/7.svg?sanitize=true">
+</a></p>
+
 ## <code><ins>sort</ins>(</code><sub><br/>&nbsp;&nbsp;`detections: Array<Detection>,`<br/></sub><code>): <i>{}</i></code>
 
 Sorts the detected dependencies into commonJS modules, packageJsons and internals.
@@ -363,7 +389,7 @@ import staticAnalysis, { sort } from 'static-analysis'
 ```
 
 <p align="center"><a href="#table-of-contents">
-  <img src="/.documentary/section-breaks/7.svg?sanitize=true">
+  <img src="/.documentary/section-breaks/8.svg?sanitize=true">
 </a></p>
 
 ## Copyright
