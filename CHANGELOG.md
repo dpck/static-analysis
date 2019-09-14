@@ -1,5 +1,9 @@
 ## 14 September 2019
 
+### [2.0.1](https://github.com/dpck/static-analysis/compare/v2.0.0...v2.0.1)
+
+- [license] Update `package.json` for LICENSE.
+
 ### [2.0.0](https://github.com/dpck/static-analysis/compare/v1.8.0...v2.0.0)
 
 - [license] Update to _Tech Nation Sucks_ license.
