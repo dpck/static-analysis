@@ -1,3 +1,10 @@
+## 14 September 2019
+
+### [1.8.0](https://github.com/dpck/static-analysis/compare/v1.7.1...v1.8.0)
+
+- [feature] Allow to pass an array of entries.
+- [package] Compile the package with _Depack_ to make 0-dep build.
+
 ## 25 April 2019
 
 ### [1.7.1](https://github.com/dpck/static-analysis/compare/v1.7.0...v1.7.1)

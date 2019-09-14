@@ -73,5 +73,14 @@
     "typal": "^1.22.6",
     "yarn-s": "1.1.0",
     "zoroaster": "^4.1.2"
+  },
+  "srcDependencies": {
+    "@depack/detect": "^1.0.2",
+    "@depack/split": "^1.0.0",
+    "@wrote/read": "^1.0.4",
+    "erotic": "^2.1.1",
+    "fpj": "^1.3.0",
+    "mismatch": "^1.2.0",
+    "resolve-dependency": "^1.0.3"
   }
 }
