@@ -9,7 +9,7 @@
   {
     "entry": "node_modules/preact/dist/preact.mjs",
     "packageJson": "node_modules/preact/package.json",
-    "version": "8.4.2",
+    "version": "8.5.2",
     "name": "preact",
     "from": "test/fixture/detect.js"
   },
@@ -35,7 +35,7 @@
   {
     "entry": "node_modules/@wrote/ensure-path/src/index.js",
     "packageJson": "node_modules/@wrote/ensure-path/package.json",
-    "version": "1.0.8",
+    "version": "1.1.0",
     "name": "@wrote/ensure-path",
     "from": "node_modules/@wrote/wrote/src/index.js"
   },

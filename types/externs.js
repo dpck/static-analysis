@@ -1,9 +1,13 @@
+/**
+ * @fileoverview
+ * @externs
+ */
 /* typal types/index.xml */
 /** @const */
 var _staticAnalysis = {}
 /**
  * The configuration options for `staticAnalysis`.
- * @typedef {{ nodeModules: (boolean|undefined), shallow: (boolean|undefined), soft: (boolean|undefined), fields: (!Array<string>|undefined) }}
+ * @typedef {{ nodeModules: (boolean|undefined), shallow: (boolean|undefined), soft: (boolean|undefined), fields: ((!Array<string>)|undefined) }}
  */
 _staticAnalysis.Config
 /**

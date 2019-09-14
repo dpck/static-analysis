@@ -1,0 +1,12 @@
+<types namespace="_staticAnalysis">
+  <method name="staticAnalysis" async
+    return="!Array<!_staticAnalysis.Detection>">
+    <arg string name="path">
+      The path to the file in which to detect dependencies.
+    </arg>
+    <arg type="!_staticAnalysis.Config" name="config">
+      The configuration options for `staticAnalysis`.
+    </arg>
+    Detects all dependencies in a file and their dependencies recursively. Returns the array with detections.
+  </method>
+</types>

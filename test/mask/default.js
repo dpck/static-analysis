@@ -5,13 +5,15 @@ import staticAnalysis from '../../src'
 export default makeTestSuite('test/result', {
   context: TempContext,
   /**
-   * @param {string} input
    * @param {TempContext} t
    */
-  async getResults(input, { write }) {
-    const f = await write('test.js', input)
+  async getResults({ write }) {
+    const f = await write('test.js', this.input)
     const res = await staticAnalysis(f, this.options)
-    return res
+    return res // JSON.stringify(res, null, 2)
   },
-  jsonProps: ['expected', 'options'],
+  jsonProps: [
+    'expected',
+    'options',
+  ],
 })

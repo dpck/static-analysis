@@ -40,6 +40,19 @@
       "skipFiles": [
         "<node_internals>/**/*.js"
       ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Server",
+      "program": "${workspaceFolder}/node_modules/.bin/alanode",
+      "console": "integratedTerminal",
+      "args": [
+        "src/server"
+      ],
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
     }
   ]
 }

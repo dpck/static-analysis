@@ -4,8 +4,8 @@ import Fixture from '@idio/preact-fixture/src'
 /* expected */
 [
   {
-    "entry": "node_modules/@idio/preact-fixture/src/index.js",
     "package": "@idio/preact-fixture",
+    "entry": "node_modules/@idio/preact-fixture/src/index.js",
     "from": [
       "test/temp/test.js"
     ]
@@ -13,15 +13,15 @@ import Fixture from '@idio/preact-fixture/src'
   {
     "entry": "node_modules/preact/dist/preact.mjs",
     "packageJson": "node_modules/preact/package.json",
-    "version": "8.4.2",
+    "version": "8.5.2",
     "name": "preact",
     "from": [
       "node_modules/@idio/preact-fixture/src/index.js"
     ]
   },
   {
-    "entry": "node_modules/@idio/preact-fixture/src/Test.jsx",
     "package": "@idio/preact-fixture",
+    "entry": "node_modules/@idio/preact-fixture/src/Test.jsx",
     "from": [
       "node_modules/@idio/preact-fixture/src/index.js"
     ]
@@ -43,9 +43,9 @@ import Fixture from '@idio/preact-fixture'
 /* expected */
 [
   {
-    "entry": "node_modules/zoroaster/build/index.js",
+    "entry": "node_modules/zoroaster/depack/index.js",
     "packageJson": "node_modules/zoroaster/package.json",
-    "version": "3.13.0",
+    "version": "4.1.2",
     "name": "zoroaster",
     "hasMain": true,
     "license": "MIT",

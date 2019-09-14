@@ -1,4 +1,4 @@
-import { throws } from 'zoroaster/assert'
+import { throws } from '@zoroaster/assert'
 import staticAnalysis from '../../src'
 import { detect } from '../../src/lib'
 
