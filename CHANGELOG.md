@@ -1,3 +1,9 @@
+## 16 November 2019
+
+### [2.1.0](https://github.com/dpck/static-analysis/compare/v2.0.3...v2.1.0)
+
+- [feature] Merge `node_modules` of the same version.
+
 ## 14 September 2019
 
 ### [2.0.3](https://github.com/dpck/static-analysis/compare/v2.0.2...v2.0.3)
