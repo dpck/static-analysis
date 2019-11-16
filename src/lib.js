@@ -69,6 +69,8 @@ const getDependenciesMeta = async (path, matches, soft, fields, pckg = null) => 
  */
 export const detect = async (path, cache = {}, {
   nodeModules = true, shallow = false, soft = false, fields = [],
+  node_modules_cache = {},
+  mergeSameNodeModules = true,
   package: pckg } = {}) => {
   if (path in cache) return []
   cache[path] = 1
@@ -90,15 +92,34 @@ export const detect = async (path, cache = {}, {
     err.message = `${path}\n [!] ${err.message}`
     throw err
   }
-  const d = deps.map(o => ({ ...o, from: path }))
-  const entries = deps
-    .filter(({ entry }) => entry && !(entry in cache))
+  const Deps = mergeSameNodeModules ? deps.map(o => {
+    const { name, version, required } = o
+    if (name && version) {
+      // for non-flattened node_modules structure, e.g., when linking
+      // to prevent multiple same packages like
+      // depA, node_modules/depB/node_modules/depA
+      const n = `${name}:${version}${required ? '-required' : ''}`
+      const existing = node_modules_cache[n]
+      if (existing) return existing
+
+      node_modules_cache[n] = o
+    }
+    return o
+  }) : deps
+  const d = Deps.map(o => ({ ...o, from: path }))
+  const entries = Deps
+    .filter(({ entry }) => {
+      return entry && !(entry in cache)
+    })
   const discovered = await entries
     .reduce(async (acc, {
       entry, hasMain, packageJson, name, package: p }) => {
       if (packageJson && shallow) return acc
       const accRes = await acc
-      const res = await detect(entry, cache, { nodeModules, shallow, soft, fields, package: name || p })
+      const res = await detect(entry, cache, {
+        nodeModules, shallow, soft, fields, package: name || p,
+        node_modules_cache, mergeSameNodeModules,
+      })
       const r = res
         .map(o => ({
           ...o,

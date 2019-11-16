@@ -7,7 +7,7 @@
 var _staticAnalysis = {}
 /**
  * The configuration options for `staticAnalysis`.
- * @typedef {{ nodeModules: (boolean|undefined), shallow: (boolean|undefined), soft: (boolean|undefined), fields: ((!Array<string>)|undefined) }}
+ * @typedef {{ nodeModules: (boolean|undefined), shallow: (boolean|undefined), soft: (boolean|undefined), mergeSameNodeModules: (boolean|undefined), fields: ((!Array<string>)|undefined) }}
  */
 _staticAnalysis.Config
 /**

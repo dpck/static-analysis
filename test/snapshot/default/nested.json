@@ -1,0 +1,28 @@
+[
+  {
+    "entry": "test/fixture/nested/node_modules/test/index.js",
+    "packageJson": "test/fixture/nested/node_modules/test/package.json",
+    "version": "0.1.0",
+    "name": "test",
+    "from": [
+      "test/fixture/nested/index.js"
+    ]
+  },
+  {
+    "entry": "test/fixture/nested/node_modules/inner-test/index.js",
+    "packageJson": "test/fixture/nested/node_modules/inner-test/package.json",
+    "version": "1",
+    "name": "inner-test",
+    "from": [
+      "test/fixture/nested/index.js",
+      "test/fixture/nested/node_modules/test/index.js"
+    ]
+  },
+  {
+    "package": "inner-test",
+    "entry": "test/fixture/nested/node_modules/inner-test/abc.js",
+    "from": [
+      "test/fixture/nested/node_modules/inner-test/index.js"
+    ]
+  }
+]

@@ -21,6 +21,7 @@ const staticAnalysis = async (path, config = {}) => {
     shallow = false,
     soft = false,
     fields = [],
+    mergeSameNodeModules = true,
   } = config
   let detected
   try {
@@ -29,7 +30,7 @@ const staticAnalysis = async (path, config = {}) => {
     detected = await paths.reduce(async (acc, p) => {
       acc = await acc
       const res = await detect(p, cache, {
-        nodeModules, shallow, soft, fields })
+        nodeModules, shallow, soft, fields, mergeSameNodeModules })
       acc.push(...res)
       return acc
     }, [])

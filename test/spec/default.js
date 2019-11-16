@@ -65,6 +65,9 @@ const TS = {
   async 'same name'() {
     return await staticAnalysis('test/fixture/same-name/run/doc')
   },
+  async 'nested'() {
+    return await staticAnalysis('test/fixture/nested')
+  },
 }
 
 export default TS

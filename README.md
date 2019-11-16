@@ -1,6 +1,6 @@
 # static-analysis
 
-[![npm version](https://badge.fury.io/js/static-analysis.svg)](https://npmjs.org/package/static-analysis)
+[![npm version](https://badge.fury.io/js/static-analysis.svg)](https://www.npmjs.com/package/static-analysis)
 
 `static-analysis` Performs Static Analysis On JavaScript Programs To Find Out All Dependencies That Stem From The Given File.
 
@@ -54,13 +54,68 @@ It is possible to pass multiple paths or a path to the directory which has `inde
 - If a source is imported like `import fn from '@idio/preact/build/fn`, then the analysis will not contain `@idio/preact` as a `node_module` dependency with the `packageJson`, `name` and `version` fields, it will only appear as an entry file.
 
 __<a name="type-config">`Config`</a>__: The configuration options for `staticAnalysis`.
-
-|    Name     |             Type              |                                             Description                                             | Default |
-| ----------- | ----------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| nodeModules | <em>boolean</em>              | Whether to include packages from `node_modules` in the output.                                      | `true`  |
-| shallow     | <em>boolean</em>              | Only report on the entries of `node_module` dependencies, without analysing their own dependencies. | `false` |
-| soft        | <em>boolean</em>              | Do not throw an error when the dependency cannot be found in `node_modules`.                        | `false` |
-| fields      | <em>!Array&lt;string&gt;</em> | Any additional fields from `package.json` files to return.                                          | -       |
+<table>
+ <thead><tr>
+  <th>Name</th>
+  <th>Type &amp; Description</th>
+  <th>Default</th>
+ </tr></thead>
+ <tr>
+  <td rowSpan="3" align="center">nodeModules</td>
+  <td><em>boolean</em></td>
+  <td rowSpan="3"><code>true</code></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td>
+   Whether to include packages from <code>node_modules</code> in the output.
+  </td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center">shallow</td>
+  <td><em>boolean</em></td>
+  <td rowSpan="3"><code>false</code></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td>
+   Only report on the entries of <code>node_module</code> dependencies, without analysing their own dependencies.
+  </td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center">soft</td>
+  <td><em>boolean</em></td>
+  <td rowSpan="3"><code>false</code></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td>
+   Do not throw an error when the dependency cannot be found in <code>node_modules</code>.
+  </td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center">mergeSameNodeModules</td>
+  <td><em>boolean</em></td>
+  <td rowSpan="3"><code>true</code></td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td>
+   For situation when inner node<em>modules contain already referenced node</em>modules, this will ensure that only the top-level ones with the same version are matched. For example, there can be <code>node_modules/a</code>, <code>node_modules/b</code> packages, and the later one can contain <code>node_modules/b/node_modules/a</code> of the same version (e.g., if the structure wasn't flattened by something like <code>yarn upgrade</code>). In this case, only the top one is returned.
+  </td>
+ </tr>
+ <tr>
+  <td rowSpan="3" align="center">fields</td>
+  <td><em>!Array&lt;string&gt;</em></td>
+  <td rowSpan="3">-</td>
+ </tr>
+ <tr></tr>
+ <tr>
+  <td>
+   Any additional fields from <code>package.json</code> files to return.
+  </td>
+ </tr>
+</table>
 
 _For example, for the given file_:
 ```js
@@ -126,7 +181,7 @@ import staticAnalysis from 'static-analysis'
     packageJson: 'node_modules/@artdeco/clean-stack/package.json',
     version: '1.1.1',
     name: '@artdeco/clean-stack',
-    from: 
+    from:
      [ 'node_modules/catchment/src/index.js',
        'node_modules/erotic/src/callback.js' ] },
   { package: 'catchment',
@@ -134,7 +189,7 @@ import staticAnalysis from 'static-analysis'
     from: [ 'node_modules/catchment/src/index.js' ] },
   { package: 'erotic',
     entry: 'node_modules/erotic/src/lib.js',
-    from: 
+    from:
      [ 'node_modules/erotic/src/index.js',
        'node_modules/erotic/src/callback.js' ] },
   { package: 'erotic',
@@ -335,7 +390,8 @@ console.log(res)
 ```
 ```js
 [ { entry: 'test/fixture/multiple/index.js',
-    from: [ 'test/fixture/multiple/a.js', 'test/fixture/multiple/b.js' ] },
+    from:
+     [ 'test/fixture/multiple/a.js', 'test/fixture/multiple/b.js' ] },
   { entry: 'node_modules/preact/dist/preact.mjs',
     packageJson: 'node_modules/preact/package.json',
     version: '8.5.2',
@@ -419,14 +475,14 @@ import staticAnalysis, { sort } from 'static-analysis'
 ```
 ```js
 { commonJsPackageJsons: [],
-  packageJsons: 
+  packageJsons:
    [ 'node_modules/@wrote/read/package.json',
      'node_modules/preact/package.json',
      'node_modules/catchment/package.json',
      'node_modules/erotic/package.json',
      'node_modules/@artdeco/clean-stack/package.json' ],
   commonJs: [],
-  js: 
+  js:
    [ 'node_modules/@wrote/read/src/index.js',
      'node_modules/preact/dist/preact.mjs',
      'node_modules/@idio/preact-fixture/src/Test.jsx',
@@ -438,7 +494,7 @@ import staticAnalysis, { sort } from 'static-analysis'
      'node_modules/erotic/src/lib.js',
      'node_modules/erotic/src/callback.js' ],
   internals: [ 'path', 'fs', 'stream', 'os' ],
-  deps: 
+  deps:
    [ '@wrote/read',
      'preact',
      'catchment',

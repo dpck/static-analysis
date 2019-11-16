@@ -7,17 +7,17 @@
   resolved "https://registry.yarnpkg.com/@artdeco/clean-stack/-/clean-stack-1.1.1.tgz#0a68b9a061b5076ebaf948c150ea26d09c1e753f"
   integrity sha512-q5lO3vGUo0WgkSqzgzjL0HQdA9t2HzQqZISuVuQWMh9xqLuiLFP/ZTsxFc8vpMl7mNpGk7Mm0OeyFQ+Evrp0Cw==
 
-"@depack/detect@^1.0.2", "@depack/detect@^1.1.0":
+"@depack/detect@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@depack/detect/-/detect-1.1.0.tgz#e5e5cbd2c7f68d689363f4b4a7179a2918d45ff3"
   integrity sha512-t6OBa7LsPNhBFDcEN1V6S3nIQp0t3rB2OfTa/UiV1jCyeI+AEmy4iwhlkgv0pdMEs+gzgwnQQ/6bwQGI6+89lA==
   dependencies:
     mismatch "^1.2.0"
 
-"@depack/render@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@depack/render/-/render-1.3.2.tgz#c9a7d903744ea329c394a90269a3f9f39b0c53db"
-  integrity sha512-MIUmrzZXHcVwTgE7b2ra7R4Z42zfcn4+vrgfEUK0ANe8JjpbPCFGAg1PAJjWLlrQE2ryF0C9r03EXQmAl7GoAQ==
+"@depack/render@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@depack/render/-/render-1.3.3.tgz#2ff9d30be0ff3fe720f1765bef3c0f92cdcd60ca"
+  integrity sha512-5anhEnMx7eDeCvXUOmYOONBQVulvAy72xy7kM9dor985Fqz+rp9vFlgL7meLgHZQTCk3Rab4qFoT14zRSMq2oA==
 
 "@depack/split@^1.0.0":
   version "1.0.0"
@@ -120,10 +120,10 @@
   resolved "https://registry.yarnpkg.com/@zoroaster/mask/-/mask-2.3.0.tgz#57d169417e09e481efafccbffdd93cef919ec5e6"
   integrity sha512-fufal06pS/SYhOKHCmoFQ+PjhQwsCwMr2h0D2xeiVaXstaWHJVEiLg4+BU/KCmOOzLXLKikf81ca4zFXip7ScQ==
 
-alamode@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/alamode/-/alamode-3.0.0.tgz#d83b1939cdb823665b850f4ee1d2255be854d058"
-  integrity sha512-rKxzjI4FG2dDrL13xGdvEUmLsaz3TUwm5/JwRzJ+5AhXs5pI/tGbsvmvJ9rHtkPTpMXfj4sf1RFZGmgbFIhBFg==
+alamode@^3.0.0, alamode@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/alamode/-/alamode-3.2.0.tgz#ee79dcf2483b5e28e9aac8cd0dfdc692aa333ca5"
+  integrity sha512-jDV6kYpIf9jHJUre1OOotW8EM2Qy58S/eOks2MWhjNz2xJQdEfyzFKbcdaZowC8sk5DKxsnapf/mZNE53B3haQ==
 
 catchment@^1.0.0:
   version "1.0.0"
@@ -138,10 +138,10 @@ catchment@^3.2.3, catchment@^3.3.0:
     "@artdeco/clean-stack" "^1.1.1"
     erotic "^2.1.0"
 
-documentary@^1.33.0:
-  version "1.33.0"
-  resolved "https://registry.yarnpkg.com/documentary/-/documentary-1.33.0.tgz#c13baaf6ea5f075c7a683e1547593dd634158a41"
-  integrity sha512-V6xOSIkBkHhQeUdLtGDUOa5LDXthjDNcmyrT5WIJmaXaYRbFnTwDE6hf9th5Bzq4Ia7CfuP/Jzln7s2ef+vrKA==
+documentary@^1.34.1:
+  version "1.34.1"
+  resolved "https://registry.yarnpkg.com/documentary/-/documentary-1.34.1.tgz#0b556051b9d1c28dcd52527332fab5bcffa117b9"
+  integrity sha512-Gi7XJ9KQYOxObCEFq0rjmP0c7CVhlo1KTz1aw17qq4P7LGkS7YRN/5PWxPOM1a/87kWIOV/zekn5ZaoWdH9sMQ==
   dependencies:
     alamode "^3.0.0"
     preact "8.5.2"
@@ -181,9 +181,9 @@ makepromise@^3.0.3, makepromise@^3.1.0:
     erotic "^2.1.0"
 
 mime-db@^1.40.0:
-  version "1.41.0"
-  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.41.0.tgz#9110408e1f6aa1b34aef51f2c9df3caddf46b6a0"
-  integrity sha512-B5gxBI+2K431XW8C2rcc/lhppbuji67nf9v39eH8pkWoZDxnAL0PxdpH32KYRScniF8qDHBDlI+ipgg5WrCUYw==
+  version "1.42.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.42.0.tgz#3e252907b4c7adb906597b4b65636272cf9e7bac"
+  integrity sha512-UbfJCR4UAVRNgMpfImz05smAXK7+c+ZntjaA26ANtkXLlOe947Aag5zdIcKQULAiF9Cq4WxBi9jUs5zkA84bYQ==
 
 mismatch@^1.2.0:
   version "1.2.0"
@@ -220,17 +220,9 @@ spawncommand@1.1.0:
     catchment "^1.0.0"
 
 static-analysis@^1.3.3:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/static-analysis/-/static-analysis-1.7.1.tgz#d5c58e0fd318a8db981616cdb7726003c93db999"
-  integrity sha512-QTZGNqXoeEOFFTZmyeR10ai9sT8Hi/Xi7zDwr6LrFcZ9l4GEBT7qeWLyesaLf+2rAnpMDWkgLJ/ovRquJX01HA==
-  dependencies:
-    "@depack/detect" "^1.0.2"
-    "@depack/split" "^1.0.0"
-    "@wrote/read" "^1.0.4"
-    erotic "^2.1.1"
-    fpj "^1.3.0"
-    mismatch "^1.2.0"
-    resolve-dependency "^1.0.3"
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/static-analysis/-/static-analysis-1.8.0.tgz#e15b24fa0da08375a266f0abb4e38116fc158eb1"
+  integrity sha512-GzrDSgLLBixAvLhtHm1xS6nevkoWoDoaNvc2qfbz3efxdl56pmos0txXqYRPHqzJJUg2xN5aQxpMKG5vUf9h7g==
 
 temp-context@^2.1.3:
   version "2.1.3"
