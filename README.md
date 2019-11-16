@@ -101,7 +101,8 @@ __<a name="type-config">`Config`</a>__: The configuration options for `staticAna
  <tr></tr>
  <tr>
   <td>
-   For situation when inner node<em>modules contain already referenced node</em>modules, this will ensure that only the top-level ones with the same version are matched. For example, there can be <code>node_modules/a</code>, <code>node_modules/b</code> packages, and the later one can contain <code>node_modules/b/node_modules/a</code> of the same version (e.g., if the structure wasn't flattened by something like <code>yarn upgrade</code>). In this case, only the top one is returned.
+   For situation when inner <code>node_modules</code> contain already referenced <code>node_modules</code>, this will ensure that only the top-level ones with the same version are matched.
+   For example, there can be <code>node_modules/a</code> &amp; <code>node_modules/b</code> packages, and the later one can contain <code>node_modules/b/node_modules/a</code> of the same version as <code>a</code> (e.g., if the structure wasn't flattened by something like <code>yarn upgrade</code>). In this case, only the top one is returned.
   </td>
  </tr>
  <tr>

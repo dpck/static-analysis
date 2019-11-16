@@ -7,7 +7,8 @@ const { _staticAnalysis, _sort } = require('./depack')
  * @param {boolean} [config.nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
  * @param {boolean} [config.shallow=false] Only report on the entries of `node_module` dependencies, without analysing their own dependencies. Default `false`.
  * @param {boolean} [config.soft=false] Do not throw an error when the dependency cannot be found in `node_modules`. Default `false`.
- * @param {boolean} [config.mergeSameNodeModules=true] For situation when inner node_modules contain already referenced node_modules, this will ensure that only the top-level ones with the same version are matched. For example, there can be `node_modules/a`, `node_modules/b` packages, and the later one can contain `node_modules/b/node_modules/a` of the same version (e.g., if the structure wasn't flattened by something like `yarn upgrade`). In this case, only the top one is returned. Default `true`.
+ * @param {boolean} [config.mergeSameNodeModules=true] For situation when inner `node_modules` contain already referenced `node_modules`, this will ensure that only the top-level ones with the same version are matched.
+ * For example, there can be `node_modules/a` &amp; `node_modules/b` packages, and the later one can contain `node_modules/b/node_modules/a` of the same version as `a` (e.g., if the structure wasn't flattened by something like `yarn upgrade`). In this case, only the top one is returned. Default `true`.
  * @param {!Array<string>} [config.fields] Any additional fields from `package.json` files to return.
  * @return {Promise<!Array<!_staticAnalysis.Detection>>}
  */
@@ -34,7 +35,8 @@ module.exports.sort = sort
  * @prop {boolean} [nodeModules=true] Whether to include packages from `node_modules` in the output. Default `true`.
  * @prop {boolean} [shallow=false] Only report on the entries of `node_module` dependencies, without analysing their own dependencies. Default `false`.
  * @prop {boolean} [soft=false] Do not throw an error when the dependency cannot be found in `node_modules`. Default `false`.
- * @prop {boolean} [mergeSameNodeModules=true] For situation when inner node_modules contain already referenced node_modules, this will ensure that only the top-level ones with the same version are matched. For example, there can be `node_modules/a`, `node_modules/b` packages, and the later one can contain `node_modules/b/node_modules/a` of the same version (e.g., if the structure wasn't flattened by something like `yarn upgrade`). In this case, only the top one is returned. Default `true`.
+ * @prop {boolean} [mergeSameNodeModules=true] For situation when inner `node_modules` contain already referenced `node_modules`, this will ensure that only the top-level ones with the same version are matched.
+ * For example, there can be `node_modules/a` &amp; `node_modules/b` packages, and the later one can contain `node_modules/b/node_modules/a` of the same version as `a` (e.g., if the structure wasn't flattened by something like `yarn upgrade`). In this case, only the top one is returned. Default `true`.
  * @prop {!Array<string>} [fields] Any additional fields from `package.json` files to return.
  * @typedef {_staticAnalysis.Detection} Detection The module detection result.
  * @typedef {Object} _staticAnalysis.Detection The module detection result.
