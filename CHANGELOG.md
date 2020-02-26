@@ -1,3 +1,9 @@
+## 26 February 2020
+
+### [2.1.1](https://github.com/dpck/static-analysis/compare/v2.1.0...v2.1.1)
+
+- [fix] Fix for Node 12.
+
 ## 16 November 2019
 
 ### [2.1.0](https://github.com/dpck/static-analysis/compare/v2.0.3...v2.1.0)
