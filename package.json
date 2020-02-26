@@ -1,6 +1,6 @@
 {
   "name": "static-analysis",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Performs RegEx Static Analysis On JavaScript Programs To Find Out All Dependencies That Stem From The Given Files.",
   "main": "compile/index.js",
   "module": "src/index.js",
