@@ -55,6 +55,9 @@ const getDependenciesMeta = async (path, matches, soft, fields, pckg = null) => 
         ...rest }
     } catch (err) {
       if (soft) return null
+      let [v] = process.version.split('.')
+      v = parseInt(v.replace('v', ''), 10)
+      if (v >= 12) throw err
       throw e(err)
     }
   })

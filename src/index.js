@@ -35,6 +35,9 @@ const staticAnalysis = async (path, config = {}) => {
       return acc
     }, [])
   } catch (err) {
+    let [v] = process.version.split('.')
+    v = parseInt(v.replace('v', ''), 10)
+    if (v >= 12) throw err
     throw e(err)
   }
   const filtered = detected.filter(({ internal, entry }, i) => {
