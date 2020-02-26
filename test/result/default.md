@@ -13,7 +13,7 @@ import Fixture from '@idio/preact-fixture/src'
   {
     "entry": "node_modules/preact/dist/preact.mjs",
     "packageJson": "node_modules/preact/package.json",
-    "version": "8.5.2",
+    "version": "8.5.3",
     "name": "preact",
     "from": [
       "node_modules/@idio/preact-fixture/src/index.js"
@@ -45,10 +45,10 @@ import Fixture from '@idio/preact-fixture'
   {
     "entry": "node_modules/zoroaster/depack/index.js",
     "packageJson": "node_modules/zoroaster/package.json",
-    "version": "4.1.2",
+    "version": "4.3.0",
     "name": "zoroaster",
     "hasMain": true,
-    "license": "MIT",
+    "license": "AGPL-3.0",
     "author": "Anton <anton@adc.sh>",
     "from": [
       "test/temp/test.js"
